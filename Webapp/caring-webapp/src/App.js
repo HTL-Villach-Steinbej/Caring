@@ -1,21 +1,20 @@
 import React from 'react';
+import Toolbar from './components/Toolbar';
+import MainFrame from './components/MainFrame';
+import BottomBar from './components/BottomBar';
 import "./style.css";
 
 function App() {
   return (
     <div className="App">
       <div className="header">
-        <p className="headerText">Home</p>
-        <p className="headerText">Book</p>
-        <p className="headerText">Info</p>
-        <p className="headerText">Problemsreport</p>
-        <p className="headerText">About</p>
-      </div>
-      <div className="sidenav">
-        <p>Sidenav</p>
+        <Toolbar />
       </div>
       <div className="body">
-        <p>BODY</p> 
+        <MainFrame />
+      </div>
+      <div className="footer">
+        <BottomBar />
       </div>
     </div>
   );
