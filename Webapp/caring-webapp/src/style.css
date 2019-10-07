@@ -59,6 +59,12 @@ body {
 .toolbar-item-text{
     display: inline;
 }
+.toolbar-right-item{
+    position: absolute;
+    top: 5px;
+    right: 30px;
+    margin-top: 15px;
+}
 .body{
     top: 0px;
     height: 92%;
