@@ -4,7 +4,7 @@ import {
   SCREEN_COMPONENTS,
   SCREEN_ANALYSIS,
   SCREEN_MAIN,
-  SCREEN_SETTINGS
+  SCREEN_LOGIN
 } from "./screens";
 
 import Toolbar from "./components/Toolbar";
@@ -18,6 +18,7 @@ import LowerBody from "./components/LowerBody";
 // import SettingsView from "./components/SettingsView";
 
 import "./style.css";
+import Login from "./components/Login";
 
 class ResourceApp extends Component {
   render() {
@@ -37,8 +38,8 @@ class ResourceApp extends Component {
         screenComponent = <MainFrame />
         break;
       }
-      case SCREEN_SETTINGS: {
-        screenComponent = <MainFrame />
+      case SCREEN_LOGIN: {
+        screenComponent = <Login />
         break;
       }
       default:
