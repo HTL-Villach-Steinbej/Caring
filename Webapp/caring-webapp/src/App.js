@@ -1,22 +1,13 @@
 import React from 'react';
-import Toolbar from './components/Toolbar';
-import MainFrame from './components/MainFrame';
-import BottomBar from './components/BottomBar';
-import "./style.css";
+import store from "./redux/store";
+import { Provider } from "react-redux";
+import ResourceApp from './ResourceApp';
 
 function App() {
   return (
-    <div className="App">
-      <div className="header">
-        <Toolbar />
-      </div>
-      <div className="body">
-        <MainFrame />
-      </div>
-      <div className="footer">
-        <BottomBar />
-      </div>
-    </div>
+    <Provider store={store}>
+        <ResourceApp />
+    </Provider>
   );
 }
 

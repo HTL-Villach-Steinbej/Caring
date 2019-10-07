@@ -7,6 +7,10 @@ function MainFrame() {
     <div className="mainframe">
         <UpperBody />
         <LowerBody />
+        <LowerBody />
+        <LowerBody />
+        <LowerBody />
+        <LowerBody />
     </div>
   );
 }

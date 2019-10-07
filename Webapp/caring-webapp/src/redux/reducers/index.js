@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
 import peers from "./peers";
-import dialogs from "./dialogs";
+import screens from "./screens";
 
-export default combineReducers({ peers, dialogs });
+export default combineReducers({ peers, screens });
