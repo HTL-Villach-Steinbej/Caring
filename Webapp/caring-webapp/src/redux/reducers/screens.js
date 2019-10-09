@@ -1,8 +1,8 @@
 import { SHOW_SCREEN } from "../actionTypes";
-import { SCREEN_MAIN } from "../../screens";
+import { SCREEN_HOME } from "../../screens";
 
 const initialState = {
-  currentScreen: SCREEN_MAIN
+  currentScreen: SCREEN_HOME
 };
 
 const screens = (state = initialState, action) => {
