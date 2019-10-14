@@ -2,7 +2,7 @@ import React from "react";
 import UpperBody from "./UpperBody";
 import LowerBody from "./LowerBody";
 
-function MainFrame() {
+function MainWindow() {
   return(
     <div className="mainframe">
         <UpperBody />
@@ -10,4 +10,4 @@ function MainFrame() {
     </div>
   );
 }
-export default MainFrame;
+export default MainWindow;

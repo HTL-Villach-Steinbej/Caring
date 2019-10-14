@@ -19,7 +19,16 @@ function Toolbar(props){
             ))}
             <div className="toolbar-right-item">
                 <img
-                    src="./icons/notification_icon.svg"
+                    height="30px"
+                    src="./icons/icons8-account-100.png"
+                    id="notification-logo"
+                    alt="Notifications Icon"
+                />
+            </div>
+            <div className="toolbar-right-item">
+                <img
+                    height="30px"
+                    src="./icons/icons8-alarm-100.png"
                     id="notification-logo"
                     alt="Notifications Icon"
                 />

@@ -31,6 +31,7 @@ body {
     height: 100%;
 }
 .header{
+    position: fixed;
     left: 0px;
     top: 0px;
     right: 0px;
@@ -60,9 +61,8 @@ body {
     display: inline;
 }
 .toolbar-right-item{
-    position: absolute;
-    top: 5px;
-    right: 30px;
+    float: right;
+    margin-right: 20px; 
     margin-top: 15px;
 }
 .toolbar-right-item:hover{
@@ -107,6 +107,7 @@ body {
     margin: 6px;
 }
 .footer{
+    position: absolute; 
     height: 80px;
     bottom: 0px;
     right: 0px;
@@ -125,9 +126,9 @@ body {
 }
 
 .login-page {
-    height: 700px;
-    width: 360px;
-    padding: 8% 0 0;
+    height: 100%;
+    width: 100%;
+    padding-top: 15%;
     margin: auto;
 }
 .form {
@@ -135,7 +136,7 @@ body {
   z-index: 1;
   background: #FFFFFF;
   max-width: 360px;
-  margin: 0 auto 100px;
+  margin: 0 auto 300px;
   padding: 45px;
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);

@@ -8,12 +8,13 @@ import {
 } from "./screens";
 
 import Toolbar from "./components/Toolbar";
-import MainFrame from "./components/MainFrame";
+import MainWindow from "./components/MainWindow";
+import RentWindow from "./components/RentWindow";
+import LoginWindow from "./components/LoginWindow";
 import Footer from "./components/Footer";
-import LowerBody from "./components/LowerBody";
 
 import "./style.css";
-import Login from "./components/Login";
+
 
 class ResourceApp extends Component {
   render() {
@@ -21,27 +22,27 @@ class ResourceApp extends Component {
     let screenComponent = null;
 
     switch (screen) {
-      case SCREEN_REPORT: {
-        screenComponent = <MainFrame />;
+      case SCREEN_HOME: {
+        screenComponent = <MainWindow />
         break;
       }
       case SCREEN_TRACING: {
-        screenComponent = <LowerBody />;
+        screenComponent = <RentWindow />;
         break;
       }
-      case SCREEN_HOME: {
-        screenComponent = <MainFrame />
+      case SCREEN_REPORT: {
+        screenComponent = <RentWindow />;
         break;
       }
       case SCREEN_LOGIN: {
-        screenComponent = <Login />
+        screenComponent = <LoginWindow />
         break;
       }
       default:
         break;
     }
     return (
-    <div className="cmc-app">
+    <div className="App">
         <div className="header">
             <Toolbar />
         </div>

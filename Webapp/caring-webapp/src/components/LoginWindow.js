@@ -1,6 +1,6 @@
 import React from 'react';
 
-class Login extends React.Component {
+class LoginWindow extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -27,4 +27,4 @@ class Login extends React.Component {
     }
 }
 
-export default Login;
+export default LoginWindow;
