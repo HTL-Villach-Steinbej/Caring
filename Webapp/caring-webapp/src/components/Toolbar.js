@@ -17,7 +17,11 @@ function Toolbar(props){
                     </p>
                 </div>
             ))}
-            <div className="toolbar-right-item">
+            <div 
+                className="toolbar-right-item"
+                onClick={() => {
+                    props.showScreen("Login");
+                }}>
                 <img
                     height="30px"
                     src="./icons/icons8-account-100.png"
@@ -34,7 +38,7 @@ function Toolbar(props){
                 />
             </div>
         </div>
-    )
+    );
 }
 
 const mapStateToProps = state => {

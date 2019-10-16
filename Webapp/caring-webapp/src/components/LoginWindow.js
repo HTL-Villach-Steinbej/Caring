@@ -7,19 +7,32 @@ class LoginWindow extends React.Component {
             username: "",
             password: ""
         }
+        this.usernameChanged = this.usernameChanged.bind(this);
+        this.passwordChanged = this.passwordChanged.bind(this);
     }
-    login(username, password) {
-
+    usernameChanged(event){
+        let newUsername = event.target.value;
+        this.setState({username: newUsername});
+    }
+    passwordChanged(event){
+        let newPassword = event.target.value;
+        this.setState({password: newPassword});
+    }
+    login() {
+        console.log('You clicked login with username: ' + this.state.username + ' and password: ' + this.state.password);
+    }
+    register() {
+        console.log('Now you can register');
     }
     render() {
         return(
-            <div class="login-page">
-                <div class="form">
-                    <form class="login-form">
-                        <input type="text" placeholder="Username" />
-                        <input type="password" placeholder="Password"/>
-                        <button onClick={this.login(this.state.username, this.state.password)}>Login</button>
-                        <p class="message">Not registered? <a href="#">Create an account</a></p>
+            <div className="login-page">
+                <div className="form">
+                    <form className="login-form">
+                        <input type="text" placeholder="Username" value={this.state.componentName} onChange={this.usernameChanged}/>
+                        <input type="password" placeholder="Password" value={this.state.componentName} onChange={this.passwordChanged}/>
+                        <button onClick={this.login}>Login</button>
+                        <p className="message">Not registered? <a onClick={this.register}>Create an account</a></p>
                     </form>
                 </div>
             </div>

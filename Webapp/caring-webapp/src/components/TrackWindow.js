@@ -6,7 +6,7 @@ const mapStyles = {
     height: '100%',
   };
 
-function RentWindow(props) {
+function TrackWindow(props) {
     return(
         <div className="rent-window">
             <Map
@@ -21,4 +21,4 @@ function RentWindow(props) {
 
 export default GoogleApiWrapper({
     apiKey: 'AIzaSyBXbw4ILxWmD1-NNYAa-5IqY9apJqbums0'
-  })(RentWindow);
+  })(TrackWindow);

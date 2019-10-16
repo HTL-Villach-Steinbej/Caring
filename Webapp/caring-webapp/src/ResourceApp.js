@@ -9,7 +9,7 @@ import {
 
 import Toolbar from "./components/Toolbar";
 import MainWindow from "./components/MainWindow";
-import RentWindow from "./components/RentWindow";
+import TrackWindow from "./components/TrackWindow";
 import LoginWindow from "./components/LoginWindow";
 import Footer from "./components/Footer";
 
@@ -27,11 +27,11 @@ class ResourceApp extends Component {
         break;
       }
       case SCREEN_TRACING: {
-        screenComponent = <RentWindow />;
+        screenComponent = <TrackWindow />;
         break;
       }
       case SCREEN_REPORT: {
-        screenComponent = <RentWindow />;
+        screenComponent = <MainWindow />;
         break;
       }
       case SCREEN_LOGIN: {
