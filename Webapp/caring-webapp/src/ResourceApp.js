@@ -14,6 +14,7 @@ import LoginWindow from "./components/LoginWindow";
 import Footer from "./components/Footer";
 
 import "./style.css";
+import ReportWindow from "./components/ReportWIndow";
 
 class ResourceApp extends Component {
   render() {
@@ -30,7 +31,7 @@ class ResourceApp extends Component {
         break;
       }
       case SCREEN_REPORT: {
-        screenComponent = <MainWindow />;
+        screenComponent = <ReportWindow />;
         break;
       }
       case SCREEN_LOGIN: {

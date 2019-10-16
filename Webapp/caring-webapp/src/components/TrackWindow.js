@@ -8,7 +8,7 @@ const mapStyles = {
 
 function TrackWindow(props) {
   return (
-    <div className="rent-window">
+    <div className="track-window">
       <h2 className="track-heading">Tracking</h2>
       <div className="track-frame">
         <Map
