@@ -15,7 +15,6 @@ import Footer from "./components/Footer";
 
 import "./style.css";
 
-
 class ResourceApp extends Component {
   render() {
     const screen = this.props.screen;
@@ -23,7 +22,7 @@ class ResourceApp extends Component {
 
     switch (screen) {
       case SCREEN_HOME: {
-        screenComponent = <MainWindow />
+        screenComponent = <MainWindow />;
         break;
       }
       case SCREEN_TRACING: {
@@ -35,24 +34,22 @@ class ResourceApp extends Component {
         break;
       }
       case SCREEN_LOGIN: {
-        screenComponent = <LoginWindow />
+        screenComponent = <LoginWindow />;
         break;
       }
       default:
         break;
     }
     return (
-    <div className="App">
+      <div className="App">
         <div className="header">
-            <Toolbar />
+          <Toolbar />
         </div>
-        <div className="body">
-          {screenComponent}
-        </div>
+        <div className="body">{screenComponent}</div>
         <div className="footer">
           <Footer />
         </div>
-    </div>
+      </div>
     );
   }
 }
@@ -65,5 +62,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { }
+  {}
 )(ResourceApp);

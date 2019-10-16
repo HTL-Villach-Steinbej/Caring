@@ -1,264 +1,285 @@
-
 /*General*/
 html {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    font-family: "Roboto-Regular", sans-serif;
-    font-weight: 600;
-  
-    /* Making the items unselectable for every browser */
-    -webkit-touch-callout: none; 
-    -webkit-user-select: none; 
-    -khtml-user-select: none; 
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none; 
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: "Roboto-Regular", sans-serif;
+  font-weight: 600;
+
+  /* Making the items unselectable for every browser */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 #root {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 body {
-    width: 100%;
-    height: 100%;
-    background-color: #f4f6f9;
+  width: 100%;
+  height: 100%;
+  background-color: #f4f6f9;
 }
 
 /*Classes*/
-.App{
-    width: 100%;
-    height: 100%;
+.App {
+  width: 100%;
+  height: 100%;
 }
-.header{
-    position: fixed;
-    left: 0px;
-    top: 0px;
-    right: 0px;
-    height: 60px;
+.header {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  height: 60px;
 }
-.toolbar{
-    height: 100%;
-    background-color:rgb(50, 96, 177);
-    color: #f4f6f9;
+.toolbar {
+  height: 100%;
+  background-color: rgb(50, 96, 177);
+  color: #f4f6f9;
 }
-.toolbar:hover{
-    background-color: #f4f6f9;
-    color:black;
+.toolbar:hover {
+  background-color: #f4f6f9;
+  color: black;
 }
-.toolbar:hover #notification-logo{
-    src: 'icons8-alarm-100_blue.png';
+.toolbar:hover #notification-logo {
+  src: "icons8-alarm-100_blue.png";
 }
-.toolbar-left-item{
-    float: left;
-    height: 35px;
-    width: 100px;
-    text-align: center;
-    margin-top: 15px;
+.toolbar-left-item {
+  float: left;
+  height: 35px;
+  width: 100px;
+  text-align: center;
+  margin-top: 15px;
 }
-.toolbar-left-item:hover{
-    color: rgb(50, 96, 177);
+.toolbar-left-item:hover {
+  color: rgb(50, 96, 177);
 }
-.toolbar-item-text{
-    display: inline;
+.toolbar-item-text {
+  display: inline;
 }
-.toolbar-right-item{
-    float: right;
-    margin-right: 20px; 
-    margin-top: 15px;
+.toolbar-right-item {
+  float: right;
+  margin-right: 20px;
+  margin-top: 15px;
 }
-
-#notification-logo:hover{
+#notification-logo:hover {
   height: 30px;
-  background: url('./icons/icons8-alarm-100_blue.png');
+  background: url("./icons/icons8-alarm-100_blue.png");
 }
 
-.body{
-    margin-top: 60px;
-    height: 100%;
-    width: 100%;
-    background-color: rgb(243, 243, 243);
+.body {
+  margin-top: 60px;
+  height: 100%;
+  width: 100%;
+  background-color: rgb(243, 243, 243);
 }
-.mainframe{
-    height: 100%;
-    width: 100%;
+.mainframe {
+  height: 100%;
+  width: 100%;
 }
-.upper-body{
-    height: 30%;
-    background-color: rgb(50, 96, 177);
-    color: #f4f6f9;
-    text-align: center;
+.upper-body {
+  height: 200px;
+  background-color: rgb(50, 96, 177);
+  color: #f4f6f9;
+  text-align: center;
 }
-.welcome-item{
-    padding: 50px;
+.welcome-item {
+  padding: 50px;
 }
-.welcome-text{
-    margin: 0px;
+.welcome-text {
+  margin: 0px;
 }
-.welcome-subtext{
-    margin-top: 6px;
+.welcome-subtext {
+  margin-top: 6px;
 }
-.footer{
-    position: absolute; 
-    height: 80px;
-    bottom: 0px;
-    right: 0px;
-    left: 0px;
-    background-color:rgb(50, 96, 177);
+.footer {
+  position: absolute;
+  height: 40px;
+  bottom: 0px;
+  right: 0px;
+  left: 0px;
+  background-color: rgb(50, 96, 177);
 }
-.bottom-bar{
-    height: 100%;
-    margin-left: 600px;
+.bottom-bar {
+  height: 100%;
+  text-align: center;
 }
-.bottom-bar-item{
-    font-weight: 400;
-    float: left;
-    color: #f4f6f9;
-    width: 100px;
+.bottom-bar-item {
+  font-weight: 400;
+  float: right;
+  color: #f4f6f9;
+  width: 100px;
+  height: 40px;
+}
+
+.bottom-bar-item p {
+  margin-top: 10px;
 }
 
 .login-page {
-    height: 100%;
-    width: 100%;
-    padding-top: 15%;
-    margin: auto;
+  height: 100%;
+  width: 100%;
+  padding-top: 15%;
+  margin: auto;
 }
 .form {
-    position: relative;
-    z-index: 1;
-    background: #FFFFFF;
-    max-width: 360px;
-    margin: 0 auto 300px;
-    padding: 45px;
-    text-align: center;
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  position: relative;
+  z-index: 1;
+  background: #ffffff;
+  max-width: 360px;
+  margin: 0 auto 300px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 .form input {
-    font-family: "Roboto", sans-serif;
-    outline: 0;
-    background: #f2f2f2;
-    width: 100%;
-    border: 0;
-    margin: 0 0 15px;
-    padding: 15px;
-    box-sizing: border-box;
-    font-size: 14px;
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
 }
 .form button {
-    font-family: "Roboto", sans-serif;
-    text-transform: uppercase;
-    outline: 0;
-    background: rgb(50, 96, 177);
-    width: 100%;
-    border: 0;
-    padding: 15px;
-    color: #FFFFFF;
-    font-size: 14px;
-    -webkit-transition: all 0.3 ease;
-    transition: all 0.3 ease;
-    cursor: pointer;
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: rgb(50, 96, 177);
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #ffffff;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
 }
-.form button:hover,.form button:active,.form button:focus {
-    background-color: #f4f6f9;
-    border: thin solid rgb(31, 86, 180);
-    color: rgb(31, 86, 180);
+.form button:hover,
+.form button:active,
+.form button:focus {
+  background-color: #f4f6f9;
+  border: thin solid rgb(31, 86, 180);
+  color: rgb(31, 86, 180);
 }
 .form .message {
-    margin: 15px 0 0;
-    color: #b3b3b3;
-    font-size: 12px;
+  margin: 15px 0 0;
+  color: #b3b3b3;
+  font-size: 12px;
 }
 .form .message a {
-    color: rgb(50, 96, 177);
-    text-decoration: none;
+  color: rgb(50, 96, 177);
+  text-decoration: none;
 }
 .form .register-form {
-    display: none;
+  display: none;
 }
 .container {
-    position: relative;
-    z-index: 1;
-    max-width: 300px;
-    margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  max-width: 300px;
+  margin: 0 auto;
 }
-.container:before, .container:after {
-    content: "";
-    display: block;
-    clear: both;
+.container:before,
+.container:after {
+  content: "";
+  display: block;
+  clear: both;
 }
 .container .info {
-    margin: 50px auto;
-    text-align: center;
+  margin: 50px auto;
+  text-align: center;
 }
 .container .info h1 {
-    margin: 0 0 15px;
-    padding: 0;
-    font-size: 36px;
-    font-weight: 300;
-    color: #1a1a1a;
+  margin: 0 0 15px;
+  padding: 0;
+  font-size: 36px;
+  font-weight: 300;
+  color: #1a1a1a;
 }
 .container .info span {
-    color: #4d4d4d;
-    font-size: 12px;
+  color: #4d4d4d;
+  font-size: 12px;
 }
 .container .info span a {
-    color: #000000;
-    text-decoration: none;
+  color: #000000;
+  text-decoration: none;
 }
 .container .info span .fa {
-    color: #EF3B3A;
+  color: #ef3b3a;
 }
 .popup {
-    position: relative;
-    display: inline-block;
-    cursor: pointer;
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+/* The actual popup (appears on top) */
+.popup .popuptext {
+  visibility: hidden;
+  width: 160px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -80px;
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Toggle this class when clicking on the popup container (hide and show the popup) */
+.popup .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
   }
-  
-  /* The actual popup (appears on top) */
-  .popup .popuptext {
-    visibility: hidden;
-    width: 160px;
-    background-color: #555;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 8px 0;
-    position: absolute;
-    z-index: 1;
-    bottom: 125%;
-    left: 50%;
-    margin-left: -80px;
+  to {
+    opacity: 1;
   }
-  
-  /* Popup arrow */
-  .popup .popuptext::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: #555 transparent transparent transparent;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
-  
-  /* Toggle this class when clicking on the popup container (hide and show the popup) */
-  .popup .show {
-    visibility: visible;
-    -webkit-animation: fadeIn 1s;
-    animation: fadeIn 1s
+  to {
+    opacity: 1;
   }
-  
-  /* Add animation (fade in the popup) */
-  @-webkit-keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity: 1;}
-  }
-  
-  @keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity:1 ;}
-  }
-  .link{
-      color: rgb(50, 96, 177);
-  }
+}
+.link {
+  color: rgb(50, 96, 177);
+}
+.track-heading {
+  padding: 5px;
+  color: rgb(50, 96, 177);
+}
+.track-frame {
+  border-radius: 5px;
+}
