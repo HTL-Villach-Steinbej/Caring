@@ -2,7 +2,6 @@
 html {
   width: 100%;
   height: 100%;
-  overflow: hidden;
   font-family: "Roboto-Regular", sans-serif;
   font-weight: 600;
 
@@ -13,7 +12,6 @@ html {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  
 }
 ::-webkit-scrollbar-track{
   box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
@@ -36,7 +34,7 @@ body {
   width: 100%;
   height: 100%;
   background-color: #f4f6f9;
-  overflow-x: scroll;
+  overflow-y: scroll;
 }
 
 /*Classes*/
@@ -110,33 +108,6 @@ body {
 }
 .welcome-subtext {
   margin-top: 6px;
-}
-.footer {
-  position: absolute;
-  height: 40px;
-  bottom: 0px;
-  right: 0px;
-  left: 0px;
-  background-color: rgb(50, 96, 177);
-}
-.bottom-bar {
-  height: 100%;
-  text-align: center;
-}
-.bottom-bar-item {
-  font-weight: 400;
-  float: right;
-  color: #f4f6f9;
-  width: 100px;
-  height: 40px;
-}
-
-.bottom-bar-item p {
-  margin-top: 12px;
-  font-size: 11px;
-}
-.bottom-bar-item p:hover{
-  font-weight: bold;
 }
 
 .login-page {

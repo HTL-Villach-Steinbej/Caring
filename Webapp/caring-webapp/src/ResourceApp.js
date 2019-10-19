@@ -11,7 +11,6 @@ import Toolbar from "./components/Toolbar";
 import MainWindow from "./components/MainWindow";
 import TrackWindow from "./components/TrackWindow";
 import LoginWindow from "./components/LoginWindow";
-import Footer from "./components/Footer";
 
 import "./style.css";
 import ReportWindow from "./components/ReportWIndow";
@@ -47,9 +46,6 @@ class ResourceApp extends Component {
           <Toolbar />
         </div>
         <div className="body">{screenComponent}</div>
-        <div className="footer">
-          <Footer />
-        </div>
       </div>
     );
   }
