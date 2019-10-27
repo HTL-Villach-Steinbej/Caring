@@ -58,9 +58,7 @@ body {
   background-color: #f4f6f9;
   color: black;
 }
-.toolbar:hover #notification-logo {
-  src: "icons8-alarm-100_blue.png";
-}
+
 .toolbar-left-item {
   float: left;
   height: 35px;
@@ -79,10 +77,7 @@ body {
   margin-right: 20px;
   margin-top: 15px;
 }
-#notification-logo:hover {
-  height: 30px;
-  background: url("./icons/icons8-alarm-100_blue.png");
-}
+
 
 .body {
   margin-top: 60px;

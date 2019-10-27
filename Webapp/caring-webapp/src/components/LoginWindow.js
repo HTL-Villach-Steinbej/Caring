@@ -1,4 +1,7 @@
 import React from "react";
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/database';
 
 class LoginWindow extends React.Component {
   constructor() {
@@ -19,12 +22,30 @@ class LoginWindow extends React.Component {
     this.setState({ password: newPassword });
   }
   login() {
-    console.log(
-      "You clicked login with username: " +
-        this.state.username +
-        " and password: " +
-        this.state.password
-    );
+    firebase.auth().signInWithEmailAndPassword(this.state.username, this.state.password).catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // ...
+    });
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        console.log("user is logged in");
+        // User is signed in.
+        var displayName = user.displayName;
+        var email = user.email;
+        var emailVerified = user.emailVerified;
+        var photoURL = user.photoURL;
+        var isAnonymous = user.isAnonymous;
+        var uid = user.uid;
+        var providerData = user.providerData;
+        // ...
+      } else {
+        console.log("user is not logged in");
+        // User is signed out.
+        // ...
+      }
+    });
   }
   register() {
     console.log("Now you can register");
@@ -36,7 +57,7 @@ class LoginWindow extends React.Component {
           <form className="login-form">
             <input
               type="text"
-              placeholder="Username"
+              placeholder="Email"
               value={this.state.componentName}
               onChange={this.usernameChanged}
             />

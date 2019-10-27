@@ -1,27 +1,32 @@
 import React from "react";
-import { Map, GoogleApiWrapper } from "google-maps-react";
+import { Map as LeafletMap, TileLayer, Marker, Popup } from "react-leaflet";
 
-const mapStyles = {
-  width: "100%",
-  height: "100%"
-};
 
 function TrackWindow(props) {
   return (
     <div className="track-window">
       <h2 className="track-heading">Tracking</h2>
-      <div className="track-frame">
-        <Map
-          google={props.google}
-          zoom={8}
-          style={mapStyles}
-          initialCenter={{ lat: 47.444, lng: -122.176 }}
-        />
+      <div className="leaflet-container">
+        <LeafletMap
+          center={[50, 10]}
+          zoom={6}
+          maxZoom={10}
+          attributionControl={true}
+          zoomControl={true}
+          doubleClickZoom={true}
+          scrollWheelZoom={true}
+          dragging={true}
+          animate={true}
+          easeLinearity={0.35}
+        >
+          <TileLayer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png" />
+          <Marker position={[50, 10]}>
+            <Popup>Popup for any custom information.</Popup>
+          </Marker>
+        </LeafletMap>
       </div>
     </div>
   );
 }
 
-export default GoogleApiWrapper({
-  apiKey: "AIzaSyBXbw4ILxWmD1-NNYAa-5IqY9apJqbums0"
-})(TrackWindow);
+export default TrackWindow;

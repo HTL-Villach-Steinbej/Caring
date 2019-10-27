@@ -7,7 +7,7 @@ function Toolbar(props) {
   return (
     <div className="toolbar">
       {SCREENS.map(SCREEN => (
-        <div className="toolbar-left-item">
+        <div className="toolbar-left-item" key={SCREEN}>
           <p
             className="toolbar-item-text"
             onClick={() => {
