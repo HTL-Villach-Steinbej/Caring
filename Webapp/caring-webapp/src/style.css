@@ -305,6 +305,10 @@ body {
   margin: 0px;
   color: #ffffff;
 }
+.report-heading{
+  padding: 5px;
+  color: rgb(50, 96, 177);
+}
 .container-about{
   padding: 50px;
   height: 200px;

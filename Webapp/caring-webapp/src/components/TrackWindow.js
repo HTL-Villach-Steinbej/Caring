@@ -1,29 +1,29 @@
 import React from "react";
-import { Map as LeafletMap, TileLayer, Marker, Popup } from "react-leaflet";
+import ReactMapboxGl, { Layer, Feature } from "react-mapbox-gl";
 
+const Map = ReactMapboxGl({ 
+  accessToken: "pk.eyJ1Ijoid2V6dXNpciIsImEiOiJjazMxZDh5eTgwNTN6M2RxZjV1MnB0N3g2In0.YK5ODFfBnOXYAOGd5XCvvA"
+});
 
 function TrackWindow(props) {
   return (
     <div className="track-window">
       <h2 className="track-heading">Tracking</h2>
-      <div className="leaflet-container">
-        <LeafletMap
-          center={[50, 10]}
-          zoom={6}
-          maxZoom={10}
-          attributionControl={true}
-          zoomControl={true}
-          doubleClickZoom={true}
-          scrollWheelZoom={true}
-          dragging={true}
-          animate={true}
-          easeLinearity={0.35}
-        >
-          <TileLayer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png" />
-          <Marker position={[50, 10]}>
-            <Popup>Popup for any custom information.</Popup>
-          </Marker>
-        </LeafletMap>
+      <div>
+        <Map
+          style="mapbox://styles/mapbox/streets-v9"
+          containerStyle={{
+            height: "100vh",
+            width: "100vw"
+          }}
+          center={[13.843420, 46.601871]}>
+          <Layer
+            type="symbol"
+            id="marker"
+            layout={{ "icon-image": "marker-15" }}>
+            <Feature coordinates={[13.843420, 46.601871]} />
+          </Layer>
+        </Map>
       </div>
     </div>
   );
