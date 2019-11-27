@@ -1,12 +1,12 @@
-import React from 'react';
+import React from "react";
 import store from "./redux/store";
 import { Provider } from "react-redux";
-import ResourceApp from './ResourceApp';
+import ResourceApp from "./ResourceApp";
 
 function App() {
   return (
     <Provider store={store}>
-        <ResourceApp />
+      <ResourceApp />
     </Provider>
   );
 }
