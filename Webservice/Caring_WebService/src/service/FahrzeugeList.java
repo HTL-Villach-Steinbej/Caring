@@ -20,24 +20,24 @@ import com.google.gson.Gson;
 
 import dal.Database;
 
-@Path("/damages")
-public class SchadensList {
+@Path("/cars")
+public class FahrzeugeList {
     @Context
     private UriInfo context;
 
     /**
      * Creates a new instance of GegenstandList
      */
-    public SchadensList() {
+    public FahrzeugeList() {
     }
     @GET
     @Path("/")
     @Produces({MediaType.APPLICATION_JSON})
-    public Response getDamages() {
+    public Response getCars() {
         Response.ResponseBuilder response = Response.status(Response.Status.OK);
         try {
             Database db = Database.newInstance();
-            response.entity(new Gson().toJson(db.getDamages()));
+            response.entity(new Gson().toJson(db.getCars()));
         } catch (Exception e) {
             response.status(Response.Status.BAD_REQUEST);
             response.entity("[ERROR] " + e.getMessage());
