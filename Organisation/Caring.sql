@@ -2,6 +2,7 @@ DROP TABLE fahrzeug cascade constraints;
 DROP TABLE zone cascade constraints;
 DROP TABLE schaden cascade constraints;
 DROP TABLE leiht_aus cascade constraints;
+DROP TABLE users cascade constraints;
 DROP TABLE verursacht_schaden cascade constraints;
 
 CREATE TABLE fahrzeug(
@@ -10,6 +11,11 @@ CREATE TABLE fahrzeug(
 	marke VARCHAR2(15),
   laufleistung INT,
   geo_point SDO_GEOMETRY
+);
+
+CREATE TABLE users(
+	u_id VARCHAR2(30),
+  PRIMARY KEY(u_id)
 );
 
 CREATE TABLE zone(
@@ -27,10 +33,12 @@ CREATE TABLE schaden(
 CREATE TABLE leiht_aus (
   lid int PRIMARY KEY,
   la_fid int,
+  la_uid VARCHAR2(30),
   la_zid int,
   von DATE,
   bis DATE,
   FOREIGN KEY(la_fid) REFERENCES fahrzeug(fid),
+  FOREIGN KEY(la_uid) REFERENCES users(u_id) ,
   FOREIGN KEY(la_zid) REFERENCES zone(zid) 
 );
 
@@ -42,6 +50,12 @@ CREATE TABLE verursacht_schaden (
   FOREIGN KEY(lid) REFERENCES leiht_aus(lid),
   FOREIGN KEY(vs_sid) REFERENCES schaden(sid)
 );
+
+insert into users values('DkTycfHAhYfYAgzOkUXiopMqcfn1');
+insert into users values('EcAUWSlaZChBpK7DuzoKKE3Pq8f1');
+insert into users values('JM8MyOjSTZVL6xI3U5Xj4IrXRj82');
+insert into users values('j6kUD6XYc5WO9p92YcvtDGnh9o43');
+insert into users values('vfq4pAEVRPQQSk7JfxVG4WcudUJ3');
 
 insert into fahrzeug values(1,'A5 TFSI','AUDI', 106243, SDO_GEOMETRY(2001, NULL, SDO_POINT_TYPE(12, 14, NULL),NULL,NULL));
 insert into fahrzeug values(2,'A6 TDI','AUDI', 56712, SDO_GEOMETRY(2001, NULL, SDO_POINT_TYPE(12, 14, NULL),NULL,NULL));
@@ -59,11 +73,11 @@ insert into schaden values(2,'Fussgeher');
 insert into schaden values(3,'Motorschaden');
 insert into schaden values(4,'Steinschlag');
 
-insert into leiht_aus values(1,1,1,TO_DATE('17/12/2015', 'DD/MM/YYYY'),TO_DATE('17/12/2015', 'DD/MM/YYYY'));
-insert into leiht_aus values(2,2,2,TO_DATE('17/12/2015', 'DD/MM/YYYY'),TO_DATE('17/12/2015', 'DD/MM/YYYY'));
-insert into leiht_aus values(3,3,2,TO_DATE('17/12/2015', 'DD/MM/YYYY'),TO_DATE('17/12/2015', 'DD/MM/YYYY'));
-insert into leiht_aus values(4,1,1,TO_DATE('17/12/2015', 'DD/MM/YYYY'),TO_DATE('17/12/2015', 'DD/MM/YYYY'));
-insert into leiht_aus values(5,2,2,TO_DATE('17/12/2015', 'DD/MM/YYYY'),TO_DATE('17/12/2015', 'DD/MM/YYYY'));
+insert into leiht_aus values(1,1,'DkTycfHAhYfYAgzOkUXiopMqcfn1',1,TO_DATE('17/12/2015', 'DD/MM/YYYY'),TO_DATE('17/12/2015', 'DD/MM/YYYY'));
+insert into leiht_aus values(2,2,'DkTycfHAhYfYAgzOkUXiopMqcfn1',2,TO_DATE('17/12/2015', 'DD/MM/YYYY'),TO_DATE('17/12/2015', 'DD/MM/YYYY'));
+insert into leiht_aus values(3,3,'vfq4pAEVRPQQSk7JfxVG4WcudUJ3',2,TO_DATE('17/12/2015', 'DD/MM/YYYY'),TO_DATE('17/12/2015', 'DD/MM/YYYY'));
+insert into leiht_aus values(4,1,'JM8MyOjSTZVL6xI3U5Xj4IrXRj82',1,TO_DATE('17/12/2015', 'DD/MM/YYYY'),TO_DATE('17/12/2015', 'DD/MM/YYYY'));
+insert into leiht_aus values(5,2,'EcAUWSlaZChBpK7DuzoKKE3Pq8f1',2,TO_DATE('17/12/2015', 'DD/MM/YYYY'),TO_DATE('17/12/2015', 'DD/MM/YYYY'));
 
 insert into verursacht_schaden values(1, 1, 100);
 insert into verursacht_schaden values(2, 2, 10000);
