@@ -36,6 +36,7 @@ public class MainActivity extends  AppCompatActivity implements
     private MapView mapView;
     private MapboxMap mapboxMap;
     private PermissionsManager permissionsManager;
+    private Toolbar toolbar;
 
 
     @Override
@@ -44,11 +45,14 @@ public class MainActivity extends  AppCompatActivity implements
         Mapbox.getInstance(getApplicationContext(), getString(R.string.mapbox_access_token));
         setContentView(R.layout.activity_main);
 
-
+toolbar=findViewById(R.id.toolbar);
+setSupportActionBar(toolbar);
 
         mapView = (MapView) findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
+
+
     }
 
     @Override

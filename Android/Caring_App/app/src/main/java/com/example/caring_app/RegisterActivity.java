@@ -21,15 +21,22 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 //import com.google.firebase.firestore.FirebaseFirestore;
 
 public class RegisterActivity extends AppCompatActivity {
     EditText etPwd;
     EditText etEmail;
+    EditText etFN;
+    EditText etPN;
     Button btnSignUp;
     TextView tvLogin;
     private FirebaseAuth mAuth;
-   // private FirebaseFirestore db;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +47,7 @@ public class RegisterActivity extends AppCompatActivity {
     private void initComponents(){
         mAuth = FirebaseAuth.getInstance();
 
-       // db = FirebaseFirestore.getInstance();
+        db = FirebaseFirestore.getInstance();
 
 
         btnSignUp = findViewById(R.id.btnSignUp);
@@ -50,6 +57,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
                 register();
+
             }
         });
 
@@ -57,22 +65,25 @@ public class RegisterActivity extends AppCompatActivity {
         tvLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
-                startActivity(intent);
+               updateActivity(true);
             }
         });
 
 
     }
 
-    private void register(){
+    private void  register(){
 
          etEmail = findViewById(R.id.etEmail);
          etPwd = findViewById(R.id.etPwd);
+         etFN=findViewById(R.id.etFN);
+         etPN=findViewById(R.id.etPN);
 
 
         String email = etEmail.getText().toString();
         String password = etPwd.getText().toString();
+        final String fullname=etFN.getText().toString();
+        String phonenr=etPN.getText().toString();
 
         etEmail.setError(null);
         etPwd.setError(null);
@@ -92,6 +103,25 @@ public class RegisterActivity extends AppCompatActivity {
                        public void onSuccess(AuthResult authResult) {
                            FirebaseUser user=mAuth.getCurrentUser();
                            user.sendEmailVerification();
+
+                           Map<String,String> userData=new HashMap<>();
+                           userData.put("FullName",fullname);
+                           userData.put("email",user.getEmail());
+                           userData.put("paymethod","");
+
+                           db.collection("users").add(userData).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                               @Override
+                               public void onComplete(@NonNull Task<DocumentReference> task) {
+                                   if(task.isSuccessful()){
+
+                                       Toast.makeText(RegisterActivity.this, "Operation successfull", Toast.LENGTH_SHORT).show();
+                                       updateActivity(true);
+
+                                   }else{
+                                       Toast.makeText(RegisterActivity.this, "irgendwos is faul", Toast.LENGTH_SHORT).show();
+                                   }
+                               }
+                           });
                        }
                    })
                     .addOnFailureListener(this, new OnFailureListener() {
@@ -102,6 +132,13 @@ public class RegisterActivity extends AppCompatActivity {
                     });
 
 }
+       }
+
+       private void updateActivity(boolean success){
+        if(success) {
+            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+            startActivity(intent);
+        }
        }
     }
 
