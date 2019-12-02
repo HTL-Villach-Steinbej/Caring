@@ -3,7 +3,7 @@ import createSagaMiddleware from "redux-saga";
 
 import index from "./reducers";
 import {
-  fetchPeersSaga
+  fetchCarsSaga
 } from "./sagas";
 
 const sagaMiddleWare = createSagaMiddleware();
@@ -15,4 +15,5 @@ export default createStore(
   composeEnhancers(applyMiddleware(sagaMiddleWare))
 );
 
-sagaMiddleWare.run(fetchPeersSaga);
+
+sagaMiddleWare.run(fetchCarsSaga);

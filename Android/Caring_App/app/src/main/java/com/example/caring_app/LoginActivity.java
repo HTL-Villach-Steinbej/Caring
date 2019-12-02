@@ -64,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
                     txtPassword.requestFocus();
                 }else if(email.isEmpty() && password.isEmpty())
                 {
-                    Toast.makeText(LoginActivity.this,"Fields are empty!",Toast.LENGTH_SHORT).show();
+                    4
                 }else if(!(email.isEmpty() && password.isEmpty())){
                     FirebaseAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
