@@ -1,8 +1,8 @@
 import { SHOW_SCREEN } from "../actionTypes";
-import { SCREEN_HOME } from "../../screens";
+import { SCREEN_TRACING } from "../../screens";
 
 const initialState = {
-  currentScreen: SCREEN_HOME
+  currentScreen: SCREEN_TRACING
 };
 
 const screens = (state = initialState, action) => {

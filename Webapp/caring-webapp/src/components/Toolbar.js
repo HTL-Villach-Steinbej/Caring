@@ -31,14 +31,6 @@ function Toolbar(props) {
           alt="Notifications Icon"
         />
       </div>
-      <div className="toolbar-right-item">
-        <img
-          height="30px"
-          src="./icons/icons8-alarm-100.png"
-          id="notification-logo"
-          alt="Notifications Icon"
-        />
-      </div>
     </div>
   );
 }

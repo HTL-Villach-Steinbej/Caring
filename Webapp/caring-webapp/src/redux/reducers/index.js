@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
-import peers from "./peers";
 import screens from "./screens";
+import cars from "./cars";
+import auth from "./auth";
 
-export default combineReducers({ peers, screens });
+export default combineReducers({ screens, cars, auth });

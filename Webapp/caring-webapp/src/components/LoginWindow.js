@@ -1,8 +1,8 @@
-import React from "react";
-import * as firebase from 'firebase/app';
-import 'firebase/auth';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { loginUser, showScreen } from "../redux/actions";
 
-class LoginWindow extends React.Component {
+class LoginWindow extends Component {
   constructor() {
     super();
     this.state = {
@@ -20,61 +20,59 @@ class LoginWindow extends React.Component {
     let newPassword = event.target.value;
     this.setState({ password: newPassword });
   }
-  login() {
-    firebase.auth().signInWithEmailAndPassword(this.state.username, this.state.password).catch(function(error) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      // ...
-    });
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        console.log("user is logged in");
-        // User is signed in.
-        var displayName = user.displayName;
-        var email = user.email;
-        var emailVerified = user.emailVerified;
-        var photoURL = user.photoURL;
-        var isAnonymous = user.isAnonymous;
-        var uid = user.uid;
-        var providerData = user.providerData;
-        // ...
-      } else {
-        console.log("user is not logged in");
-        // User is signed out.
-        // ...
-      }
-    });
+  login = () => {
+    const { dispatch } = this.props;
+    const { username, password } = this.state;
+    dispatch(loginUser(username, password));
   }
   register() {
-    console.log("Now you can register");
+    this.props.showScreen('Register');
   }
   render() {
-    return (
-      <div className="login-page">
-        <div className="form">
-          <form className="login-form">
-            <input
-              type="text"
-              placeholder="Email"
-              value={this.state.componentName}
-              onChange={this.usernameChanged}
-            />
-            <input
-              type="password"
-              placeholder="Password"
-              value={this.state.componentName}
-              onChange={this.passwordChanged}
-            />
-            <button onClick={this.login}>Login</button>
-            <p className="message">
-              Not registered? <a onClick={this.register}>Create an account</a>
-            </p>
-          </form>
+    const { loginError, isAuthenticated } = this.props;
+    if (isAuthenticated) {
+      showScreen('Track')
+    } 
+    else {
+      return (
+        <div className="login-page">
+          <div className="form">
+            <form className="login-form">
+              <input
+                type="text"
+                placeholder="Email"
+                value={this.state.username}
+                onChange={this.usernameChanged}
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                value={this.state.password}
+                onChange={this.passwordChanged}
+              />
+              {loginError && (
+              <p>
+                Incorrect email or password.
+              </p>
+            )}
+              <button onClick={this.login}>Login</button>
+              <p className="message">
+                Not registered? <a onClick={this.register}>Create an account</a>
+              </p>
+            </form>
+          </div>
         </div>
-      </div>
-    );
+      );
+   }
   }
 }
 
-export default LoginWindow;
+function mapStateToProps(state) {
+  return {
+    isLoggingIn: state.auth.isLoggingIn,
+    loginError: state.auth.loginError,
+    isAuthenticated: state.auth.isAuthenticated
+  };
+}
+
+export default connect(mapStateToProps)(LoginWindow);
