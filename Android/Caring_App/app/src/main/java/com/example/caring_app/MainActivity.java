@@ -1,5 +1,6 @@
 package com.example.caring_app;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.mapbox.android.core.permissions.PermissionsListener;
@@ -26,6 +27,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.List;
@@ -37,6 +41,7 @@ public class MainActivity extends  AppCompatActivity implements
     private MapboxMap mapboxMap;
     private PermissionsManager permissionsManager;
     private Toolbar toolbar;
+
 
 
     @Override
@@ -53,6 +58,28 @@ setSupportActionBar(toolbar);
         mapView.getMapAsync(this);
 
 
+    }
+
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menue_settings, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.settings:
+                Intent i = new Intent(MainActivity.this,Payment.class);
+                startActivity(i);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override
