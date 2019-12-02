@@ -6,6 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".Payment">
 
+    <Button
+        android:id="@+id/buttonPayPal"
+        android:layout_width="340dp"
+        android:layout_height="250dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="128dp"
+        android:background="@drawable/paypal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/buttonCredit"
+        android:layout_width="340dp"
+        android:layout_height="250dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="384dp"
+        android:background="@drawable/creditcards"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
