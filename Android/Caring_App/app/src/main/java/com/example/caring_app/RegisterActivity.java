@@ -106,6 +106,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                            Map<String,String> userData=new HashMap<>();
                            userData.put("FullName",fullname);
+                           userData.put("uid",mAuth.getCurrentUser().getUid());
                            userData.put("email",user.getEmail());
                            userData.put("paymethod","");
 
