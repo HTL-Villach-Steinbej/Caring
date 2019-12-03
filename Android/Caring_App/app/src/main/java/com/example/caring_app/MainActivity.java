@@ -1,5 +1,7 @@
 package com.example.caring_app;
 
+import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -39,6 +41,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends  AppCompatActivity implements
