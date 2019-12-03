@@ -3,6 +3,8 @@ package com.example.caring_app;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.mapbox.android.core.permissions.PermissionsListener;
 import com.mapbox.android.core.permissions.PermissionsManager;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
@@ -41,7 +43,8 @@ public class MainActivity extends  AppCompatActivity implements
     private MapboxMap mapboxMap;
     private PermissionsManager permissionsManager;
     private Toolbar toolbar;
-
+    FirebaseAuth mFirebaseAuth;
+    private FirebaseAuth.AuthStateListener mAuthStateListener;
 
 
     @Override
@@ -56,6 +59,16 @@ setSupportActionBar(toolbar);
         mapView = (MapView) findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
+
+        /*
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser User = mFirebaseAuth.getCurrentUser();
+        if(User == null)
+        {
+            Intent i = new Intent(MainActivity.this,RegisterActivity.class);
+            startActivity(i);
+        }*/
+
 
 
     }
@@ -73,10 +86,16 @@ setSupportActionBar(toolbar);
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
-            case R.id.settings:
+            case R.id.payment:
                 Intent i = new Intent(MainActivity.this,Payment.class);
                 startActivity(i);
                 return true;
+            case R.id.logout:
+                FirebaseAuth.getInstance().signOut();
+                Intent register = new Intent(MainActivity.this,RegisterActivity.class);
+                startActivity(register);
+                MainActivity.this.finish();
+
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -128,6 +147,12 @@ setSupportActionBar(toolbar);
 
     @Override
     public void onExplanationNeeded(List<String> permissionsToExplain) {
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(MainActivity.this,MainActivity.class);
+        startActivity(i);
     }
 
     @Override

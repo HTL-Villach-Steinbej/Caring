@@ -14,6 +14,15 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -25,7 +34,10 @@ public class CreditCart extends AppCompatActivity {
     EditText Datum;
     Spinner CreditType;
     Button Save;
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
+    private DatabaseReference FirebaseDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +60,7 @@ public class CreditCart extends AppCompatActivity {
                 String nummer = txtNummer.getText().toString();
                 String prnr = txtPruefnummer.getText().toString();
                 String datum = Datum.getText().toString();
-                Toast.makeText(CreditCart.this,nummer+" ",Toast.LENGTH_SHORT).show();
+
                 boolean valid = true;
                 if(nummer.isEmpty())
                 {
@@ -68,7 +80,21 @@ public class CreditCart extends AppCompatActivity {
 
                 if(valid)
                 {
-                    //In Firebase DB Speichern dass Kreditkarte verbunden ist!!
+                    mAuth=FirebaseAuth.getInstance();
+                    FirebaseUser User = mAuth.getCurrentUser();
+                    FirebaseDB = FirebaseDatabase.getInstance().getReference();
+
+                    try {
+                        FirebaseDB.child("users").child(User.getUid()).child("paymethod").setValue("creditcard");
+                    }catch (Exception ex)
+                    {
+                        ex.printStackTrace();
+                    }
+
+                    //FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
+                   // CollectionReference questionsRef = rootRef.collection("questions");
+                    //DocumentReference docRef = questionsRef.document(User.getUid());
+                    //docRef.update("paymethod", "creditcard");
                 }
             }
 
