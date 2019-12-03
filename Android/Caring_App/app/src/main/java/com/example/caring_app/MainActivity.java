@@ -45,6 +45,9 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconAllowOverlap;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconOffset;
+
 public class MainActivity extends  AppCompatActivity implements
         OnMapReadyCallback, PermissionsListener {
 
