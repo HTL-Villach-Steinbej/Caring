@@ -110,19 +110,18 @@ public class RegisterActivity extends AppCompatActivity {
                            userData.put("email",user.getEmail());
                            userData.put("paymethod","");
 
-                           db.collection("users").add(userData).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-                               @Override
-                               public void onComplete(@NonNull Task<DocumentReference> task) {
-                                   if(task.isSuccessful()){
 
-                                       Toast.makeText(RegisterActivity.this, "Operation successfull", Toast.LENGTH_SHORT).show();
-                                       updateActivity(true);
-
-                                   }else{
-                                       Toast.makeText(RegisterActivity.this, "irgendwos is faul", Toast.LENGTH_SHORT).show();
-                                   }
-                               }
-                           });
+                           db.collection("users").document(mAuth.getCurrentUser().getUid()).set(userData)
+                                   .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                       @Override
+                                       public void onSuccess(Void aVoid) {
+                                       }
+                                   })
+                                   .addOnFailureListener(new OnFailureListener() {
+                                       @Override
+                                       public void onFailure(@NonNull Exception e) {
+                                       }
+                                   });
                        }
                    })
                     .addOnFailureListener(this, new OnFailureListener() {
