@@ -32,7 +32,6 @@ public class RegisterActivity extends AppCompatActivity {
     EditText etPwd;
     EditText etEmail;
     EditText etFN;
-    EditText etPN;
     Button btnSignUp;
     TextView tvLogin;
     private FirebaseAuth mAuth;
@@ -77,13 +76,11 @@ public class RegisterActivity extends AppCompatActivity {
          etEmail = findViewById(R.id.etEmail);
          etPwd = findViewById(R.id.etPwd);
          etFN=findViewById(R.id.etFN);
-         etPN=findViewById(R.id.etPN);
 
 
         String email = etEmail.getText().toString();
         String password = etPwd.getText().toString();
         final String fullname=etFN.getText().toString();
-        String phonenr=etPN.getText().toString();
 
         etEmail.setError(null);
         etPwd.setError(null);
