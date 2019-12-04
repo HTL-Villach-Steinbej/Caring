@@ -32,7 +32,6 @@ public class RegisterActivity extends AppCompatActivity {
     EditText etPwd;
     EditText etEmail;
     EditText etFN;
-    EditText etPN;
     Button btnSignUp;
     TextView tvLogin;
     private FirebaseAuth mAuth;
@@ -77,13 +76,11 @@ public class RegisterActivity extends AppCompatActivity {
          etEmail = findViewById(R.id.etEmail);
          etPwd = findViewById(R.id.etPwd);
          etFN=findViewById(R.id.etFN);
-         etPN=findViewById(R.id.etPN);
 
 
         String email = etEmail.getText().toString();
         String password = etPwd.getText().toString();
         final String fullname=etFN.getText().toString();
-        String phonenr=etPN.getText().toString();
 
         etEmail.setError(null);
         etPwd.setError(null);
@@ -109,19 +106,18 @@ public class RegisterActivity extends AppCompatActivity {
                            userData.put("email",user.getEmail());
                            userData.put("paymethod","");
 
-                           db.collection("users").add(userData).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-                               @Override
-                               public void onComplete(@NonNull Task<DocumentReference> task) {
-                                   if(task.isSuccessful()){
 
-                                       Toast.makeText(RegisterActivity.this, "Operation successfull", Toast.LENGTH_SHORT).show();
-                                       updateActivity(true);
-
-                                   }else{
-                                       Toast.makeText(RegisterActivity.this, "irgendwos is faul", Toast.LENGTH_SHORT).show();
-                                   }
-                               }
-                           });
+                           db.collection("users").document(mAuth.getCurrentUser().getUid()).set(userData)
+                                   .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                       @Override
+                                       public void onSuccess(Void aVoid) {
+                                       }
+                                   })
+                                   .addOnFailureListener(new OnFailureListener() {
+                                       @Override
+                                       public void onFailure(@NonNull Exception e) {
+                                       }
+                                   });
                        }
                    })
                     .addOnFailureListener(this, new OnFailureListener() {
@@ -140,7 +136,13 @@ public class RegisterActivity extends AppCompatActivity {
             startActivity(intent);
         }
        }
+
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(RegisterActivity.this,LoginActivity.class);
+        startActivity(i);
     }
+}
 
 
 
