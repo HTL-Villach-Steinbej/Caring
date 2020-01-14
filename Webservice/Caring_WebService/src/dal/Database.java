@@ -10,6 +10,7 @@ import com.google.gson.JsonElement;
 import bll.Fahrzeug;
 import bll.Point;
 import bll.Schaden;
+import bll.Zone;
 
 public class Database {
 	private static Database instance = null;
@@ -30,7 +31,7 @@ public class Database {
 		      String myDriver = "oracle.jdbc.driver.OracleDriver";
 		      //212.152.179.117
 		      //10.0.6.111
-		      String myUrl = "jdbc:oracle:thin:@212.152.179.117:1521:ora11g";
+		      String myUrl = "jdbc:oracle:thin:@10.0.6.111:1521:ora11g";
 		      Class.forName(myDriver);
 		      this.con= DriverManager.getConnection(myUrl, "d5a21", "d5a");
 		} catch (Exception e) {
@@ -125,12 +126,14 @@ public class Database {
 			createCon();
 			PreparedStatement stmt = null;
 			con.setAutoCommit(true);
-			stmt = con.prepareStatement("Delete From Schaden Where sid=?");
+			stmt = con.prepareStatement("Delete From Schaden Where sid = ?");
+			//Achtung Verbindung zu einer anderen Tabelle kann nicht gelöscht werden wahrscheinlich
+			//Research anstehend 
 			stmt.setInt(1, id);
 			stmt.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			throw new Exception("Damage with id " + id + "not found;");
+			throw new Exception("Damage with id " + id + "not found;"+e.getMessage());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -225,7 +228,7 @@ public class Database {
 			createCon();
 			PreparedStatement stmt = null;
 			con.setAutoCommit(true);
-			stmt = con.prepareStatement("Delete From fahrzeug Where fid=?");
+			stmt = con.prepareStatement("Delete From Fahrzeug Where fid=?");
 			stmt.setInt(1, id);
 			stmt.execute();
 		} catch (SQLException e) {
@@ -238,7 +241,98 @@ public class Database {
 			closeCon();
 		}
 	}
+	//Zonen
 	
+	public ArrayList<Zone> getZonen() {
+		ArrayList<Zone> result = new ArrayList<Zone>();
+		try {
+			createCon();
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery("select * from Zone");
+			while (rs.next())
+				result.add(new Zone(rs.getInt(1), rs.getString(2),rs.getInt(3)));
+			closeCon();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return result;
+	}
+	public Zone getZone(int _id) throws Exception {
+		Zone zone = null;
+		try {
+			createCon();
+			PreparedStatement stmt = null;
+			con.setAutoCommit(true);
+			stmt = con.prepareStatement("select * from Zone Where zid=?");
+			stmt.setInt(1, _id);
+			ResultSet rs = stmt.executeQuery();
+			rs.next();
+			zone = new Zone(rs.getInt(1), rs.getString(2),rs.getInt(3));
+		} catch (SQLException e) {
+			throw new Exception("no Zone found with id: " + _id);
+		}
+
+		return zone;
+	}
+	public void setZone(Zone zone) throws Exception {
+		try {
+			createCon();
+			PreparedStatement stmt = null;
+			con.setAutoCommit(true);
+			stmt = con.prepareStatement("INSERT INTO Zone VALUES (?,?,?)");
+			stmt.setInt(1, zone.getId());
+			stmt.setString(2, zone.getBezeichnung());
+			stmt.setInt(3,zone.getKostensatz());
+			stmt.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			throw new Exception("Zone with id " + zone.getId() + "already existst;");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			closeCon();
+		}
+	}
+	public void updateZone(Zone zone) throws Exception {
+		// TODO Auto-generated method stub
+		try {
+			createCon();
+			PreparedStatement stmt = null;
+			con.setAutoCommit(true);
+			stmt = con.prepareStatement("Update Zone SET Bezeichnung=?,Kostensatz=? Where zid = ?");
+			stmt.setInt(3, zone.getId());
+			stmt.setString(1, zone.getBezeichnung());
+			stmt.setInt(2, zone.getKostensatz());
+			int count = stmt.executeUpdate();
+			if(count == 0) throw new Exception();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			throw new Exception("Zone with id " + zone.getId() + " not found;");
+		}  finally {
+			closeCon();
+		}
+
+	}
+	public void deleteZone(int id) throws Exception {
+		// TODO Auto-generated method stub
+		try {
+			createCon();
+			PreparedStatement stmt = null;
+			con.setAutoCommit(true);
+			stmt = con.prepareStatement("Delete From Zone Where zid=?");
+			stmt.setInt(1, id);
+			stmt.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			throw new Exception("Damage with id " + id + "not found;");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			closeCon();
+		}
+	}
 	
 
 	
