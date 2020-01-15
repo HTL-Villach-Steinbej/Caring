@@ -38,6 +38,7 @@ public class DamageActivity extends AppCompatActivity {
         car.setLaufleistung(10000);
         car.setMarke("BMW");
         car.setBezeichnung("e92 335i");
+        fillProvider();
 
         txtMarke.setText(car.getMarke());
         txtLaufleistung.setText(String.valueOf(car.getLaufleistung()));
@@ -56,6 +57,7 @@ public class DamageActivity extends AppCompatActivity {
         spinnerArray.add("Schaden in der Lenkung");
         spinnerArray.add("Schaden am Getriebe");
         spinnerArray.add("Schaden am Licht");
+        spinnerArray.add("Schaden am Fenster");
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 this, android.R.layout.simple_spinner_item, spinnerArray);
