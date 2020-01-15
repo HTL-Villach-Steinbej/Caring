@@ -17,7 +17,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CreditCart"></activity>
+        <activity android:name=".DamageActivity"></activity>
+        <activity android:name=".CreditCart" />
         <activity android:name=".PayPal" />
         <activity android:name=".Payment" />
         <activity

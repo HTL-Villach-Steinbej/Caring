@@ -5,8 +5,23 @@ public class Car {
     private String bezeichnung;
     private String marke;
     private int laufleistung;
-    private int xCord;
-    private int yCord;
+    private Point location;
+
+
+
+    public Car() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+    public Car(int id, String bezeichnung, String marke, int laufleistung, Point location) {
+        super();
+        this.id = id;
+        this.bezeichnung = bezeichnung;
+        this.marke = marke;
+        this.laufleistung = laufleistung;
+        this.location = location;
+    }
 
     public int getId() {
         return id;
@@ -40,28 +55,11 @@ public class Car {
         this.laufleistung = laufleistung;
     }
 
-    public int getxCord() {
-        return xCord;
+    public Point getLocation() {
+        return location;
     }
 
-    public void setxCord(int xCord) {
-        this.xCord = xCord;
-    }
-
-    public int getyCord() {
-        return yCord;
-    }
-
-    public void setyCord(int yCord) {
-        this.yCord = yCord;
-    }
-
-    public Car(int id, String bezeichnung, String marke, int laufleistung, int xCord, int yCord) {
-        this.id = id;
-        this.bezeichnung = bezeichnung;
-        this.marke = marke;
-        this.laufleistung = laufleistung;
-        this.xCord = xCord;
-        this.yCord = yCord;
+    public void setLocation(Point location) {
+        this.location = location;
     }
 }
