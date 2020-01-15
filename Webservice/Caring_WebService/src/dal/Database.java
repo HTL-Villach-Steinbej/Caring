@@ -9,6 +9,7 @@ import com.google.gson.JsonElement;
 
 import bll.Fahrzeug;
 import bll.Point;
+import bll.Rent;
 import bll.Schaden;
 import bll.Zone;
 
@@ -333,7 +334,105 @@ public class Database {
 			closeCon();
 		}
 	}
+	//Rents
 	
+		public ArrayList<Rent> getRents() {
+			ArrayList<Rent> result = new ArrayList<Rent>();
+			try {
+				createCon();
+				Statement stmt = con.createStatement();
+				ResultSet rs = stmt.executeQuery("select * from leiht_aus");
+				while (rs.next())
+					result.add(new Rent(rs.getInt(1), rs.getInt(2),rs.getInt(3),rs.getInt(4),rs.getDate(5),rs.getDate(6)));
+				closeCon();
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+			return result;
+		}
+			
+		public Rent getRent(int _id) throws Exception {
+			Rent rent = null;
+			try {
+				createCon();
+				PreparedStatement stmt = null;
+				con.setAutoCommit(true);
+				stmt = con.prepareStatement("SELECT * FROM leiht_aus  Where lid = ?");
+				stmt.setInt(1, _id);
+				ResultSet rs = stmt.executeQuery();
+				rs.next();
+				rent = new Rent(rs.getInt(1), rs.getInt(2),rs.getInt(3),rs.getInt(4),rs.getDate(5),rs.getDate(6));
+			} catch (SQLException e) {
+				throw new Exception("no rent found with id: " + _id);
+			}
 
+			return rent;
+		}
+		public void setRent(Rent rent) throws Exception {
+			try {
+				createCon();
+				PreparedStatement stmt = null;
+				con.setAutoCommit(true);
+				stmt = con.prepareStatement("insert into leiht_aus values(?,?,?,?,?,?) ");
+				stmt.setInt(1, rent.getId());
+				stmt.setInt(2, rent.getFid());
+				stmt.setInt(3, rent.getUid());
+				stmt.setInt(4,rent.getZid());
+				stmt.setDate(5, rent.getVon());
+				stmt.setDate(6,	rent.getBis());
+				stmt.execute();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				throw new Exception("Rent with id " + rent.getId() + "already existst;");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				closeCon();
+			}
+		}
+		public void updateRent(Rent	 rent) throws Exception {
+			// TODO Auto-generated method stub
+			try {
+				createCon();
+				PreparedStatement stmt = null;
+				con.setAutoCommit(true);
+				stmt = con.prepareStatement("Update leiht_aus SET fid = ?,uid = ?, zid =?,von = ?, bis = ? WHERE lid = ?");
+				stmt.setInt(1, rent.getFid());
+				stmt.setInt(2, rent.getUid());
+				stmt.setInt(3, rent.getZid());
+				stmt.setDate(4, rent.getVon());
+				stmt.setDate(5, rent.getBis());
+				stmt.setInt(6, rent.getId());
+				
+				int count = stmt.executeUpdate();
+				if(count == 0) throw new Exception();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				throw new Exception("Rent with id " + rent.getId() + " not found;");
+			}  finally {
+				closeCon();
+			}
+
+		}
+		public void deleteRent(int id) throws Exception {
+			// TODO Auto-generated method stub
+			try {
+				createCon();
+				PreparedStatement stmt = null;
+				con.setAutoCommit(true);
+				stmt = con.prepareStatement("Delete From leiht_aus Where lid=?");
+				stmt.setInt(1, id);
+				stmt.execute();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				throw new Exception("Rent with id " + id + "not found;");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				closeCon();
+			}
+		}
 	
 }
