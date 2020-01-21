@@ -57,6 +57,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                 register();
 
+
             }
         });
 
@@ -111,6 +112,7 @@ public class RegisterActivity extends AppCompatActivity {
                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
                                        @Override
                                        public void onSuccess(Void aVoid) {
+                                           updateActivity(true);
                                        }
                                    })
                                    .addOnFailureListener(new OnFailureListener() {
