@@ -115,6 +115,10 @@ setSupportActionBar(toolbar);
                 Intent register = new Intent(MainActivity.this,RegisterActivity.class);
                 startActivity(register);
                 MainActivity.this.finish();
+            case R.id.Schaden_melden:
+                Intent Damage = new Intent(MainActivity.this,DamageActivity.class);
+                startActivity(Damage);
+                return true;
 
             default:
                 return super.onOptionsItemSelected(item);

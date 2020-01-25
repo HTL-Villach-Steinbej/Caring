@@ -35,7 +35,7 @@ public class CreditCart extends AppCompatActivity {
     Spinner CreditType;
     Button Save;
     private FirebaseAuth mAuth;
-    private FirebaseFirestore db;
+    private FirebaseFirestore Firestoredb;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private DatabaseReference FirebaseDB;
 
@@ -82,10 +82,10 @@ public class CreditCart extends AppCompatActivity {
                 {
                     mAuth=FirebaseAuth.getInstance();
                     FirebaseUser User = mAuth.getCurrentUser();
-                    FirebaseDB = FirebaseDatabase.getInstance().getReference();
+                    Firestoredb = Firestoredb.getInstance();
 
                     try {
-                        FirebaseDB.child("users").child(User.getUid()).child("paymethod").setValue("creditcard");
+                        Firestoredb.collection("users").document(User.getUid()).update("paymethod","creditcart");
                     }catch (Exception ex)
                     {
                         ex.printStackTrace();

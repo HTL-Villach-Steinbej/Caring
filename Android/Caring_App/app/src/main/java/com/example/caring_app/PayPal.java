@@ -20,8 +20,7 @@ public class PayPal extends AppCompatActivity {
     EditText txtPassw;
     Button Save;
     private FirebaseAuth mAuth;
-    private FirebaseFirestore db;
-    private DatePickerDialog.OnDateSetListener mDateSetListener;
+    private FirebaseFirestore Firestoredb;
     private DatabaseReference FirebaseDB;
 
     @Override
@@ -64,12 +63,12 @@ public class PayPal extends AppCompatActivity {
 
                 if(valid)
                 {
-                    mAuth= FirebaseAuth.getInstance();
+                    mAuth=FirebaseAuth.getInstance();
                     FirebaseUser User = mAuth.getCurrentUser();
-                    FirebaseDB = FirebaseDatabase.getInstance().getReference();
+                    Firestoredb = Firestoredb.getInstance();
 
                     try {
-                        FirebaseDB.child("users").child(User.getUid()).child("paymethod").setValue("paypal");
+                        Firestoredb.collection("users").document(User.getUid()).update("paymethod","paypal");
                     }catch (Exception ex)
                     {
                         ex.printStackTrace();
