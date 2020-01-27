@@ -9,5 +9,9 @@
         android:icon="@drawable/ic_icon_settings"
         android:title="Logout">
     </item>
+    <item android:id="@+id/Schaden_melden"
+        android:icon="@drawable/ic_icon_settings"
+        android:title="Schaden Melden">
+    </item>
 
 </menu>

@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class Payment extends AppCompatActivity {
+public class
+
+Payment extends AppCompatActivity {
     Button PayPal;
     Button Credit;
 
