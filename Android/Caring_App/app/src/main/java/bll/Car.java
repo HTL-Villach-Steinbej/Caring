@@ -1,26 +1,36 @@
 package bll;
 
-public class Car {
+import android.location.Location;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
+
+public class Car extends AppCompatActivity{
     private int id;
     private String bezeichnung;
     private String marke;
     private int laufleistung;
-    private Point location;
+    private float distance;
+    private Location carLocation;
+    private FusedLocationProviderClient fusedLocationClient;
 
 
+    public Car()
 
-    public Car() {
+    {
         super();
         // TODO Auto-generated constructor stub
     }
 
-    public Car(int id, String bezeichnung, String marke, int laufleistung, Point location) {
-        super();
+    public Car(int id, String bezeichnung, String marke, int laufleistung, Location point) {
         this.id = id;
         this.bezeichnung = bezeichnung;
         this.marke = marke;
         this.laufleistung = laufleistung;
-        this.location = location;
+        this.carLocation = point;
     }
 
     public int getId() {
@@ -55,11 +65,21 @@ public class Car {
         this.laufleistung = laufleistung;
     }
 
-    public Point getLocation() {
-        return location;
-    }
+    public int getDistance() {
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        fusedLocationClient.getLastLocation()
+                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        distance=location.distanceTo(carLocation);
 
-    public void setLocation(Point location) {
-        this.location = location;
+                        if (location != null) {
+                            // Logic to handle location object
+                        }
+                    }
+                });
+
+
+        return (int)distance;
     }
 }

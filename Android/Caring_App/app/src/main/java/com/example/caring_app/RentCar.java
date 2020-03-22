@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -16,10 +18,13 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class RentCar extends AppCompatActivity {
 
     Button btnrentCar;
     Button btnStopp;
+    Button btnReport;
     TextView tvPay;
 Chronometer chronometer;
 long abgelaufeneZeit;
@@ -45,19 +50,33 @@ long abgelaufeneZeit;
         btnStopp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tvPay.setText("You have to pay: "+((chronometer.getBase() - SystemClock.elapsedRealtime())*1.20)+"€");
+                double amount= Math.round(100.0 * ((SystemClock.elapsedRealtime() -chronometer.getBase() )*0.00020))/100.0;
+                tvPay.setText("You have to pay: "+amount+"€");
                 chronometer.setBase(SystemClock.elapsedRealtime());
                 chronometer.stop();
 
                 btnStopp.setEnabled(false);
                 btnrentCar.setEnabled(true);
                 abgelaufeneZeit = 0;
+                Intent intent = new Intent(RentCar.this, CarLocation.class);
+                startActivityForResult(intent,0);
 
             }
         });
 
 
+    btnReport=findViewById(R.id.reportP);
+
+        btnReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(RentCar.this,DamageActivity.class);
+                startActivity(i);
+
+            }
+        });
     }
+
 
    /* private void initComponents() {
 
