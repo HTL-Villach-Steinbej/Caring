@@ -11,6 +11,8 @@ import bll.Fahrzeug;
 import bll.Point;
 import bll.Rent;
 import bll.Schaden;
+import bll.SchadenRent;
+import bll.User;
 import bll.Zone;
 
 public class Database {
@@ -32,7 +34,7 @@ public class Database {
 		      String myDriver = "oracle.jdbc.driver.OracleDriver";
 		      //212.152.179.117
 		      //10.0.6.111
-		      String myUrl = "jdbc:oracle:thin:@10.0.6.111:1521:ora11g";
+		      String myUrl = "jdbc:oracle:thin:@212.152.179.117:1521:ora11g";
 		      Class.forName(myDriver);
 		      this.con= DriverManager.getConnection(myUrl, "d5a21", "d5a");
 		} catch (Exception e) {
@@ -123,6 +125,9 @@ public class Database {
 	}
 	public void deleteDamage(int id) throws Exception {
 		// TODO Auto-generated method stub
+		
+		
+		
 		try {
 			createCon();
 			PreparedStatement stmt = null;
@@ -234,7 +239,7 @@ public class Database {
 			stmt.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			throw new Exception("Car with id " + id + "not found;");
+			throw new Exception("Car with id " + id + "not found;"+e.getMessage());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -280,14 +285,14 @@ public class Database {
 			createCon();
 			PreparedStatement stmt = null;
 			con.setAutoCommit(true);
-			stmt = con.prepareStatement("INSERT INTO Zone VALUES (?,?,?)");
+			stmt = con.prepareStatement("insert into zone values(?,?,?)");
 			stmt.setInt(1, zone.getId());
 			stmt.setString(2, zone.getBezeichnung());
 			stmt.setInt(3,zone.getKostensatz());
 			stmt.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			throw new Exception("Zone with id " + zone.getId() + "already existst;");
+			throw new Exception("Zone with id " + zone.getId() + "already existst;"+e.getMessage());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -320,13 +325,19 @@ public class Database {
 		try {
 			createCon();
 			PreparedStatement stmt = null;
+			PreparedStatement stmt1 = null;
 			con.setAutoCommit(true);
-			stmt = con.prepareStatement("Delete From Zone Where zid=?");
-			stmt.setInt(1, id);
-			stmt.execute();
+			//stmt = con.prepareStatement("Delete from leiht_aus Where la_zid=?");
+			stmt1 = con.prepareStatement("Delete From Zone Where zid=?");
+			
+			//stmt.setInt(1, id);
+			stmt1.setInt(1, id);
+			
+			//stmt.execute();
+			stmt1.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			throw new Exception("Damage with id " + id + "not found;");
+			throw new Exception("Zone with id " + id + "not found;"+e.getMessage());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -343,10 +354,10 @@ public class Database {
 				Statement stmt = con.createStatement();
 				ResultSet rs = stmt.executeQuery("select * from leiht_aus");
 				while (rs.next())
-					result.add(new Rent(rs.getInt(1), rs.getInt(2),rs.getInt(3),rs.getInt(4),rs.getDate(5),rs.getDate(6)));
+					result.add(new Rent(rs.getInt(1), rs.getInt(2),rs.getString(3),rs.getInt(4),rs.getDate(5),rs.getDate(6)));
 				closeCon();
 			} catch (Exception e) {
-				System.out.println(e);
+				System.out.println(e.getMessage());
 			}
 			return result;
 		}
@@ -361,7 +372,7 @@ public class Database {
 				stmt.setInt(1, _id);
 				ResultSet rs = stmt.executeQuery();
 				rs.next();
-				rent = new Rent(rs.getInt(1), rs.getInt(2),rs.getInt(3),rs.getInt(4),rs.getDate(5),rs.getDate(6));
+				rent = new Rent(rs.getInt(1), rs.getInt(2),rs.getString(3),rs.getInt(4),rs.getDate(5),rs.getDate(6));
 			} catch (SQLException e) {
 				throw new Exception("no rent found with id: " + _id);
 			}
@@ -376,7 +387,7 @@ public class Database {
 				stmt = con.prepareStatement("insert into leiht_aus values(?,?,?,?,?,?) ");
 				stmt.setInt(1, rent.getId());
 				stmt.setInt(2, rent.getFid());
-				stmt.setInt(3, rent.getUid());
+				stmt.setString(3, rent.getUid());
 				stmt.setInt(4,rent.getZid());
 				stmt.setDate(5, rent.getVon());
 				stmt.setDate(6,	rent.getBis());
@@ -397,19 +408,17 @@ public class Database {
 				createCon();
 				PreparedStatement stmt = null;
 				con.setAutoCommit(true);
-				stmt = con.prepareStatement("Update leiht_aus SET fid = ?,uid = ?, zid =?,von = ?, bis = ? WHERE lid = ?");
-				stmt.setInt(1, rent.getFid());
-				stmt.setInt(2, rent.getUid());
-				stmt.setInt(3, rent.getZid());
-				stmt.setDate(4, rent.getVon());
-				stmt.setDate(5, rent.getBis());
-				stmt.setInt(6, rent.getId());
+				stmt = con.prepareStatement("Update leiht_aus SET von = ?, bis = ? WHERE lid = ?");
+				
+				stmt.setDate(1, rent.getVon());
+				stmt.setDate(2, rent.getBis());
+				stmt.setInt(3, rent.getId());
 				
 				int count = stmt.executeUpdate();
 				if(count == 0) throw new Exception();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				throw new Exception("Rent with id " + rent.getId() + " not found;");
+				throw new Exception("Rent with id " + rent.getId() + " not found;"+e.getMessage());
 			}  finally {
 				closeCon();
 			}
@@ -426,7 +435,7 @@ public class Database {
 				stmt.execute();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				throw new Exception("Rent with id " + id + "not found;");
+				throw new Exception("Rent with id " + id + "not found;"+e.getMessage());
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -434,5 +443,173 @@ public class Database {
 				closeCon();
 			}
 		}
+		public ArrayList<SchadenRent> getDamagesFromRent(int id){
+			ArrayList<SchadenRent> result = new ArrayList<SchadenRent>();
+			try {
+				createCon();
+				PreparedStatement stmt = null;
+				con.setAutoCommit(true);
+				stmt = con.prepareStatement("Select sid,lid,kosten,bezeichnung From verursacht_schaden left join schaden on sid = vs_sid  Where lid=?");
+				stmt.setInt(1, id);
+				ResultSet rs = stmt.executeQuery();
+				while (rs.next())
+					result.add(new SchadenRent(rs.getInt(2), rs.getInt(1) ,rs.getInt(3), rs.getString(4)));
+				closeCon();	
+				
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+			return result;
+		}
+		public void createDamageFromRent(SchadenRent schadenrent) throws Exception {
+			try {
+				createCon();
+				PreparedStatement stmt = null;
+				con.setAutoCommit(true);
+				
+				PreparedStatement stmt1 = null;
+				stmt1 = con.prepareStatement("insert into schaden values(?,?) ");
+				stmt1.setInt(1, schadenrent.getId());
+				stmt1.setString(2,schadenrent.getBezeichnung());
+				stmt1.execute();
+				
+				stmt = con.prepareStatement("insert into verursacht_schaden values(?,?,?) ");
+				stmt.setInt(1, schadenrent.getLid());
+				stmt.setInt(2, schadenrent.getId());
+				stmt.setInt(3, schadenrent.getKosten());
+				stmt.execute();
+				
+				
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				throw new Exception("Rent with id " + schadenrent.getId() + "already existst;"+e.getMessage());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				closeCon();
+			}
+		}
+		public void removeDamageFromRent(int r_id,int d_id) throws Exception {
+			// TODO Auto-generated method stub
+			try {
+				createCon();
+				PreparedStatement stmt = null;
+				con.setAutoCommit(true);
+				stmt = con.prepareStatement("Delete From verursacht_schaden Where lid=? AND vs_sid=?");
+				stmt.setInt(1, r_id);
+				stmt.setInt(2, d_id);
+				stmt.execute();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				throw new Exception("User with id " + r_id + "not found;"+e.getMessage());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				closeCon();
+			}
+		}
+		//User
+		
+		public ArrayList<User> getUsers() {
+				ArrayList<User> result = new ArrayList<User>();
+				try {
+					createCon();
+					Statement stmt = con.createStatement();
+					ResultSet rs = stmt.executeQuery("select * from users");
+					while (rs.next())
+						result.add(new User(rs.getString(1)));
+					closeCon();
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+				}
+				return result;
+			}
+				
+		public User getUser(String _id) throws Exception {
+				User user = null;
+				try {
+					createCon();
+					PreparedStatement stmt = null;
+					con.setAutoCommit(true);
+					stmt = con.prepareStatement("SELECT * FROM users  Where u_id = ?");
+					stmt.setString(1, _id);
+					ResultSet rs = stmt.executeQuery();
+					rs.next();
+					user = new User(rs.getString(1));
+				} catch (SQLException e) {
+					throw new Exception("no User found with id: " + _id+e.getMessage());
+				}
+
+				return user;
+			}
+		
+		public void setUser(User user) throws Exception {
+				try {
+					createCon();
+					PreparedStatement stmt = null;
+					con.setAutoCommit(true);
+					stmt = con.prepareStatement("insert into users values(?) ");
+					stmt.setString(1, user.getId());
+					
+					stmt.execute();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					throw new Exception("User with id " + user.getId() + "already existst;");
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} finally {
+					closeCon();
+				}
+			}
+		
+		/* Vielleicht noch benötigt
+			public void updateUser(Rent	 rent) throws Exception {
+				// TODO Auto-generated method stub
+				try {
+					createCon();
+					PreparedStatement stmt = null;
+					con.setAutoCommit(true);
+					stmt = con.prepareStatement("Update leiht_aus SET von = ?, bis = ? WHERE lid = ?");
+					
+					stmt.setDate(1, rent.getVon());
+					stmt.setDate(2, rent.getBis());
+					stmt.setInt(3, rent.getId());
+					
+					int count = stmt.executeUpdate();
+					if(count == 0) throw new Exception();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					throw new Exception("Rent with id " + rent.getId() + " not found;"+e.getMessage());
+				}  finally {
+					closeCon();
+				}
+
+			}*/
+		
+		public void deleteUser(String id) throws Exception {
+				// TODO Auto-generated method stub
+				try {
+					createCon();
+					PreparedStatement stmt = null;
+					con.setAutoCommit(true);
+					stmt = con.prepareStatement("Delete From users Where u_id=?");
+					stmt.setString(1, id);
+					stmt.execute();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					throw new Exception("User with id " + id + "not found;"+e.getMessage());
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} finally {
+					closeCon();
+				}
+			}
+			
+		
 	
 }

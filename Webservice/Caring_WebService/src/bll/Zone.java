@@ -5,6 +5,7 @@ public class Zone {
 	private String bezeichnung;
 	private int kostensatz;
 	
+	
 	public Zone() {
 		super();
 		// TODO Auto-generated constructor stub

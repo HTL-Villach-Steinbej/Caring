@@ -20,9 +20,10 @@ import com.google.gson.Gson;
 import bll.Fahrzeug;
 import bll.Rent;
 import bll.Schaden;
+import bll.SchadenRent;
 import dal.Database;
 
-@Path("/car")
+@Path("/rent")
 public class RentService {
 	
 	@Context
@@ -35,7 +36,7 @@ public class RentService {
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Path("/{rentId}")
-	public Response getCar(@PathParam("rentId") String id) {
+	public Response getRent(@PathParam("rentId") String id) {
 		Database db = Database.newInstance();
 		Response.ResponseBuilder response = Response.status(Response.Status.OK);
 		try {
@@ -52,7 +53,7 @@ public class RentService {
 	@DELETE
 	@Consumes({ MediaType.TEXT_HTML, MediaType.TEXT_XML, MediaType.APPLICATION_JSON })
 	@Path("/{rentId}")
-	public Response deleteCar(@PathParam("rentId") String id) throws IOException {
+	public Response deleteRent(@PathParam("rentId") String id) throws IOException {
 		Response.ResponseBuilder response = Response.status(Response.Status.NO_CONTENT);
 		Database db = Database.newInstance();
 
@@ -68,15 +69,15 @@ public class RentService {
 	}
 	@POST
 	@Consumes({ MediaType.APPLICATION_JSON })
-	public Response newCar(String strCar) throws Exception {
+	public Response newRent(String strRent) throws Exception {
 		Response.ResponseBuilder response = Response.status(Response.Status.CREATED);
 		Database db = Database.newInstance();
-		System.out.println("======================NEW Car: " + strCar);
+		System.out.println("======================NEW Car: " + strRent);
 
 		try {
-			Fahrzeug car = new Gson().fromJson(strCar, Fahrzeug.class);
-			db.setCar(car);
-			response.entity("car added");
+			Rent rent = new Gson().fromJson(strRent, Rent.class);
+			db.setRent(rent);
+			response.entity("Rent added");
 		} catch (Exception e) {
 			response.status(Response.Status.BAD_REQUEST);
 			response.entity("[ERROR] " + e.getMessage());
@@ -87,14 +88,65 @@ public class RentService {
 
 	@PUT
 	@Consumes({ MediaType.APPLICATION_JSON })
-	public Response updateCar(String strCar) throws IOException {
+	public Response updateRent(String strRent) throws IOException {
 		Database db = Database.newInstance();
 		Response.ResponseBuilder response = Response.status(Response.Status.OK);
 
 		try {
-			Fahrzeug car = new Gson().fromJson(strCar, Fahrzeug.class);
-			db.updateCar(car);
-			response.entity("car updated");
+			Rent rent = new Gson().fromJson(strRent, Rent.class);
+			db.updateRent(rent);
+			response.entity("Rent updated");
+		} catch (Exception e) {
+			response.status(Response.Status.BAD_REQUEST);
+			response.entity("[ERROR] " + e.getMessage());
+		}
+
+		return response.build();
+	}
+	@GET
+	@Produces({ MediaType.APPLICATION_JSON })
+	@Path("/{rentId}/dammages")
+	public Response getDamagesFromRent(@PathParam("rentId") String id) {
+		Database db = Database.newInstance();
+		Response.ResponseBuilder response = Response.status(Response.Status.OK);
+		try {
+            response.entity(new Gson().toJson(db.getDamagesFromRent(Integer.parseInt(id))));
+		} catch (Exception e) {
+			response.status(Response.Status.BAD_REQUEST);
+			response.entity("[ERROR] " + e.getMessage());
+		}
+		System.out.println("======================webservice GET called");
+		return response.build();
+	}
+	@POST
+	@Consumes({ MediaType.APPLICATION_JSON })
+	@Path("/dammage")
+	public Response createDamageFromRent(String strSchadenRent) throws Exception {
+		Response.ResponseBuilder response = Response.status(Response.Status.CREATED);
+		Database db = Database.newInstance();
+		System.out.println("======================NEW SchadenRent: " + strSchadenRent);
+
+		try {
+			SchadenRent schadenRent = new Gson().fromJson(strSchadenRent, SchadenRent.class);
+			db.createDamageFromRent(schadenRent);
+			response.entity("SchadenRent added");
+		} catch (Exception e) {
+			response.status(Response.Status.BAD_REQUEST);
+			response.entity("[ERROR] " + e.getMessage());
+		}
+
+		return response.build();
+	}
+	@DELETE
+	@Consumes({ MediaType.TEXT_HTML, MediaType.TEXT_XML, MediaType.APPLICATION_JSON })
+	@Path("/{rentId}/damage/{damageId}")
+	public Response removeDamageFromRent(@PathParam("rentId") String r_id,@PathParam("damageId") String d_id) throws IOException {
+		Response.ResponseBuilder response = Response.status(Response.Status.NO_CONTENT);
+		Database db = Database.newInstance();
+
+		try {
+			db.removeDamageFromRent(Integer.valueOf(r_id),Integer.valueOf(d_id));
+			response.entity("damage deleted");
 		} catch (Exception e) {
 			response.status(Response.Status.BAD_REQUEST);
 			response.entity("[ERROR] " + e.getMessage());

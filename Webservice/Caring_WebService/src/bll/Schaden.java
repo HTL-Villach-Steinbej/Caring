@@ -1,7 +1,7 @@
 package bll;
 
 public class Schaden {
-	//HERE IS STRESS
+
 	private int id;
 	private String bezeichnung;
 	

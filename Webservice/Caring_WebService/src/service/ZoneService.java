@@ -71,7 +71,7 @@ public class ZoneService {
 	public Response newZone(String strZone) throws Exception {
 		Response.ResponseBuilder response = Response.status(Response.Status.CREATED);
 		Database db = Database.newInstance();
-		System.out.println("======================NEW Car: " + strZone);
+		System.out.println("======================NEW Zone: " + strZone);
 
 		try {
 			Zone zone = new Gson().fromJson(strZone, Zone.class);
