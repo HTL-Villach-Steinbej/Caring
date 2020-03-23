@@ -6,12 +6,12 @@ import java.time.LocalDateTime;
 public class Rent {
 		private int id;
 		private int fid;
-		private int uid;
+		private String uid;
 		private int zid;
 		private Date von;
 		private Date bis;
 		
-		public Rent(int id, int fid, int uid, int zid, Date von, Date bis) {
+		public Rent(int id, int fid, String uid, int zid, Date von, Date bis) {
 			super();
 			this.id = id;
 			this.fid = fid;
@@ -37,11 +37,11 @@ public class Rent {
 			this.fid = fid;
 		}
 
-		public int getUid() {
+		public String getUid() {
 			return uid;
 		}
 
-		public void setUid(int uid) {
+		public void setUid(String uid) {
 			this.uid = uid;
 		}
 

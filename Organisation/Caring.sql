@@ -19,7 +19,7 @@ CREATE TABLE users(
 );
 
 CREATE TABLE zone(
-  zid int primary key, 
+  zid int primary key , 
   bezeichnung VARCHAR2(15),
   kostensatz int,
   radius SDO_GEOMETRY
@@ -37,9 +37,10 @@ CREATE TABLE leiht_aus (
   la_zid int,
   von DATE,
   bis DATE,
-  FOREIGN KEY(la_fid) REFERENCES fahrzeug(fid),
-  FOREIGN KEY(la_uid) REFERENCES users(u_id) ,
-  FOREIGN KEY(la_zid) REFERENCES zone(zid) 
+  FOREIGN KEY(la_fid) REFERENCES fahrzeug(fid) ON DELETE CASCADE,
+  FOREIGN KEY(la_uid) REFERENCES users(u_id)  ON DELETE CASCADE,
+  FOREIGN KEY(la_zid) REFERENCES zone(zid) ON DELETE CASCADE 
+
 );
 
 CREATE TABLE verursacht_schaden (
@@ -47,8 +48,8 @@ CREATE TABLE verursacht_schaden (
   vs_sid int,
   kosten Number,
   PRIMARY KEY(lid, vs_sid),
-  FOREIGN KEY(lid) REFERENCES leiht_aus(lid),
-  FOREIGN KEY(vs_sid) REFERENCES schaden(sid)
+  FOREIGN KEY(lid) REFERENCES leiht_aus(lid) ON DELETE CASCADE,
+  FOREIGN KEY(vs_sid) REFERENCES schaden(sid) ON DELETE CASCADE
 );
 
 insert into users values('DkTycfHAhYfYAgzOkUXiopMqcfn1');
