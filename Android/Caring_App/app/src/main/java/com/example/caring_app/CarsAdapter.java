@@ -32,7 +32,7 @@ public class CarsAdapter extends ArrayAdapter<Car> {
 
         tvMarke.setText(item.getMarke());
         tvBezeichnung.setText(item.getBezeichnung());
-        tvLocation.setText(item.getDistance());
+        tvLocation.setText(item.getBezeichnung());
 
 
         return convertView;

@@ -42,7 +42,8 @@ public class AddCar extends AppCompatActivity {
         });
         String a=edMarke.getText().toString();
         //WS neues Car in die DB speichern
-         newCar=new Car(10,edMarke.getText().toString(),edBezeichnung.getText().toString(),Integer.parseInt(edLaufleistung.getText().toString()),l);
+//        int laufleistunf= Integer.parseInt(edLaufleistung.getText().toString());
+         newCar=new Car(10,edMarke.getText().toString(),edBezeichnung.getText().toString(),10000,l);
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

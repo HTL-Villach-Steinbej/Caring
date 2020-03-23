@@ -118,6 +118,8 @@ public class RegisterActivity extends AppCompatActivity {
                                    .addOnFailureListener(new OnFailureListener() {
                                        @Override
                                        public void onFailure(@NonNull Exception e) {
+                                           Log.e("registerFail",e.getMessage(),e);
+
                                        }
                                    });
                        }

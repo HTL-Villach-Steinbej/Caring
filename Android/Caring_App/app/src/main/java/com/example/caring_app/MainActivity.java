@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void fillItems() {
+        items=new ArrayList<Car>();
         Location location=new Location("");
         location.setLatitude(46.63534558545709);
         location.setLongitude(13.848026296368516);
