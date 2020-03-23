@@ -61,6 +61,14 @@ public class Car extends AppCompatActivity{
         return laufleistung;
     }
 
+    public Location getCarLocation() {
+        return carLocation;
+    }
+
+    public void setCarLocation(Location carLocation) {
+        this.carLocation = carLocation;
+    }
+
     public void setLaufleistung(int laufleistung) {
         this.laufleistung = laufleistung;
     }

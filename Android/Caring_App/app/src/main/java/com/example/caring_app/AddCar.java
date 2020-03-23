@@ -41,6 +41,7 @@ public class AddCar extends AppCompatActivity {
             }
         });
         String a=edMarke.getText().toString();
+        //WS neues Car in die DB speichern
          newCar=new Car(10,edMarke.getText().toString(),edBezeichnung.getText().toString(),Integer.parseInt(edLaufleistung.getText().toString()),l);
     }
     @Override

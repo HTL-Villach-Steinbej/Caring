@@ -15,6 +15,7 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import bll.Car;
@@ -49,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long viewId) {
                 Intent modify_intent = new Intent(MainActivity.this, RentCar.class);
                 Car b=items.get(position);
-
+                modify_intent.putExtra("key",(Serializable) b);
                 startActivity(modify_intent);
             }
         });

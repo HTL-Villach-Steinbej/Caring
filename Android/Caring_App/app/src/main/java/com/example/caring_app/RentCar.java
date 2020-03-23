@@ -1,6 +1,7 @@
 package com.example.caring_app;
 
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.Gravity;
@@ -20,18 +21,27 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import bll.Car;
+
 public class RentCar extends AppCompatActivity {
 
     Button btnrentCar;
     Button btnStopp;
     Button btnReport;
+    Location l;
     TextView tvPay;
+    Car value;
 Chronometer chronometer;
 long abgelaufeneZeit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.rentcar_popup);
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+             value = (Car)extras.getSerializable("key");
+            //The key argument here must match that used in the other activity
+        }
         btnrentCar=findViewById(R.id.rentCar);
         btnStopp=findViewById(R.id.stoppRent);
         chronometer=findViewById(R.id.chronometer);
@@ -76,6 +86,23 @@ long abgelaufeneZeit;
             }
         });
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Check that it is the SecondActivity with an OK result
+        if (requestCode == 0) {
+            if (resultCode == RESULT_OK) {
+
+                // Get String data from Intent
+
+                l= (Location)data.getSerializableExtra("carLocation");
+                value.setCarLocation(l);
+                //WS car mit geänderter Location in DB updaten
+            }
+        }
+    }
+
 
 
    /* private void initComponents() {
