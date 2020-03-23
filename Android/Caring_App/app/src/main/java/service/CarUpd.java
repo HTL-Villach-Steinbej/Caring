@@ -16,7 +16,7 @@ import java.net.ProtocolException;
 import bll.Car;
 
 public class CarUpd extends AsyncTask<CarUpd.COMMAND, Void, String> {
-    private static final String URL ="SuseBooksService_Jersey119/Library/BookDetail/";
+    private static final String URL ="";
     private static String ipHost = null;
     private Car car = null;
 
