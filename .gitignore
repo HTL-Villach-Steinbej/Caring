@@ -1,2 +1,4 @@
-Webapp/caring-webapp/package-lock.json
-Webapp/caring-webapp/package.json
+Webapp/your-project-name/package-lock.json
+Webapp/your-project-name/package.json
+/Webapp/node_modules
+/Webapp/your-project-name/node_modules
