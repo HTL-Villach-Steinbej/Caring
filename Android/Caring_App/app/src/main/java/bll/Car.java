@@ -22,10 +22,7 @@ public class Car implements Serializable {
 
 
     public Car()
-
     {
-        super();
-        // TODO Auto-generated constructor stub
     }
 
     public Car(int id, String bezeichnung, String marke, int laufleistung, Location point) {

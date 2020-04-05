@@ -4,14 +4,16 @@ public class Schaden {
     private int id;
     private String bezeichnung;
     private String beschreibung;
+    private int carId;
 
     public Schaden() {
         super();
     }
 
-    public Schaden(int id, String bezeichnung,String beschreibung) {
+    public Schaden(int id, int CarID ,String bezeichnung,String beschreibung) {
         super();
         this.id = id;
+        this.carId= CarID;
         this.bezeichnung = bezeichnung;
         this.beschreibung = beschreibung;
     }
@@ -34,5 +36,13 @@ public class Schaden {
 
     public void setBeschreibung(String beschreibung) {
         this.beschreibung = beschreibung;
+    }
+
+    public int getCarId() {
+        return carId;
+    }
+
+    public void setCarId(int carId) {
+        this.carId = carId;
     }
 }
