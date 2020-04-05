@@ -4,18 +4,21 @@ import android.location.Location;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.caring_app.MainActivity;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 
-public class Car extends AppCompatActivity{
+import java.io.Serializable;
+
+public class Car implements Serializable {
     private int id;
     private String bezeichnung;
     private String marke;
     private int laufleistung;
     private float distance;
     private Location carLocation;
-    private FusedLocationProviderClient fusedLocationClient;
+    private MainActivity ma=new MainActivity();
 
 
     public Car()
@@ -74,20 +77,7 @@ public class Car extends AppCompatActivity{
     }
 
     public int getDistance() {
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-        fusedLocationClient.getLastLocation()
-                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
-                    @Override
-                    public void onSuccess(Location location) {
-                        distance=location.distanceTo(carLocation);
 
-                        if (location != null) {
-                            // Logic to handle location object
-                        }
-                    }
-                });
-
-
-        return (int)distance;
+        return ma.getLOcation(carLocation);
     }
 }

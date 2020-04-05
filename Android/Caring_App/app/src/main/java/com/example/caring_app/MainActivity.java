@@ -24,6 +24,9 @@ public class MainActivity extends AppCompatActivity {
     CarsAdapter adapter;
     ArrayList<Car> items;
     Button addCar;
+    Location carLocation;
+    private  FusedLocationProviderClient fusedLocationClient;
+    private int distance;
 
 
     @Override
@@ -32,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ListView listOfCars= (ListView) findViewById(R.id.listCars);
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         adapter = new CarsAdapter(MainActivity.this, items);
         listOfCars.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -50,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long viewId) {
                 Intent modify_intent = new Intent(MainActivity.this, RentCar.class);
                 Car b=items.get(position);
-                modify_intent.putExtra("key",(Serializable) b);
+                modify_intent.putExtra("carId", b.getId());
                 startActivity(modify_intent);
             }
         });
@@ -72,6 +76,24 @@ public class MainActivity extends AppCompatActivity {
         items.add(new Car(3,"A8","Audi",10000,location));
 
 
+    }
+
+    public int getLOcation(final Location carLocation){
+        fusedLocationClient.getLastLocation()
+                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+
+                        if (location != null) {
+                            distance= (int)location.distanceTo(carLocation);
+
+                        }
+                    }
+                });
+
+
+
+        return distance;
     }
 }
 

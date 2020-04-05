@@ -30,7 +30,7 @@ public class RentCar extends AppCompatActivity {
     Button btnReport;
     Location l;
     TextView tvPay;
-    Car value;
+    int carID;
 Chronometer chronometer;
 long abgelaufeneZeit;
     @Override
@@ -39,7 +39,7 @@ long abgelaufeneZeit;
         setContentView(R.layout.rentcar_popup);
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-             value = (Car)extras.getSerializable("key");
+             carID=extras.getInt("carId");
             //The key argument here must match that used in the other activity
         }
         btnrentCar=findViewById(R.id.rentCar);
@@ -97,7 +97,7 @@ long abgelaufeneZeit;
                 // Get String data from Intent
 
                 l= (Location)data.getSerializableExtra("carLocation");
-                value.setCarLocation(l);
+
                 //WS car mit geänderter Location in DB updaten
             }
         }
