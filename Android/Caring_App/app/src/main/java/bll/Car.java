@@ -19,10 +19,7 @@ public class Car extends AppCompatActivity{
 
 
     public Car()
-
     {
-        super();
-        // TODO Auto-generated constructor stub
     }
 
     public Car(int id, String bezeichnung, String marke, int laufleistung, Location point) {

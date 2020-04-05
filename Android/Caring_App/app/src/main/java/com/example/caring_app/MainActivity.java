@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -19,10 +20,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import bll.Car;
+import bll.Fahrzeug;
+import dal.Database;
 
 public class MainActivity extends AppCompatActivity {
     CarsAdapter adapter;
     ArrayList<Car> items;
+    ArrayList<Fahrzeug> TestList;
     Button addCar;
 
 
@@ -59,7 +63,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void fillItems() {
+
         items=new ArrayList<Car>();
+        /*
         Location location=new Location("");
         location.setLatitude(46.63534558545709);
         location.setLongitude(13.848026296368516);
@@ -69,7 +75,22 @@ public class MainActivity extends AppCompatActivity {
         items.add(new Car(2,"320d","BMW",10000,location));
         location.setLatitude(46.602056383042424);
         location.setLongitude(13.877747146269485);
-        items.add(new Car(3,"A8","Audi",10000,location));
+        items.add(new Car(3,"A8","Audi",10000,location));*/
+
+        Database db = Database.newInstance();
+        try {
+            TestList = db.getAllCars();
+            for (Fahrzeug fahrzeug:TestList) {
+                Location location = new Location("");
+                location.setLatitude(fahrzeug.getLocation().getX());
+                location.setLongitude(fahrzeug.getLocation().getY());
+               items.add(new Car(fahrzeug.getId(),fahrzeug.getBezeichnung(),fahrzeug.getMarke(),fahrzeug.getLaufleistung(),location));
+            }
+            Toast.makeText(getApplicationContext(),items.toString(),Toast.LENGTH_LONG).show();
+        }catch (Exception ex)
+        {
+            System.out.println(ex.getMessage());
+        }
 
 
     }

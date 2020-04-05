@@ -8,9 +8,11 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import javax.net.ssl.HttpsURLConnection;
+
 public class CarsList extends AsyncTask<String,Void,String> {
 
-    private static final String URL = "/";
+    private static final String URL = "/Caring_WebService/Caring/cars";
     private static String ipHost = null;
 
     public static void setIpHost(String ip) {
@@ -19,16 +21,17 @@ public class CarsList extends AsyncTask<String,Void,String> {
     @Override
     protected String doInBackground(String... command) {
         boolean isError = false;
-        java.net.URL url = null;
+        URL url = null;
         HttpURLConnection conn = null;
         BufferedReader reader = null;
         String content = null;
 
         try {
-            url = new URL(ipHost + URL);
+            url = new URL("http://"+ipHost + URL);
             conn = (HttpURLConnection) url.openConnection();
-           /* if (!conn.getResponseMessage().contains("OK")) {
-             //   isError = true;
+            /*
+            if (!conn.getResponseMessage().contains("OK")) {
+               isError = true;
                 reader = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
             } else {
                 reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));

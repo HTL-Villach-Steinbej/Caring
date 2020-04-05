@@ -73,7 +73,7 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.makeText(LoginActivity.this,"Login failed, please try again!",Toast.LENGTH_SHORT).show();
                             }else
                             {
-                                Intent i = new Intent(LoginActivity.this,TestMapLOngEX.class);
+                                Intent i = new Intent(LoginActivity.this,MainActivity.class);
                                 startActivity(i);
                             }
                         }

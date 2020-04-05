@@ -8,11 +8,12 @@ import com.google.gson.reflect.TypeToken;
 
 
 import bll.Car;
+import bll.Fahrzeug;
 import service.CarsList;
 
 public class Database {
     private static Database db = null;
-    private static String ipHost = "127.0.0.1:8080";
+    private static String ipHost = "172.16.119.1:8080";
 
     private Database() {
     }
@@ -30,9 +31,11 @@ public class Database {
         ipHost = ip;
         return db;
     }
-    public ArrayList<Car> getAllCars() throws Exception {
+
+    public ArrayList<Fahrzeug> getAllCars() throws Exception {
+
         Gson gson = new Gson();
-        java.util.ArrayList<Car> retCars;
+        ArrayList<Fahrzeug> retCars = new ArrayList<Fahrzeug>();
 
         //each call needs an new instance of async !!
         CarsList controller = new CarsList();
@@ -41,7 +44,7 @@ public class Database {
         controller.execute();
         String strFromWebService = controller.get();
         try {
-            Type colltype = new TypeToken<ArrayList<Car>>(){}.getType();
+            Type colltype = new TypeToken<ArrayList<Fahrzeug>>(){}.getType();
             retCars = gson.fromJson(strFromWebService,colltype);
         } catch (Exception ex) {
             throw new Exception(strFromWebService);
@@ -52,4 +55,21 @@ public class Database {
 
         return retCars;
     }
+
+    /*
+    public String insertBook(Book book) throws Exception {
+        Gson gson = new Gson();
+
+        //each call needs an new instance of async !!
+        ServiceBookDetailPutPost controller = new ServiceBookDetailPutPost();
+        ServiceBookDetailPutPost.setIPHost(ipHost);
+
+        ServiceBookDetailPutPost.COMMAND paras[] = new ServiceBookDetailPutPost.COMMAND[1];
+        paras[0] = ServiceBookDetailPutPost.COMMAND.POST;
+        controller.setBook(book);
+        controller.execute(paras);
+        return controller.get();
+    }*/
+
+
 }
