@@ -5,6 +5,8 @@ import android.location.Location;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.caring_app.MainActivity;
+import com.example.caring_app.User;
+import com.example.caring_app.UserLocationFinder;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -74,7 +76,8 @@ public class Car implements Serializable {
     }
 
     public int getDistance() {
-
-        return ma.getLOcation(carLocation);
+        UserLocationFinder finder=new UserLocationFinder();
+Location l=finder.getLocation();
+        return (int)carLocation.distanceTo(finder.getLocation());
     }
 }

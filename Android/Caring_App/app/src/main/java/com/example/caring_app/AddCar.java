@@ -19,7 +19,7 @@ public class AddCar extends AppCompatActivity {
     EditText edBezeichnung;
     EditText edLaufleistung;
    Double longitude;
-   Double latitude;
+    Double latitude;
     Car newCar;
     Location carlocation;
 
@@ -62,7 +62,6 @@ public class AddCar extends AppCompatActivity {
                 carlocation.setLongitude(longitude);
                 //WS neues Car in die DB speichern fortlaufende Id?? SQL sequence?
                 newCar=new Car(10,edBezeichnung.getText().toString(),edMarke.getText().toString(),10000,carlocation);
-                int a=100;
             }
         }
     }
