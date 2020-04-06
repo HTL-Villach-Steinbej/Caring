@@ -18,7 +18,7 @@ import bll.Car;
 import bll.Fahrzeug;
 
 public class CarUpd extends AsyncTask<CarUpd.COMMAND, Void, String> {
-    private static final String URL ="";
+    private static final String URL ="/Caring_WebService/Caring/car";
     private static String ipHost = null;
     private Fahrzeug car = null;
 

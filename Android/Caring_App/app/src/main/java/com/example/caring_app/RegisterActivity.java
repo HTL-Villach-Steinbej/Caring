@@ -2,6 +2,7 @@ package com.example.caring_app;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -23,9 +24,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import bll.User;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import dal.Database;
 //import com.google.firebase.firestore.FirebaseFirestore;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -36,6 +40,7 @@ public class RegisterActivity extends AppCompatActivity {
     TextView tvLogin;
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
+    User usertoinsert;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,6 +111,14 @@ public class RegisterActivity extends AppCompatActivity {
                            userData.put("FullName",fullname);
                            userData.put("email",user.getEmail());
                            userData.put("paymethod","");
+
+                           Database database = Database.newInstance();
+                           try {
+                               usertoinsert = new User(user.getUid());
+                               database.insertUser(usertoinsert);
+                           }catch (Exception ex){
+                               ex.getMessage();
+                           }
 
 
                            db.collection("users").document(mAuth.getCurrentUser().getUid()).set(userData)

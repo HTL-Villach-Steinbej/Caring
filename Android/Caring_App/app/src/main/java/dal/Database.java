@@ -10,8 +10,10 @@ import com.google.gson.Gson;
 
 import bll.Car;
 import bll.Fahrzeug;
+import bll.User;
 import service.CarUpd;
 import service.CarsList;
+import service.UserPostPutDelete;
 
 public class Database {
     private static Database db = null;
@@ -68,6 +70,20 @@ public class Database {
         CarUpd.COMMAND paras[] = new CarUpd.COMMAND[1];
         paras[0] = CarUpd.COMMAND.POST;
         controller.setCar(fz);
+        controller.execute(paras);
+        return controller.get();
+    }
+
+    public String insertUser(User user) throws Exception {
+        Gson gson = new Gson();
+
+        //each call needs an new instance of async !!
+        UserPostPutDelete controller = new UserPostPutDelete();
+        UserPostPutDelete.setIPHost(ipHost);
+
+        CarUpd.COMMAND paras[] = new CarUpd.COMMAND[1];
+        paras[0] = CarUpd.COMMAND.POST;
+        controller.setUser(user);
         controller.execute(paras);
         return controller.get();
     }

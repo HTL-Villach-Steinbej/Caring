@@ -10,6 +10,9 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 import bll.Car;
+import bll.Fahrzeug;
+import bll.Point;
+import dal.Database;
 
 public class AddCar extends AppCompatActivity {
     Button addCar;
@@ -61,8 +64,17 @@ public class AddCar extends AppCompatActivity {
                 carlocation.setLatitude(latitude);
                 carlocation.setLongitude(longitude);
                 //WS neues Car in die DB speichern fortlaufende Id?? SQL sequence?
-                newCar=new Car(10,edBezeichnung.getText().toString(),edMarke.getText().toString(),10000,carlocation);
-                int a=100;
+                newCar=new Car(10,edBezeichnung.getText().toString(),edMarke.getText().toString(),Integer.valueOf(edLaufleistung.getText().toString()),carlocation);
+                Fahrzeug f = new Fahrzeug(10,newCar.getBezeichnung(),newCar.getMarke(),newCar.getLaufleistung(),new Point(carlocation.getLatitude(),carlocation.getLongitude()));
+                Database db = Database.newInstance();
+
+                try {
+                    db.insertCar(f);
+                }catch (Exception ex)
+                {
+                   System.out.println(ex.getMessage());
+                }
+                finish();
             }
         }
     }
