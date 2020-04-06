@@ -1,7 +1,9 @@
 package com.example.caring_app;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -30,12 +32,14 @@ import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.Layer;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
+import com.mapbox.mapboxsdk.utils.BitmapUtils;
 
 import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 
 
 import static com.mapbox.mapboxsdk.style.layers.Property.NONE;
@@ -62,7 +66,7 @@ public class CarLocation extends AppCompatActivity implements PermissionsListene
 
 // Mapbox access token is configured here. This needs to be called either in your application
 // object or in the same activity which contains the mapview.
-        Mapbox.getInstance(this, getString(R.string.mapbox_access_token));
+        Mapbox.getInstance(this, "pk.eyJ1IjoibWF1dGVuZGQiLCJhIjoiY2s4NXVqNGdzMDl0ZTNpbzBrZzdubDRqMyJ9.eyKm8m0kL2kBxqy5U17rOg");
 
 // This contains the MapView in XML and needs to be called after the access token is configured.
         setContentView(R.layout.activity_car_location);
@@ -82,12 +86,11 @@ public class CarLocation extends AppCompatActivity implements PermissionsListene
                 enableLocationPlugin(style);
 
 
-
 // When user is still picking a location, we hover a marker above the mapboxMap in the center.
 // This is done by using an image view with the default marker found in the SDK. You can
 // swap out for your own marker image, just make sure it matches up with the dropped marker.
                 hoveringMarker = new ImageView(CarLocation.this);
-                hoveringMarker.setImageResource(R.drawable.red_marker);
+                hoveringMarker.setImageResource(R.drawable.ic_directions_car_black_24dp);
                 FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
                         ViewGroup.LayoutParams.WRAP_CONTENT,
                         ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.CENTER);
@@ -128,12 +131,10 @@ public class CarLocation extends AppCompatActivity implements PermissionsListene
                             }
 
 // Use the map camera target's coordinates to make a reverse geocoding search
-                            carLocation=new Location("");
-                            carLocation.setLongitude(mapTargetLatLng.getLongitude());
-                            carLocation.setLatitude( mapTargetLatLng.getLatitude());
-
                             Intent intent = new Intent();
-                            intent.putExtra("carLocation", carLocation);
+                            intent.putExtra("locLongitude", mapTargetLatLng.getLongitude());
+                            intent.putExtra("locLatitude", mapTargetLatLng.getLatitude());
+
                             setResult(RESULT_OK, intent);
                             finish();
 
@@ -159,10 +160,13 @@ public class CarLocation extends AppCompatActivity implements PermissionsListene
         });
     }
 
+
+
     private void initDroppedMarker(@NonNull Style loadedMapStyle) {
-// Add the marker image to map
-        loadedMapStyle.addImage("dropped-icon-image", BitmapFactory.decodeResource(
-                getResources(), R.drawable.ic_directions_car_black_24dp));
+        Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_directions_car_black_24dp, null);
+        Bitmap mBitmap = BitmapUtils.getBitmapFromDrawable(drawable);
+
+        loadedMapStyle.addImage("dropped-icon-image", mBitmap);
         loadedMapStyle.addSource(new GeoJsonSource("dropped-marker-source-id"));
         loadedMapStyle.addLayer(new SymbolLayer(DROPPED_MARKER_LAYER_ID,
                 "dropped-marker-source-id").withProperties(

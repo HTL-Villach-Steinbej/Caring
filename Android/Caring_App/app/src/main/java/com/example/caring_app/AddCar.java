@@ -18,8 +18,10 @@ public class AddCar extends AppCompatActivity {
     EditText edMarke;
     EditText edBezeichnung;
     EditText edLaufleistung;
-    Location l;
+   Double longitude;
+   Double latitude;
     Car newCar;
+    Location carlocation;
 
 
     @Override
@@ -31,6 +33,7 @@ public class AddCar extends AppCompatActivity {
         edMarke=findViewById(R.id.edMarke);
         edBezeichnung=findViewById(R.id.edBez);
         edLaufleistung= findViewById(R.id.edLauf);
+        carlocation=new Location("");
 
         addLocation.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,9 +44,7 @@ public class AddCar extends AppCompatActivity {
             }
         });
         String a=edMarke.getText().toString();
-        //WS neues Car in die DB speichern
-//        int laufleistunf= Integer.parseInt(edLaufleistung.getText().toString());
-         newCar=new Car(10,edMarke.getText().toString(),edBezeichnung.getText().toString(),10000,l);
+
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -55,9 +56,13 @@ public class AddCar extends AppCompatActivity {
 
                 // Get String data from Intent
 
-                l= (Location)data.getSerializableExtra("carLocation");
-                // Set text view with string
-
+                longitude=data.getDoubleExtra("locLongitude",0);
+                latitude=data.getDoubleExtra("locLatitude",0);
+                carlocation.setLatitude(latitude);
+                carlocation.setLongitude(longitude);
+                //WS neues Car in die DB speichern fortlaufende Id?? SQL sequence?
+                newCar=new Car(10,edBezeichnung.getText().toString(),edMarke.getText().toString(),10000,carlocation);
+                int a=100;
             }
         }
     }

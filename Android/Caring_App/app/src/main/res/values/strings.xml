@@ -13,5 +13,5 @@
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
-    <string name="mapbox_access_token">pk.eyJ1IjoibWF1dGVuZGQiLCJhIjoiY2szNXNwMmFlMGV3eTNobXZlMjk0ZW15MSJ9.DFvWdeHqJbwVCWyW0cWXQQ</string>
+    <string name="mapbox_access_token">pk.eyJ1IjoibWF1dGVuZGQiLCJhIjoiY2s4NXVqNGdzMDl0ZTNpbzBrZzdubDRqMyJ9.eyKm8m0kL2kBxqy5U17rOg</string>
 </resources>
