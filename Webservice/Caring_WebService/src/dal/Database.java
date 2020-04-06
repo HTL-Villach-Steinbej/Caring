@@ -185,9 +185,16 @@ public class Database {
 		try {
 			createCon();
 			PreparedStatement stmt = null;
+			Statement stmt1 = con.createStatement();
+			ResultSet rs1 = stmt1.executeQuery("select Max(fid) from fahrzeug");
+			int fid=0;
+			while (rs1.next())
+			 fid= rs1.getInt(1)+1;
+			
+			System.out.println(fid);
 			con.setAutoCommit(true);
 			stmt = con.prepareStatement("insert into fahrzeug values(?,?,?,?, SDO_GEOMETRY(2001, NULL, SDO_POINT_TYPE(?, ?, NULL),NULL,NULL)) ");
-			stmt.setInt(1, fahrzeug.getId());
+			stmt.setInt(1, fid);
 			stmt.setString(2, fahrzeug.getBezeichnung());
 			stmt.setString(3, fahrzeug.getMarke());
 			stmt.setInt(4,fahrzeug.getLaufleistung());
@@ -196,7 +203,7 @@ public class Database {
 			stmt.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			throw new Exception("Car with id " + fahrzeug.getId() + "already existst;");
+			throw new Exception("Car with id " + fahrzeug.getId() + "already existst;"+e.getMessage());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
