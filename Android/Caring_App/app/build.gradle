@@ -41,6 +41,7 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-annotation-v8:0.7.0'
+    implementation 'de.gerdi-project:GSON:6.0.6'
 
 }
 apply plugin: 'com.google.gms.google-services'

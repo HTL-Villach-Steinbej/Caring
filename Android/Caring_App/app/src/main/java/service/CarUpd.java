@@ -2,6 +2,7 @@ package service;
 
 import android.os.AsyncTask;
 
+
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
@@ -14,18 +15,19 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 
 import bll.Car;
+import bll.Fahrzeug;
 
 public class CarUpd extends AsyncTask<CarUpd.COMMAND, Void, String> {
     private static final String URL ="";
     private static String ipHost = null;
-    private Car car = null;
+    private Fahrzeug car = null;
 
     public enum COMMAND{ POST, PUT}
 
     public static void setIPHost( String ip){
         ipHost = ip;
     }
-    public void setCar( Car car ){
+    public void setCar( Fahrzeug car ){
         this.car = car;
     }
     @Override
