@@ -30,6 +30,9 @@ public class RentCar extends AppCompatActivity {
     Button btnReport;
     Location l;
     TextView tvPay;
+    Double longitude;
+    Double latitude;
+    Location carlocation;
     int carID;
 Chronometer chronometer;
 long abgelaufeneZeit;
@@ -47,6 +50,7 @@ long abgelaufeneZeit;
         chronometer=findViewById(R.id.chronometer);
         tvPay=findViewById(R.id.toPay);
         abgelaufeneZeit=0;
+        carlocation=new Location("");
         btnrentCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,11 +98,11 @@ long abgelaufeneZeit;
         if (requestCode == 0) {
             if (resultCode == RESULT_OK) {
 
-                // Get String data from Intent
-
-                l= (Location)data.getSerializableExtra("carLocation");
-
-                //WS car mit geänderter Location in DB updaten
+                longitude=data.getDoubleExtra("locLongitude",0);
+                latitude=data.getDoubleExtra("locLatitude",0);
+                carlocation.setLatitude(latitude);
+                carlocation.setLongitude(longitude);
+                //WS mit geänderter Location
             }
         }
     }
