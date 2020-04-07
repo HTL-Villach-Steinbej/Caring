@@ -1,7 +1,4 @@
 package dal;
-
-
-
 import com.google.common.reflect.TypeToken;
 
 import java.util.ArrayList;
