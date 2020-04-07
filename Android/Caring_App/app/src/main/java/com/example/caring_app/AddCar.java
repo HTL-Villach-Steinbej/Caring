@@ -24,6 +24,7 @@ public class AddCar extends AppCompatActivity {
    Double longitude;
    Double latitude;
     Car newCar;
+    Fahrzeug f;
     Location carlocation;
 
 
@@ -33,6 +34,7 @@ public class AddCar extends AppCompatActivity {
         setContentView(R.layout.activity_addcar);
         setTitle("Add Car");
         addLocation=findViewById(R.id.btnLocation);
+        addCar = findViewById(R.id.btnCar);
         edMarke=findViewById(R.id.edMarke);
         edBezeichnung=findViewById(R.id.edBez);
         edLaufleistung= findViewById(R.id.edLauf);
@@ -43,10 +45,22 @@ public class AddCar extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(AddCar.this, CarLocation.class);
                 startActivityForResult(intent,0);
-
             }
         });
-        String a=edMarke.getText().toString();
+
+        addCar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Database db = Database.newInstance();
+                try {
+                    db.insertCar(f);
+                }catch (Exception ex)
+                {
+                    System.out.println(ex.getMessage());
+                }
+                finish();
+            }
+        });
 
     }
     @Override
@@ -65,16 +79,7 @@ public class AddCar extends AppCompatActivity {
                 carlocation.setLongitude(longitude);
                 //WS neues Car in die DB speichern fortlaufende Id?? SQL sequence?
                 newCar=new Car(10,edBezeichnung.getText().toString(),edMarke.getText().toString(),Integer.valueOf(edLaufleistung.getText().toString()),carlocation);
-                Fahrzeug f = new Fahrzeug(10,newCar.getBezeichnung(),newCar.getMarke(),newCar.getLaufleistung(),new Point(carlocation.getLatitude(),carlocation.getLongitude()));
-                Database db = Database.newInstance();
-
-                try {
-                    db.insertCar(f);
-                }catch (Exception ex)
-                {
-                   System.out.println(ex.getMessage());
-                }
-                finish();
+                this.f = new Fahrzeug(10,newCar.getBezeichnung(),newCar.getMarke(),newCar.getLaufleistung(),new Point(carlocation.getLatitude(),carlocation.getLongitude()));
             }
         }
     }

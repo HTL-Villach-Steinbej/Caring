@@ -71,6 +71,20 @@ public class Database {
         return controller.get();
     }
 
+    public String updateCar(Fahrzeug fz) throws Exception {
+        Gson gson = new Gson();
+
+        //each call needs an new instance of async !!
+        CarUpd controller = new CarUpd();
+        CarUpd.setIPHost(ipHost);
+
+        CarUpd.COMMAND paras[] = new CarUpd.COMMAND[1];
+        paras[0] = CarUpd.COMMAND.PUT;
+        controller.setCar(fz);
+        controller.execute(paras);
+        return controller.get();
+    }
+
     public String insertUser(User user) throws Exception {
         Gson gson = new Gson();
 

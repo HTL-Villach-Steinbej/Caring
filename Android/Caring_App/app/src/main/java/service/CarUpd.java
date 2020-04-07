@@ -40,7 +40,7 @@ public class CarUpd extends AsyncTask<CarUpd.COMMAND, Void, String> {
         Gson gson = new Gson();
 
         try {
-            url = new java.net.URL(this.ipHost + URL );
+            url = new java.net.URL("http://"+this.ipHost + URL );
             // Öffnen der Connection
             conn = (HttpURLConnection)url.openConnection();
             // Evaluieren des Commands POST/PUT sind die erwarteten

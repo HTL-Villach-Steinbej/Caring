@@ -22,6 +22,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
 import bll.Car;
+import bll.Fahrzeug;
+import dal.Database;
 
 public class RentCar extends AppCompatActivity {
 
@@ -74,7 +76,17 @@ long abgelaufeneZeit;
                 abgelaufeneZeit = 0;
                 Intent intent = new Intent(RentCar.this, CarLocation.class);
                 startActivityForResult(intent,0);
+                //Car mit neuer Location
+                Fahrzeug f = new Fahrzeug();
+                //CarItems in f Items setzen
 
+                Database db = Database.newInstance();
+                try {
+                    db.updateCar(f);
+                }catch (Exception ex)
+                {
+                    ex.getMessage();
+                }
             }
         });
 
