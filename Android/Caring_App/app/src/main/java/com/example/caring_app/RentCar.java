@@ -54,7 +54,7 @@ long abgelaufeneZeit;
         btnrentCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+        //createRent ws callen
                 chronometer.setBase(SystemClock.elapsedRealtime() + abgelaufeneZeit);
                 chronometer.start();
                 btnrentCar.setEnabled(false);
