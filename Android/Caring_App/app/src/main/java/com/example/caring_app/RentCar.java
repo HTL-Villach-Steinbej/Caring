@@ -23,6 +23,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import bll.Car;
 import bll.Fahrzeug;
+import bll.Point;
 import dal.Database;
 
 public class RentCar extends AppCompatActivity {
@@ -35,7 +36,7 @@ public class RentCar extends AppCompatActivity {
     Double longitude;
     Double latitude;
     Location carlocation;
-    int carID;
+    Car car;
 Chronometer chronometer;
 long abgelaufeneZeit;
     @Override
@@ -44,8 +45,7 @@ long abgelaufeneZeit;
         setContentView(R.layout.rentcar_popup);
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-             carID=extras.getInt("carId");
-            //The key argument here must match that used in the other activity
+             car=(Car)extras.getParcelable("car");
         }
         btnrentCar=findViewById(R.id.rentCar);
         btnStopp=findViewById(R.id.stoppRent);
@@ -77,8 +77,8 @@ long abgelaufeneZeit;
                 Intent intent = new Intent(RentCar.this, CarLocation.class);
                 startActivityForResult(intent,0);
                 //Car mit neuer Location
-                Fahrzeug f = new Fahrzeug();
-                //CarItems in f Items setzen
+           
+                Fahrzeug f = new Fahrzeug(10,car.getBezeichnung(),car.getMarke(),car.getLaufleistung(),new Point(carlocation.getLatitude(),carlocation.getLongitude()));
 
                 Database db = Database.newInstance();
                 try {

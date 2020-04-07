@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long viewId) {
                 Intent modify_intent = new Intent(MainActivity.this, RentCar.class);
                 Car b=items.get(position);
-                modify_intent.putExtra("carId", b.getId());
+                modify_intent.putExtra("car", b);
                 startActivity(modify_intent);
             }
         });
@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
     private void fillItems() {
 
         items=new ArrayList<Car>();
-/*
+
         Location location=new Location("");
         location.setLatitude(46.63534558545709);
         location.setLongitude(13.848026296368516);
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         location.setLatitude(46.602056383042424);
         location.setLongitude(13.877747146269485);
         items.add(new Car(3,"A8","Audi",10000,location));
-*/
+/*
         Database db = Database.newInstance();
         try {
             TestList = db.getAllCars();
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
         {
             System.out.println(ex.getMessage());
         }
-
+*/
 
     }
 
