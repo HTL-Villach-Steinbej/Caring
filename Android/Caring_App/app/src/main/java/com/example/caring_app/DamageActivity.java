@@ -21,11 +21,16 @@ public class DamageActivity extends AppCompatActivity {
     Spinner idSpinnerSchaden;
     Button idSave;
     EditText txtSchadenbeschreibung;
+    Car car;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_damage);
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            car = (Car) extras.getParcelable("car");
+        }
 
         txtMarke  = findViewById(R.id.txtMarke);
         txtLaufleistung = findViewById(R.id.txtLaufleistung);
@@ -34,10 +39,7 @@ public class DamageActivity extends AppCompatActivity {
         idSave= findViewById(R.id.idSave);
         txtSchadenbeschreibung = findViewById(R.id.txtSchadenbeschreibung);
 
-        Car car = new Car ();
-        car.setLaufleistung(10000);
-        car.setMarke("BMW");
-        car.setBezeichnung("e92 335i");
+
         fillProvider();
 
         txtMarke.setText(car.getMarke());

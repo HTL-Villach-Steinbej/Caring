@@ -21,9 +21,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.Date;
+
 import bll.Car;
 import bll.Fahrzeug;
 import bll.Point;
+import bll.Rent;
 import dal.Database;
 
 public class RentCar extends AppCompatActivity {
@@ -31,8 +34,13 @@ public class RentCar extends AppCompatActivity {
     Button btnrentCar;
     Button btnStopp;
     Button btnReport;
+    Rent rentObj;
     Location l;
+    Date von;
+    Date bis;
     TextView tvPay;
+    private FirebaseAuth mAuth;
+
     Double longitude;
     Double latitude;
     Location carlocation;
@@ -45,7 +53,7 @@ long abgelaufeneZeit;
         setContentView(R.layout.rentcar_popup);
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-             car=(Car)extras.getParcelable("car");
+            car = (Car) extras.getParcelable("car");
         }
         btnrentCar=findViewById(R.id.rentCar);
         btnStopp=findViewById(R.id.stoppRent);
@@ -56,7 +64,7 @@ long abgelaufeneZeit;
         btnrentCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-        //createRent ws callen
+                von=new Date();
                 chronometer.setBase(SystemClock.elapsedRealtime() + abgelaufeneZeit);
                 chronometer.start();
                 btnrentCar.setEnabled(false);
@@ -76,10 +84,9 @@ long abgelaufeneZeit;
                 abgelaufeneZeit = 0;
                 Intent intent = new Intent(RentCar.this, CarLocation.class);
                 startActivityForResult(intent,0);
-                //Car mit neuer Location
-
+                bis=new Date();
+                rentObj=new Rent(1,car.getId(),mAuth.getCurrentUser().getUid(),1,von,bis);
                 Fahrzeug f = new Fahrzeug(car.getId(),car.getBezeichnung(),car.getMarke(),car.getLaufleistung(),new Point(carlocation.getLatitude(),carlocation.getLongitude()));
-
                 Database db = Database.newInstance();
                 try {
                     db.updateCar(f);
@@ -97,6 +104,7 @@ long abgelaufeneZeit;
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(RentCar.this,DamageActivity.class);
+                i.putExtra("car", car);
                 startActivity(i);
 
             }
