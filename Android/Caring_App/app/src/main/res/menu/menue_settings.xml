@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-<item android:id="@+id/payment"
+    <item
+        android:id="@+id/logout"
+        android:icon="@drawable/ic_icon_settings"
+        android:title="Logout"></item>
+    <item android:id="@+id/payment"
     android:icon="@drawable/ic_icon_settings"
     android:title="Payment">
 </item>
-    <item android:id="@+id/logout"
+    <item android:id="@+id/addCar"
         android:icon="@drawable/ic_icon_settings"
-        android:title="Logout">
-    </item>
-    <item android:id="@+id/Schaden_melden"
-        android:icon="@drawable/ic_icon_settings"
-        android:title="Schaden Melden">
+        android:title="Add Car">
     </item>
 
 </menu>

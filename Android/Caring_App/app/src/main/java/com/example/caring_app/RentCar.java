@@ -77,8 +77,8 @@ long abgelaufeneZeit;
                 Intent intent = new Intent(RentCar.this, CarLocation.class);
                 startActivityForResult(intent,0);
                 //Car mit neuer Location
-           
-                Fahrzeug f = new Fahrzeug(10,car.getBezeichnung(),car.getMarke(),car.getLaufleistung(),new Point(carlocation.getLatitude(),carlocation.getLongitude()));
+
+                Fahrzeug f = new Fahrzeug(car.getId(),car.getBezeichnung(),car.getMarke(),car.getLaufleistung(),new Point(carlocation.getLatitude(),carlocation.getLongitude()));
 
                 Database db = Database.newInstance();
                 try {

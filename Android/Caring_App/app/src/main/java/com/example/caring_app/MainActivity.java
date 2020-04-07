@@ -5,16 +5,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -27,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     CarsAdapter adapter;
     ArrayList<Car> items;
     ArrayList<Fahrzeug> TestList;
-    Button addCar;
+    Toolbar toolbar;
     Location carLocation;
     private  FusedLocationProviderClient fusedLocationClient;
     private int distance;
@@ -39,20 +43,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ListView listOfCars= (ListView) findViewById(R.id.listCars);
+        toolbar=findViewById(R.id.toolbar);
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         adapter = new CarsAdapter(MainActivity.this, items);
         listOfCars.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-        addCar=findViewById(R.id.btnAdd);
-        addCar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent newTodo = new Intent(MainActivity.this, AddCar.class);
-                startActivity(newTodo);
-            }
-        });
-
-
         listOfCars.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long viewId) {
@@ -63,7 +58,41 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        setSupportActionBar(toolbar);
 
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+
+    {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menue_settings, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.payment:
+                Intent i = new Intent(MainActivity.this,Payment.class);
+                startActivity(i);
+                return true;
+            case R.id.addCar:
+                Intent s = new Intent(MainActivity.this,AddCar.class);
+                startActivity(s);
+                return true;
+            case R.id.logout:
+                FirebaseAuth.getInstance().signOut();
+                Intent register = new Intent(MainActivity.this,RegisterActivity.class);
+                startActivity(register);
+                MainActivity.this.finish();
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private void fillItems() {
