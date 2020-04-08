@@ -19,6 +19,8 @@ import com.google.gson.Gson;
 
 import bll.Fahrzeug;
 import bll.Schaden;
+import bll.SchadenRent;
+import bll.SchadenUser;
 import bll.User;
 import bll.Zone;
 import dal.Database;
@@ -85,24 +87,57 @@ public class UserService {
 
 		return response.build();
 	}
-	/* Vlt noch benötigt 
-	@PUT
-	@Consumes({ MediaType.APPLICATION_JSON })
-	public Response updateUser(String strZone) throws IOException {
+	@GET
+	@Produces({ MediaType.APPLICATION_JSON })
+	@Path("/{rentId}/dammages")
+	public Response getDamagesFromRent(@PathParam("rentId") String id) {
 		Database db = Database.newInstance();
 		Response.ResponseBuilder response = Response.status(Response.Status.OK);
+		try {
+            response.entity(new Gson().toJson(db.getDamagesFromRent(Integer.parseInt(id))));
+		} catch (Exception e) {
+			response.status(Response.Status.BAD_REQUEST);
+			response.entity("[ERROR] " + e.getMessage());
+		}
+		System.out.println("======================webservice GET called");
+		return response.build();
+	}
+	@POST
+	@Consumes({ MediaType.APPLICATION_JSON })
+	@Path("/dammage")
+	public Response CreateDamageFromUser(String strSchadenUser) throws Exception {
+		Response.ResponseBuilder response = Response.status(Response.Status.CREATED);
+		Database db = Database.newInstance();
+		System.out.println("======================NEW SchadenUser: " + strSchadenUser);
 
 		try {
-			Zone zone = new Gson().fromJson(strZone, Zone.class);
-			db.updateZone(zone);
-			response.entity("Zone updated");
+			SchadenUser schadenUser = new Gson().fromJson(strSchadenUser, SchadenUser.class);
+			db.createDamageFromUser(schadenUser);
+			response.entity("SchadenUser added");
 		} catch (Exception e) {
 			response.status(Response.Status.BAD_REQUEST);
 			response.entity("[ERROR] " + e.getMessage());
 		}
 
 		return response.build();
-	}*/ 
+	}
+	@DELETE
+	@Consumes({ MediaType.TEXT_HTML, MediaType.TEXT_XML, MediaType.APPLICATION_JSON })
+	@Path("/{rentId}/damage/{damageId}")
+	public Response removeDamageFromRent(@PathParam("rentId") String r_id,@PathParam("damageId") String d_id) throws IOException {
+		Response.ResponseBuilder response = Response.status(Response.Status.NO_CONTENT);
+		Database db = Database.newInstance();
+
+		try {
+			db.removeDamageFromRent(Integer.valueOf(r_id),Integer.valueOf(d_id));
+			response.entity("damage deleted");
+		} catch (Exception e) {
+			response.status(Response.Status.BAD_REQUEST);
+			response.entity("[ERROR] " + e.getMessage());
+		}
+
+		return response.build();
+	}
 
 }
 

@@ -12,6 +12,7 @@ import bll.Point;
 import bll.Rent;
 import bll.Schaden;
 import bll.SchadenRent;
+import bll.SchadenUser;
 import bll.User;
 import bll.Zone;
 
@@ -54,14 +55,14 @@ public class Database {
 	}
 
 	// Schaden
-	public ArrayList<Schaden> getDamages() {
-		ArrayList<Schaden> result = new ArrayList<Schaden>();
+	public ArrayList<SchadenUser> getDamages() {
+		ArrayList<SchadenUser> result = new ArrayList<SchadenUser>();
 		try {
 			createCon();
 			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery("select * from Schaden");
+			ResultSet rs = stmt.executeQuery("select  sid, ms_uid,ms_fid,bezeichnung,beschreibung,datum from Schaden inner join meldetschaden on sid = ms_sid");
 			while (rs.next())
-				result.add(new Schaden(rs.getInt(1), rs.getString(2)));
+				result.add(new SchadenUser(rs.getInt(1),rs.getString(2), rs.getInt(3),rs.getString(4),rs.getString(5),rs.getDate(6)));
 			closeCon();
 		} catch (Exception e) {
 			System.out.println(e);
@@ -390,9 +391,14 @@ public class Database {
 			try {
 				createCon();
 				PreparedStatement stmt = null;
+				Statement stmt1 = con.createStatement();
+				ResultSet rs1 = stmt1.executeQuery("select Max(lid) from leiht_aus");
+				int lid=0;
+				while (rs1.next())
+				 lid= rs1.getInt(1)+1;
 				con.setAutoCommit(true);
 				stmt = con.prepareStatement("insert into leiht_aus values(?,?,?,?,?,?) ");
-				stmt.setInt(1, rent.getId());
+				stmt.setInt(1, lid);
 				stmt.setInt(2, rent.getFid());
 				stmt.setString(3, rent.getUid());
 				stmt.setInt(4,rent.getZid());
@@ -617,6 +623,45 @@ public class Database {
 				}
 			}
 			
-		
+		public void createDamageFromUser(SchadenUser schadenuser) throws Exception {
+			int sid=0;
+
+			try {
+				createCon();
+				PreparedStatement stmt = null;
+				con.setAutoCommit(true);
+				
+				Statement stmt2 = con.createStatement();
+				ResultSet rs1 = stmt2.executeQuery("select Max(sid) from schaden");
+				while (rs1.next())
+				 sid= rs1.getInt(1)+1;
+				
+				
+				PreparedStatement stmt1 = null;
+				stmt1 = con.prepareStatement("insert into schaden values(?,?,?,?) ");
+				stmt1.setInt(1, sid);
+				stmt1.setString(2,schadenuser.getBezeichnung());
+				stmt1.setString(3,schadenuser.getBeschreibung());
+				stmt1.setDate(4, schadenuser.getDatum());
+				stmt1.execute();
+				
+				stmt = con.prepareStatement("insert into meldetSchaden values(?,?,?) ");
+				stmt.setString(1, schadenuser.getUd());
+				stmt.setInt(2, sid);
+				stmt.setInt(3, schadenuser.getFid());
+				stmt.execute();
+				
+				
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				throw new Exception("Rent with id " + sid + "already existst;"+e.getMessage());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				closeCon();
+			}
+		}
 	
 }

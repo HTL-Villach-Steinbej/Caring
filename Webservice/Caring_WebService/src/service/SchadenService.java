@@ -18,6 +18,7 @@ import javax.ws.rs.core.UriInfo;
 import com.google.gson.Gson;
 
 import bll.Schaden;
+import bll.SchadenRent;
 import dal.Database;
 
 @Path("/damage")
@@ -100,5 +101,6 @@ public class SchadenService {
 
 		return response.build();
 	}
-
+	
+	
 }
