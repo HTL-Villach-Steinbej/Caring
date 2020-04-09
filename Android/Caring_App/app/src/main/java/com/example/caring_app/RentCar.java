@@ -65,6 +65,8 @@ long abgelaufeneZeit;
             @Override
             public void onClick(View v) {
                 von=new Date();
+                rentObj=new Rent(1,car.getId(),mAuth.getCurrentUser().getUid(),1,von,bis);
+                //call ws rent
                 chronometer.setBase(SystemClock.elapsedRealtime() + abgelaufeneZeit);
                 chronometer.start();
                 btnrentCar.setEnabled(false);
@@ -85,7 +87,8 @@ long abgelaufeneZeit;
                 Intent intent = new Intent(RentCar.this, CarLocation.class);
                 startActivityForResult(intent,0);
                 bis=new Date();
-                rentObj=new Rent(1,car.getId(),mAuth.getCurrentUser().getUid(),1,von,bis);
+                rentObj.setBis(bis);
+                //update rent
                 Fahrzeug f = new Fahrzeug(car.getId(),car.getBezeichnung(),car.getMarke(),car.getLaufleistung(),new Point(carlocation.getLatitude(),carlocation.getLongitude()));
                 Database db = Database.newInstance();
                 try {

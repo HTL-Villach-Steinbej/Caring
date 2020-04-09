@@ -37,11 +37,18 @@ public class UserLocationFinder extends AppCompatActivity  {
     FusedLocationProviderClient mFusedLocationClient;
     Location userLocation;
 
-   public UserLocationFinder(){
-       mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
-       getLastLocation();
-   }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+        getLastLocation();
+    }
+
+    public UserLocationFinder(){
+
+    }
 
     @SuppressLint("MissingPermission")
     private void getLastLocation(){
