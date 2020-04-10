@@ -63,6 +63,7 @@ long abgelaufeneZeit;
         chronometer=findViewById(R.id.chronometer);
         tvPay=findViewById(R.id.toPay);
         abgelaufeneZeit=0;
+        newRent = new Rent();
         this.mAuth = FirebaseAuth.getInstance();
         carlocation=new Location("");
         btnrentCar.setOnClickListener(new View.OnClickListener() {
@@ -70,13 +71,12 @@ long abgelaufeneZeit;
             public void onClick(View v) {
                 java.util.Date jetzt = new java.util.Date();
                 von = new Date(jetzt.getTime());
-                bis = new Date(jetzt.getTime());
+                bis = null;
                 rentObj=new Rent(1,car.getId(),mAuth.getCurrentUser().getUid(),1,von,bis);
 
                 Database db = Database.newInstance();
 
                 try{
-
                     newRent = db.insertRent(rentObj);
                 }catch(Exception ex)
                 {
@@ -104,8 +104,17 @@ long abgelaufeneZeit;
                 startActivityForResult(intent,0);
                 java.util.Date jetzt = new java.util.Date();
                 bis = new Date(jetzt.getTime());
-                rentObj.setBis(bis);
-                //update rent
+                newRent.setBis(bis);
+
+                Database database = Database.newInstance();
+
+                try {
+                    database.updateRent(newRent);
+                }catch (Exception ex)
+                {
+                    ex.printStackTrace();
+                }
+
                 Fahrzeug f = new Fahrzeug(car.getId(),car.getBezeichnung(),car.getMarke(),car.getLaufleistung(),new Point(carlocation.getLatitude(),carlocation.getLongitude()));
                 Database db = Database.newInstance();
                 try {
