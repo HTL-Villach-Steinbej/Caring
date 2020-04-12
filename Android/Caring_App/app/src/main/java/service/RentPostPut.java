@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.Console;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -14,12 +15,12 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 
 import bll.Rent;
-import bll.SchadenUser;
+import bll.User;
 
-public class ServicePostSchaden extends AsyncTask<ServicePostSchaden.COMMAND, Void, String> {
-    private static final String URL = "/Caring_WebService/Caring/user/dammage";
+public class RentPostPut extends AsyncTask<RentPostPut.COMMAND, Void, String> {
+    private static final String URL = "/Caring_WebService/Caring/rent";
     private static String ipHost = null;
-    private SchadenUser schaden = null;
+    private Rent rent = null;
 
     public enum COMMAND {POST, PUT}
 
@@ -27,12 +28,12 @@ public class ServicePostSchaden extends AsyncTask<ServicePostSchaden.COMMAND, Vo
         ipHost = ip;
     }
 
-    public void setSchaden(SchadenUser schaden) {
-        this.schaden = schaden;
+    public void setRent(Rent rent) {
+        this.rent = rent;
     }
 
     @Override
-    protected String doInBackground(ServicePostSchaden.COMMAND... commands) {
+    protected String doInBackground(RentPostPut.COMMAND... commands) {
         java.net.URL url = null;
         HttpURLConnection conn = null;
         BufferedWriter writer = null;
@@ -58,12 +59,13 @@ public class ServicePostSchaden extends AsyncTask<ServicePostSchaden.COMMAND, Vo
             // setzen des Content-Types auf das JSON Format
             conn.setRequestProperty("Content-Type", "application/json");
             writer = new BufferedWriter(new OutputStreamWriter((conn.getOutputStream())));
-            writer.write(gson.toJson(schaden));
+            writer.write(gson.toJson(rent));
             writer.flush();
             writer.close();
 
+
             // Überprüfen, ob ein Fehler aufgetreten ist, lesen der Fehlermeldung
-            if (conn.getResponseCode() != 200) {
+            if (conn.getResponseCode() != 201) {
                 reader = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
                 StringBuilder sb = new StringBuilder();
 
@@ -73,7 +75,18 @@ public class ServicePostSchaden extends AsyncTask<ServicePostSchaden.COMMAND, Vo
                 }
                 content = conn.getResponseCode() + " " + sb.toString();
             } else {
-                content = "ResponseCode: " + conn.getResponseCode();
+
+                reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                // get data from server
+                StringBuilder sb = new StringBuilder();
+                String line = null;
+
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line);
+                }
+
+                content = sb.toString();
+
             }
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -99,3 +112,4 @@ public class ServicePostSchaden extends AsyncTask<ServicePostSchaden.COMMAND, Vo
 
     }
 }
+

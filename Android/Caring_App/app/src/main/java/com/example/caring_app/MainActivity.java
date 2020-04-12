@@ -99,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
 
         items=new ArrayList<Car>();
 
+        /*
         Location location=new Location("");
         location.setLatitude(20.63534558545709);
         location.setLongitude(33.848026296368516);
@@ -108,8 +109,8 @@ public class MainActivity extends AppCompatActivity {
         items.add(new Car(2,"320d","BMW",10000,location));
         location.setLatitude(46.602056383042424);
         location.setLongitude(13.877747146269485);
-        items.add(new Car(3,"A8","Audi",10000,location));
-/*
+        items.add(new Car(3,"A8","Audi",10000,location));*/
+
         Database db = Database.newInstance();
         try {
             TestList = db.getAllCars();
@@ -124,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
         {
             System.out.println(ex.getMessage());
         }
-*/
+
 
     }
 

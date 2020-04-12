@@ -1,9 +1,11 @@
 package com.example.caring_app;
 
 import android.content.Intent;
+import android.icu.text.IDNA;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.provider.ContactsContract;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -21,7 +23,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-import java.util.Date;
+import java.sql.Date;
 
 import bll.Car;
 import bll.Fahrzeug;
@@ -36,6 +38,7 @@ public class RentCar extends AppCompatActivity {
     Button btnReport;
     Rent rentObj;
     Location l;
+    Rent newRent;
     Date von;
     Date bis;
     TextView tvPay;
@@ -60,13 +63,26 @@ long abgelaufeneZeit;
         chronometer=findViewById(R.id.chronometer);
         tvPay=findViewById(R.id.toPay);
         abgelaufeneZeit=0;
+        newRent = new Rent();
+        this.mAuth = FirebaseAuth.getInstance();
         carlocation=new Location("");
         btnrentCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                von=new Date();
+                java.util.Date jetzt = new java.util.Date();
+                von = new Date(jetzt.getTime());
+                bis = null;
                 rentObj=new Rent(1,car.getId(),mAuth.getCurrentUser().getUid(),1,von,bis);
-                //call ws rent
+
+                Database db = Database.newInstance();
+
+                try{
+                    newRent = db.insertRent(rentObj);
+                }catch(Exception ex)
+                {
+                    ex.getMessage();
+                }
+
                 chronometer.setBase(SystemClock.elapsedRealtime() + abgelaufeneZeit);
                 chronometer.start();
                 btnrentCar.setEnabled(false);
@@ -86,9 +102,19 @@ long abgelaufeneZeit;
                 abgelaufeneZeit = 0;
                 Intent intent = new Intent(RentCar.this, CarLocation.class);
                 startActivityForResult(intent,0);
-                bis=new Date();
-                rentObj.setBis(bis);
-                //update rent
+                java.util.Date jetzt = new java.util.Date();
+                bis = new Date(jetzt.getTime());
+                newRent.setBis(bis);
+
+                Database database = Database.newInstance();
+
+                try {
+                    database.updateRent(newRent);
+                }catch (Exception ex)
+                {
+                    ex.printStackTrace();
+                }
+
                 Fahrzeug f = new Fahrzeug(car.getId(),car.getBezeichnung(),car.getMarke(),car.getLaufleistung(),new Point(carlocation.getLatitude(),carlocation.getLongitude()));
                 Database db = Database.newInstance();
                 try {

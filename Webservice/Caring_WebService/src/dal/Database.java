@@ -387,13 +387,14 @@ public class Database {
 
 			return rent;
 		}
-		public void setRent(Rent rent) throws Exception {
+		public int setRent(Rent rent) throws Exception {
+			int lid=0;
 			try {
 				createCon();
 				PreparedStatement stmt = null;
 				Statement stmt1 = con.createStatement();
 				ResultSet rs1 = stmt1.executeQuery("select Max(lid) from leiht_aus");
-				int lid=0;
+				
 				while (rs1.next())
 				 lid= rs1.getInt(1)+1;
 				con.setAutoCommit(true);
@@ -414,6 +415,7 @@ public class Database {
 			} finally {
 				closeCon();
 			}
+			return lid;
 		}
 		public void updateRent(Rent	 rent) throws Exception {
 			// TODO Auto-generated method stub
@@ -474,29 +476,38 @@ public class Database {
 			}
 			return result;
 		}
-		public void createDamageFromRent(SchadenRent schadenrent) throws Exception {
+		public void createDamageFromRent(SchadenUser schadenrent) throws Exception {
 			try {
 				createCon();
+				
 				PreparedStatement stmt = null;
+				Statement stmt1 = con.createStatement();
+				ResultSet rs1 = stmt1.executeQuery("select Max(sid) from schaden");
+				int sid=0;
+				while (rs1.next())
+				 sid= rs1.getInt(1)+1;
+				
 				con.setAutoCommit(true);
+			
+				stmt = con.prepareStatement("insert into schaden values(?,?,?,?) ");
+				stmt.setInt(1, schadenrent.getSid());
+				stmt.setString(2,schadenrent.getBezeichnung());
+				stmt.setString(3, schadenrent.getBeschreibung());
+				stmt.setDate(4, schadenrent.getDatum());
+				stmt.execute();
 				
-				PreparedStatement stmt1 = null;
-				stmt1 = con.prepareStatement("insert into schaden values(?,?) ");
-				stmt1.setInt(1, schadenrent.getId());
-				stmt1.setString(2,schadenrent.getBezeichnung());
-				stmt1.execute();
-				
+				/*
 				stmt = con.prepareStatement("insert into verursacht_schaden values(?,?,?) ");
 				stmt.setInt(1, schadenrent.getLid());
 				stmt.setInt(2, schadenrent.getId());
 				stmt.setInt(3, schadenrent.getKosten());
-				stmt.execute();
+				stmt.execute();*/
 				
 				
 
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				throw new Exception("Rent with id " + schadenrent.getId() + "already existst;"+e.getMessage());
+			//throw new Exception("Rent with id " + schadenrent.getId() + "already existst;"+e.getMessage());
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -644,13 +655,14 @@ public class Database {
 				stmt1.setString(3,schadenuser.getBeschreibung());
 				stmt1.setDate(4, schadenuser.getDatum());
 				stmt1.execute();
+				con.commit();
 				
 				stmt = con.prepareStatement("insert into meldetSchaden values(?,?,?) ");
-				stmt.setString(1, schadenuser.getUd());
+				stmt.setString(1, schadenuser.getUid());
 				stmt.setInt(2, sid);
 				stmt.setInt(3, schadenuser.getFid());
 				stmt.execute();
-				
+				con.commit();
 				
 
 			} catch (SQLException e) {

@@ -21,6 +21,7 @@ import bll.Fahrzeug;
 import bll.Rent;
 import bll.Schaden;
 import bll.SchadenRent;
+import bll.SchadenUser;
 import dal.Database;
 
 @Path("/rent")
@@ -72,12 +73,13 @@ public class RentService {
 	public Response newRent(String strRent) throws Exception {
 		Response.ResponseBuilder response = Response.status(Response.Status.CREATED);
 		Database db = Database.newInstance();
-		System.out.println("======================NEW Car: " + strRent);
+		System.out.println("======================NEW RENT: " + strRent);
 
 		try {
 			Rent rent = new Gson().fromJson(strRent, Rent.class);
-			db.setRent(rent);
-			response.entity("Rent added");
+			int id = db.setRent(rent);
+			Rent rent2 = db.getRent(id);
+			response.entity(new Gson().toJson(rent2));
 		} catch (Exception e) {
 			response.status(Response.Status.BAD_REQUEST);
 			response.entity("[ERROR] " + e.getMessage());
@@ -121,14 +123,14 @@ public class RentService {
 	@POST
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@Path("/dammage")
-	public Response createDamageFromRent(String strSchadenRent) throws Exception {
+	public Response createDamageUser(String strSchadenRent) throws Exception {
 		Response.ResponseBuilder response = Response.status(Response.Status.CREATED);
 		Database db = Database.newInstance();
 		System.out.println("======================NEW SchadenRent: " + strSchadenRent);
 
 		try {
-			SchadenRent schadenRent = new Gson().fromJson(strSchadenRent, SchadenRent.class);
-			db.createDamageFromRent(schadenRent);
+			SchadenUser schadenUser = new Gson().fromJson(strSchadenRent, SchadenUser.class);
+			db.createDamageFromRent(schadenUser);
 			response.entity("SchadenRent added");
 		} catch (Exception e) {
 			response.status(Response.Status.BAD_REQUEST);
