@@ -72,7 +72,7 @@ public class RentService {
 	public Response newRent(String strRent) throws Exception {
 		Response.ResponseBuilder response = Response.status(Response.Status.CREATED);
 		Database db = Database.newInstance();
-		System.out.println("======================NEW Car: " + strRent);
+		System.out.println("======================NEW REnt: " + strRent);
 
 		try {
 			Rent rent = new Gson().fromJson(strRent, Rent.class);
@@ -80,7 +80,7 @@ public class RentService {
 			response.entity("Rent added");
 		} catch (Exception e) {
 			response.status(Response.Status.BAD_REQUEST);
-			response.entity("[ERROR] " + e.getMessage());
+			response.entity("[ERROR] " + e.getMessage()+e.getLocalizedMessage());
 		}
 
 		return response.build();

@@ -1,11 +1,17 @@
 package dal;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.sql.*;
-import java.util.ArrayList;
 
-import com.google.gson.JsonElement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import bll.Fahrzeug;
 import bll.Point;
@@ -357,12 +363,25 @@ public class Database {
 	
 		public ArrayList<Rent> getRents() {
 			ArrayList<Rent> result = new ArrayList<Rent>();
+			
+			Calendar c1 = null;
+			Calendar c2 = null;
+			SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+			
+			
 			try {
 				createCon();
 				Statement stmt = con.createStatement();
 				ResultSet rs = stmt.executeQuery("select * from leiht_aus");
-				while (rs.next())
-					result.add(new Rent(rs.getInt(1), rs.getInt(2),rs.getString(3),rs.getInt(4),rs.getDate(5),rs.getDate(6)));
+				while (rs.next()) {
+					c1 = Calendar.getInstance();
+				c1.setTime(rs.getTimestamp(5));
+				c2 = Calendar.getInstance();
+				c2.setTime(rs.getTimestamp(6));
+				System.out.println(c2);
+					
+					result.add(new Rent(rs.getInt(1), rs.getInt(2),rs.getString(3),rs.getInt(4),c1.getTime(),c2.getTime()));
+				}
 				closeCon();
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
@@ -372,15 +391,20 @@ public class Database {
 			
 		public Rent getRent(int _id) throws Exception {
 			Rent rent = null;
+			Calendar c1 = null;
+			Calendar c2 = null;
 			try {
 				createCon();
 				PreparedStatement stmt = null;
-				con.setAutoCommit(true);
 				stmt = con.prepareStatement("SELECT * FROM leiht_aus  Where lid = ?");
 				stmt.setInt(1, _id);
 				ResultSet rs = stmt.executeQuery();
 				rs.next();
-				rent = new Rent(rs.getInt(1), rs.getInt(2),rs.getString(3),rs.getInt(4),rs.getDate(5),rs.getDate(6));
+				c1 = Calendar.getInstance();
+				c1.setTime(rs.getTimestamp(5));
+				c2 = Calendar.getInstance();
+				c2.setTime(rs.getTimestamp(6));
+				rent = new Rent(rs.getInt(1), rs.getInt(2),rs.getString(3),rs.getInt(4),c1.getTime(),c2.getTime());
 			} catch (SQLException e) {
 				throw new Exception("no rent found with id: " + _id);
 			}
@@ -389,11 +413,14 @@ public class Database {
 		}
 		public void setRent(Rent rent) throws Exception {
 			try {
+				Calendar c1 = null;
+				Calendar c2 = null;
+				
 				createCon();
 				PreparedStatement stmt = null;
 				Statement stmt1 = con.createStatement();
 				ResultSet rs1 = stmt1.executeQuery("select Max(lid) from leiht_aus");
-				int lid=0;
+				int lid=1;
 				while (rs1.next())
 				 lid= rs1.getInt(1)+1;
 				con.setAutoCommit(true);
@@ -402,15 +429,28 @@ public class Database {
 				stmt.setInt(2, rent.getFid());
 				stmt.setString(3, rent.getUid());
 				stmt.setInt(4,rent.getZid());
-				stmt.setDate(5, rent.getVon());
-				stmt.setDate(6,	rent.getBis());
+				
+				/*c1 = Calendar.getInstance();
+				c1.setTime(rent.getVon());
+				c2 = Calendar.getInstance();
+				c2.setTime(rent.getBis());
+				
+		        java.sql.Date sDateVON = new  java.sql.Date(c1.getTimeInMillis()); 
+		        java.sql.Date sDateBIS = new  java.sql.Date(c2.getTimeInMillis()); */
+				Timestamp sDateVON = new Timestamp(rent.getVon().getTime());
+				Timestamp sDateBIS = new Timestamp(rent.getBis().getTime());
+
+		       
+				stmt.setTimestamp(5,sDateVON );
+				stmt.setTimestamp(6,sDateBIS);
 				stmt.execute();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				throw new Exception("Rent with id " + rent.getId() + "already existst;");
+				throw new Exception("Rent with id " + rent.getId() + "already existst;"+e.getMessage());
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				System.out.println(e.getMessage());
 			} finally {
 				closeCon();
 			}
@@ -423,8 +463,8 @@ public class Database {
 				con.setAutoCommit(true);
 				stmt = con.prepareStatement("Update leiht_aus SET von = ?, bis = ? WHERE lid = ?");
 				
-				stmt.setDate(1, rent.getVon());
-				stmt.setDate(2, rent.getBis());
+				stmt.setDate(1, (java.sql.Date) rent.getVon());
+				stmt.setDate(2, (java.sql.Date) rent.getBis());
 				stmt.setInt(3, rent.getId());
 				
 				int count = stmt.executeUpdate();
