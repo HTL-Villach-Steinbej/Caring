@@ -462,8 +462,11 @@ public class Database {
 				con.setAutoCommit(true);
 				stmt = con.prepareStatement("Update leiht_aus SET von = ?, bis = ? WHERE lid = ?");
 				
-				stmt.setDate(1, (java.sql.Date) rent.getVon());
-				stmt.setDate(2, (java.sql.Date) rent.getBis());
+				Timestamp sDateVON = new Timestamp(rent.getVon().getTime());
+				Timestamp sDateBIS = new Timestamp(rent.getBis().getTime());
+				
+				stmt.setTimestamp(1, sDateVON);
+				stmt.setTimestamp(2, sDateBIS);
 				stmt.setInt(3, rent.getId());
 				
 				int count = stmt.executeUpdate();
