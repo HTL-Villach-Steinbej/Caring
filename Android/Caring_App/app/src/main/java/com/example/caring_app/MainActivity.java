@@ -100,8 +100,8 @@ public class MainActivity extends AppCompatActivity {
         items=new ArrayList<Car>();
 
         Location location=new Location("");
-        location.setLatitude(46.63534558545709);
-        location.setLongitude(13.848026296368516);
+        location.setLatitude(20.63534558545709);
+        location.setLongitude(33.848026296368516);
         items.add(new Car(1,"530d","BMW",10000,location));
         location.setLatitude(46.60672966890297);
         location.setLongitude(13.83002907003356);

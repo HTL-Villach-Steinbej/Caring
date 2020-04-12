@@ -1,5 +1,6 @@
 package bll;
 
+import android.content.Intent;
 import android.location.Location;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -21,7 +22,7 @@ public class Car implements Parcelable {
     private String marke;
     private int laufleistung;
     private float distance;
-    private Location carLocation;
+    private Location carLocation=new Location("");
     private MainActivity ma=new MainActivity();
 
 
@@ -87,8 +88,10 @@ public class Car implements Parcelable {
 
     public int getDistance() {
         UserLocationFinder finder=new UserLocationFinder();
-Location l=finder.getLocation();
-        return (int)carLocation.distanceTo(finder.getLocation());
+Location l=new Location("");
+        l.setLongitude(13.848);
+        l.setLatitude(46.6353);
+        return (int)carLocation.distanceTo(l);
     }
 
     @Override
