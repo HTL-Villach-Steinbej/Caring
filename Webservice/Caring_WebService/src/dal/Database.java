@@ -1,17 +1,13 @@
 package dal;
 
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.Timestamp;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
+
+import com.google.gson.JsonElement;
 
 import bll.Fahrzeug;
 import bll.Point;
@@ -361,33 +357,33 @@ public class Database {
 	}
 	//Rents
 	
-		public ArrayList<Rent> getRents() {
-			ArrayList<Rent> result = new ArrayList<Rent>();
-			
-			Calendar c1 = null;
-			Calendar c2 = null;
-			SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
-			
-			
-			try {
-				createCon();
-				Statement stmt = con.createStatement();
-				ResultSet rs = stmt.executeQuery("select * from leiht_aus");
-				while (rs.next()) {
-					c1 = Calendar.getInstance();
-				c1.setTime(rs.getTimestamp(5));
-				c2 = Calendar.getInstance();
-				c2.setTime(rs.getTimestamp(6));
-				System.out.println(c2);
-					
-					result.add(new Rent(rs.getInt(1), rs.getInt(2),rs.getString(3),rs.getInt(4),c1.getTime(),c2.getTime()));
-				}
-				closeCon();
-			} catch (Exception e) {
-				System.out.println(e.getMessage());
+	public ArrayList<Rent> getRents() {
+		ArrayList<Rent> result = new ArrayList<Rent>();
+		
+		Calendar c1 = null;
+		Calendar c2 = null;
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+		
+		
+		try {
+			createCon();
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery("select * from leiht_aus");
+			while (rs.next()) {
+				c1 = Calendar.getInstance();
+			c1.setTime(rs.getTimestamp(5));
+			c2 = Calendar.getInstance();
+			c2.setTime(rs.getTimestamp(6));
+			System.out.println(c2);
+				
+				result.add(new Rent(rs.getInt(1), rs.getInt(2),rs.getString(3),rs.getInt(4),c1.getTime(),c2.getTime()));
 			}
-			return result;
+			closeCon();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
+		return result;
+	}
 			
 		public Rent getRent(int _id) throws Exception {
 			Rent rent = null;
@@ -411,7 +407,9 @@ public class Database {
 
 			return rent;
 		}
-		public void setRent(Rent rent) throws Exception {
+		public int setRent(Rent rent) throws Exception {
+			int lid=1;
+
 			try {
 				Calendar c1 = null;
 				Calendar c2 = null;
@@ -420,7 +418,6 @@ public class Database {
 				PreparedStatement stmt = null;
 				Statement stmt1 = con.createStatement();
 				ResultSet rs1 = stmt1.executeQuery("select Max(lid) from leiht_aus");
-				int lid=1;
 				while (rs1.next())
 				 lid= rs1.getInt(1)+1;
 				con.setAutoCommit(true);
@@ -454,6 +451,8 @@ public class Database {
 			} finally {
 				closeCon();
 			}
+			
+			return lid;
 		}
 		public void updateRent(Rent	 rent) throws Exception {
 			// TODO Auto-generated method stub

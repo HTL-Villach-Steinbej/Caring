@@ -89,7 +89,7 @@ public class FahrzeugService {
 	public Response updateCar(String strCar) throws IOException {
 		Database db = Database.newInstance();
 		Response.ResponseBuilder response = Response.status(Response.Status.OK);
-
+		System.out.println("Fahrzeug UPDATE");
 		try {
 			Fahrzeug car = new Gson().fromJson(strCar, Fahrzeug.class);
 			db.updateCar(car);

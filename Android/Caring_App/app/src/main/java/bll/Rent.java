@@ -1,6 +1,7 @@
 package bll;
 
-import java.util.Date;
+
+import java.sql.Date;
 
 public class Rent {
     private int id;
@@ -18,6 +19,9 @@ public class Rent {
         this.zid = zid;
         this.von = von;
         this.bis = bis;
+    }
+
+    public Rent(){
     }
 
     public int getId() {
