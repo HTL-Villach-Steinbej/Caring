@@ -454,28 +454,34 @@ public class Database {
 			
 			return lid;
 		}
-		public void updateRent(Rent	 rent) throws Exception {
-			// TODO Auto-generated method stub
-			try {
-				createCon();
-				PreparedStatement stmt = null;
-				con.setAutoCommit(true);
-				stmt = con.prepareStatement("Update leiht_aus SET von = ?, bis = ? WHERE lid = ?");
-				
-				stmt.setDate(1, (java.sql.Date) rent.getVon());
-				stmt.setDate(2, (java.sql.Date) rent.getBis());
-				stmt.setInt(3, rent.getId());
-				
-				int count = stmt.executeUpdate();
-				if(count == 0) throw new Exception();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				throw new Exception("Rent with id " + rent.getId() + " not found;"+e.getMessage());
-			}  finally {
-				closeCon();
-			}
+		public void updateRent(Rent     rent) throws Exception {
+            // TODO Auto-generated method stub
+            try {
+                createCon();
+                PreparedStatement stmt = null;
+                con.setAutoCommit(true);
+                stmt = con.prepareStatement("Update leiht_aus SET von = ?, bis = ? WHERE lid = ?");
+                
+                Timestamp sDateVON = new Timestamp(rent.getVon().getTime());
+                Timestamp sDateBIS = new Timestamp(rent.getBis().getTime());
+                
+                stmt.setTimestamp(1, sDateVON);
+                stmt.setTimestamp(2, sDateBIS);
+                stmt.setInt(3, rent.getId());
+                
+                int count = stmt.executeUpdate();
+                if(count == 0) throw new Exception();
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
+                throw new Exception("Rent with id " + rent.getId() + " not found;"+e.getMessage());
+            }  finally {
+                closeCon();
+            }
 
-		}
+ 
+
+        }
+		
 		public void deleteRent(int id) throws Exception {
 			// TODO Auto-generated method stub
 			try {
