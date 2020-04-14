@@ -13,7 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-import java.sql.Date;
+
+import java.util.Date;
 
 import bll.Car;
 import bll.Fahrzeug;
@@ -61,9 +62,9 @@ long abgelaufeneZeit;
         btnrentCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                java.util.Date jetzt = new java.util.Date();
-                von = new Date(jetzt.getTime());
-                bis = null;
+
+                von = new Date();
+                bis = new Date();
                 rentObj=new Rent(1,car.getId(),mAuth.getCurrentUser().getUid(),1,von,bis);
 
                 Database db = Database.newInstance();
@@ -94,8 +95,8 @@ long abgelaufeneZeit;
                 abgelaufeneZeit = 0;
                 Intent intent = new Intent(RentCar.this, CarLocation.class);
                 startActivityForResult(intent,0);
-                java.util.Date jetzt = new java.util.Date();
-                bis = new Date(jetzt.getTime());
+
+                bis = new Date();
                 newRent.setBis(bis);
 
                 Database database = Database.newInstance();

@@ -73,7 +73,9 @@ public class RentService {
 	public Response newRent(String strRent) throws Exception {
 		Response.ResponseBuilder response = Response.status(Response.Status.CREATED);
 		Database db = Database.newInstance();
-		System.out.println("======================NEW RENT: " + strRent);
+		System.out.println("======================NEW REnt: " + strRent);
+
+
 
 		try {
 			Rent rent = new Gson().fromJson(strRent, Rent.class);
@@ -82,7 +84,7 @@ public class RentService {
 			response.entity(new Gson().toJson(rent2));
 		} catch (Exception e) {
 			response.status(Response.Status.BAD_REQUEST);
-			response.entity("[ERROR] " + e.getMessage());
+			response.entity("[ERROR] " + e.getMessage()+e.getLocalizedMessage());
 		}
 
 		return response.build();
@@ -130,7 +132,7 @@ public class RentService {
 
 		try {
 			SchadenUser schadenUser = new Gson().fromJson(strSchadenRent, SchadenUser.class);
-			db.createDamageFromRent(schadenUser);
+			db.createDamageFromUser(schadenUser);
 			response.entity("SchadenRent added");
 		} catch (Exception e) {
 			response.status(Response.Status.BAD_REQUEST);

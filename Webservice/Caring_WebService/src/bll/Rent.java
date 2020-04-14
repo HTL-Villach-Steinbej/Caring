@@ -1,7 +1,7 @@
 package bll;
 
-import java.sql.Date;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 public class Rent {
 		private int id;
@@ -20,6 +20,8 @@ public class Rent {
 			this.von = von;
 			this.bis = bis;
 		}
+
+		
 
 		public int getId() {
 			return id;
