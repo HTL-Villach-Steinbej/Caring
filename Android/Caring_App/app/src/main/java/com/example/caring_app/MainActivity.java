@@ -24,9 +24,15 @@ import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -49,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
 BackgroundLocationService gpsService;
     public boolean mTracking = false;
     ServiceConnection serviceConnection;
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore Firestoredb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,10 +78,10 @@ BackgroundLocationService gpsService;
             }
         };
         this.getApplication().bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
-      // startTracking();
+        // startTracking();
         setContentView(R.layout.activity_main);
-        ListView listOfCars= (ListView) findViewById(R.id.listCars);
-        toolbar=findViewById(R.id.toolbar);
+        ListView listOfCars = (ListView) findViewById(R.id.listCars);
+        toolbar = findViewById(R.id.toolbar);
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         adapter = new CarsAdapter(MainActivity.this, items);
         listOfCars.setAdapter(adapter);
@@ -82,16 +90,44 @@ BackgroundLocationService gpsService;
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long viewId) {
 
-                Intent modify_intent = new Intent(MainActivity.this, RentCar.class);
-                Car b=items.get(position);
-                modify_intent.putExtra("car", b);
-                startActivity(modify_intent);
+                mAuth = FirebaseAuth.getInstance();
+                FirebaseUser User = mAuth.getCurrentUser();
+                Firestoredb = Firestoredb.getInstance();
+
+                try {
+                    DocumentReference df = Firestoredb.collection("users").document(User.getUid());
+                    df.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if (task.isSuccessful()) {
+                                DocumentSnapshot document = task.getResult();
+                                if (document.exists()) {
+                                   String s =String.valueOf(document.getString("paymethod"));
+                                   System.out.println(s);
+                                   if(s=="" || s == null)
+                                   {
+                                       Intent i = new Intent(MainActivity.this,Payment.class);
+                                       startActivity(i);
+                                   }
+                                } else {
+                                    System.out.println("No such document");
+                                }
+                            } else {
+                                task.getException().printStackTrace();
+                            }
+                        }
+                    });
+                    Intent modify_intent = new Intent(MainActivity.this, RentCar.class);
+                    Car b = items.get(position);
+                    modify_intent.putExtra("car", b);
+                    startActivity(modify_intent);
+                }catch (Exception ex)
+                {
+                    ex.printStackTrace();
+                }
             }
         });
-
         setSupportActionBar(toolbar);
-
-
     }
 
     @Override
@@ -152,7 +188,7 @@ BackgroundLocationService gpsService;
 
         items=new ArrayList<Car>();
 
-        /*
+
         Location location=new Location("");
         location.setLatitude(20.63534558545709);
         location.setLongitude(33.848026296368516);
@@ -163,7 +199,7 @@ BackgroundLocationService gpsService;
         location.setLatitude(46.602056383042424);
         location.setLongitude(13.877747146269485);
         items.add(new Car(3,"A8","Audi",10000,location));
-        */
+        /*
         Database db = Database.newInstance();
         try {
             TestList = db.getAllCars();
@@ -177,7 +213,7 @@ BackgroundLocationService gpsService;
         }catch (Exception ex)
         {
             System.out.println(ex.getMessage());
-        }
+        }*/
 
 
     }

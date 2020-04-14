@@ -3,6 +3,7 @@ package com.example.caring_app;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -69,6 +70,8 @@ public class PayPal extends AppCompatActivity {
 
                     try {
                         Firestoredb.collection("users").document(User.getUid()).update("paymethod","paypal");
+                        Intent s = new Intent(PayPal.this,MainActivity.class);
+                        startActivity(s);
                     }catch (Exception ex)
                     {
                         ex.printStackTrace();
