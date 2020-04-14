@@ -9,9 +9,9 @@
     android:icon="@drawable/ic_icon_settings"
     android:title="Payment">
 </item>
-    <item android:id="@+id/addCar"
+    <item
+        android:id="@+id/addCar"
         android:icon="@drawable/ic_icon_settings"
-        android:title="Add Car">
-    </item>
+        android:title="Add your own car"></item>
 
 </menu>
