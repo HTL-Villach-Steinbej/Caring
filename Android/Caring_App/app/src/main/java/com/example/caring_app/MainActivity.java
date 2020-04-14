@@ -151,7 +151,7 @@ BackgroundLocationService gpsService;
 
         items=new ArrayList<Car>();
 
-/*
+        /*
         Location location=new Location("");
         location.setLatitude(20.63534558545709);
         location.setLongitude(33.848026296368516);
@@ -162,15 +162,16 @@ BackgroundLocationService gpsService;
         location.setLatitude(46.602056383042424);
         location.setLongitude(13.877747146269485);
         items.add(new Car(3,"A8","Audi",10000,location));
-*/
+        */
+
         Database db = Database.newInstance();
         try {
             TestList = db.getAllCars();
             for (Fahrzeug fahrzeug:TestList) {
-                Location location = new Location("");
-                location.setLatitude(fahrzeug.getLocation().getX());
-                location.setLongitude(fahrzeug.getLocation().getY());
-               items.add(new Car(fahrzeug.getId(),fahrzeug.getBezeichnung(),fahrzeug.getMarke(),fahrzeug.getLaufleistung(),location));
+                Location locationnew = new Location("");
+                locationnew.setLatitude(fahrzeug.getLocation().getX());
+                locationnew.setLongitude(fahrzeug.getLocation().getY());
+               items.add(new Car(fahrzeug.getId(),fahrzeug.getBezeichnung(),fahrzeug.getMarke(),fahrzeug.getLaufleistung(),locationnew));
             }
             Toast.makeText(getApplicationContext(),items.toString(),Toast.LENGTH_LONG).show();
         }catch (Exception ex)
