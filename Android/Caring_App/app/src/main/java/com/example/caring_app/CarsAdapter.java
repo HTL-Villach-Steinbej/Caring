@@ -32,7 +32,16 @@ public class CarsAdapter extends ArrayAdapter<Car> {
 
         tvMarke.setText(item.getMarke());
         tvBezeichnung.setText(item.getBezeichnung());
-       tvLocation.setText(String.valueOf(item.getDistance()));
+        double distance=item.getDistance();
+        if(distance>1000){
+            distance=distance/1000;
+
+            tvLocation.setText("Dist: "+String.valueOf( String.format("%.2f", distance))+"km");
+        }
+        else{
+            tvLocation.setText("Dist: "+String.valueOf(item.getDistance())+"m");
+
+        }
 
 
         return convertView;
