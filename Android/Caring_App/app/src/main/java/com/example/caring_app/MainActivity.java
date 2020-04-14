@@ -57,6 +57,7 @@ BackgroundLocationService gpsService;
     ServiceConnection serviceConnection;
     private FirebaseAuth mAuth;
     private FirebaseFirestore Firestoredb;
+    ListView listOfCars;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,10 +79,9 @@ BackgroundLocationService gpsService;
             }
         };
         this.getApplication().bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
-        // startTracking();
         setContentView(R.layout.activity_main);
-        ListView listOfCars = (ListView) findViewById(R.id.listCars);
-        toolbar = findViewById(R.id.toolbar);
+         listOfCars= (ListView) findViewById(R.id.listCars);
+        toolbar=findViewById(R.id.toolbar);
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         adapter = new CarsAdapter(MainActivity.this, items);
         listOfCars.setAdapter(adapter);
@@ -127,7 +127,10 @@ BackgroundLocationService gpsService;
                 }
             }
         });
+
         setSupportActionBar(toolbar);
+
+
     }
 
     @Override
@@ -188,7 +191,7 @@ BackgroundLocationService gpsService;
 
         items=new ArrayList<Car>();
 
-
+        /*
         Location location=new Location("");
         location.setLatitude(20.63534558545709);
         location.setLongitude(33.848026296368516);
@@ -199,7 +202,7 @@ BackgroundLocationService gpsService;
         location.setLatitude(46.602056383042424);
         location.setLongitude(13.877747146269485);
         items.add(new Car(3,"A8","Audi",10000,location));
-        /*
+        */
         Database db = Database.newInstance();
         try {
             TestList = db.getAllCars();
@@ -213,29 +216,20 @@ BackgroundLocationService gpsService;
         }catch (Exception ex)
         {
             System.out.println(ex.getMessage());
-        }*/
+        }
 
 
     }
 
-    public int getLOcation(final Location carLocation){
-        fusedLocationClient.getLastLocation()
-                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
-                    @Override
-                    public void onSuccess(Location location) {
-
-                        if (location != null) {
-                            distance= (int)location.distanceTo(carLocation);
-
-                        }
-                    }
-                });
-
-
-
-        return distance;
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+fillItems();
+        adapter = new CarsAdapter(MainActivity.this, items);
+        listOfCars.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
-
-
 }
+
+
 
