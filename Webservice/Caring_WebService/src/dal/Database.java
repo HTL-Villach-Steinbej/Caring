@@ -158,7 +158,7 @@ public class Database {
 		try {
 			createCon();
 			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT  fid, bezeichnung  , marke, laufleistung , f.geo_point.SDO_POINT.X as X, f.geo_point.SDO_POINT.Y as Y FROM Fahrzeug f where ausgeliehen ='ja'");
+			ResultSet rs = stmt.executeQuery("SELECT  fid, bezeichnung  , marke, laufleistung , f.geo_point.SDO_POINT.X as X, f.geo_point.SDO_POINT.Y as Y FROM Fahrzeug f where ausgeliehen like 'nein'");
 			while (rs.next())
 				result.add(new Fahrzeug(rs.getInt(1), rs.getString(2),rs.getString(3),rs.getInt(4),new Point(rs.getDouble(5),rs.getDouble(6))));
 			closeCon();

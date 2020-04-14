@@ -95,27 +95,6 @@ long abgelaufeneZeit;
                 abgelaufeneZeit = 0;
                 Intent intent = new Intent(RentCar.this, CarLocation.class);
                 startActivityForResult(intent,0);
-
-                bis = new Date();
-                newRent.setBis(bis);
-
-                Database database = Database.newInstance();
-
-                try {
-                    database.updateRent(newRent);
-                }catch (Exception ex)
-                {
-                    ex.printStackTrace();
-                }
-
-                Fahrzeug f = new Fahrzeug(car.getId(),car.getBezeichnung(),car.getMarke(),car.getLaufleistung(),new Point(carlocation.getLatitude(),carlocation.getLongitude()));
-                Database db = Database.newInstance();
-                try {
-                    db.updateCar(f);
-                }catch (Exception ex)
-                {
-                    ex.getMessage();
-                }
             }
         });
 
@@ -154,7 +133,27 @@ long abgelaufeneZeit;
                 latitude=data.getDoubleExtra("locLatitude",0);
                 carlocation.setLatitude(latitude);
                 carlocation.setLongitude(longitude);
-                //WS mit geänderter Location
+                this.car.setCarLocation(carlocation);
+                bis = new Date();
+                newRent.setBis(bis);
+
+                Database database = Database.newInstance();
+
+                try {
+                    database.updateRent(newRent);
+                }catch (Exception ex)
+                {
+                    ex.printStackTrace();
+                }
+
+                Fahrzeug f = new Fahrzeug(car.getId(),car.getBezeichnung(),car.getMarke(),car.getLaufleistung(),new Point(carlocation.getLongitude(),carlocation.getLatitude()));
+                Database db = Database.newInstance();
+                try {
+                    db.updateCar(f);
+                }catch (Exception ex)
+                {
+                    ex.getMessage();
+                }
             }
         }
     }
