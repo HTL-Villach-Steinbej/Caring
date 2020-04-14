@@ -158,7 +158,7 @@ public class Database {
 		try {
 			createCon();
 			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT  fid, bezeichnung  , marke, laufleistung , f.geo_point.SDO_POINT.X as X, f.geo_point.SDO_POINT.Y as Y FROM Fahrzeug f");
+			ResultSet rs = stmt.executeQuery("SELECT  fid, bezeichnung  , marke, laufleistung , f.geo_point.SDO_POINT.X as X, f.geo_point.SDO_POINT.Y as Y FROM Fahrzeug f where ausgeliehen ='ja'");
 			while (rs.next())
 				result.add(new Fahrzeug(rs.getInt(1), rs.getString(2),rs.getString(3),rs.getInt(4),new Point(rs.getDouble(5),rs.getDouble(6))));
 			closeCon();
@@ -196,7 +196,7 @@ public class Database {
 			
 			System.out.println(fid);
 			con.setAutoCommit(true);
-			stmt = con.prepareStatement("insert into fahrzeug values(?,?,?,?, SDO_GEOMETRY(2001, NULL, SDO_POINT_TYPE(?, ?, NULL),NULL,NULL)) ");
+			stmt = con.prepareStatement("insert into fahrzeug values(?,?,?,?, SDO_GEOMETRY(2001, NULL, SDO_POINT_TYPE(?, ?, NULL),NULL,NULL),'nein') ");
 			stmt.setInt(1, fid);
 			stmt.setString(2, fahrzeug.getBezeichnung());
 			stmt.setString(3, fahrzeug.getMarke());
