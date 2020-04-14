@@ -22,6 +22,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".NavigationActivityCar" />
+
+        <service
+            android:name=".BackgroundLocationService"
+            android:enabled="true"
+            android:exported="true" />
 
         <activity android:name=".DamageActivity" />
         <activity android:name=".CreditCart" />

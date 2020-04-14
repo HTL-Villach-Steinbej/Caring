@@ -1,23 +1,13 @@
 package com.example.caring_app;
 
 import android.content.Intent;
-import android.icu.text.IDNA;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.provider.ContactsContract;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -43,6 +33,7 @@ public class RentCar extends AppCompatActivity {
     Date bis;
     TextView tvPay;
     private FirebaseAuth mAuth;
+    Button btnNv;
 
     Double longitude;
     Double latitude;
@@ -60,6 +51,7 @@ long abgelaufeneZeit;
         }
         btnrentCar=findViewById(R.id.rentCar);
         btnStopp=findViewById(R.id.stoppRent);
+        btnNv=findViewById(R.id.btnNavigation);
         chronometer=findViewById(R.id.chronometer);
         tvPay=findViewById(R.id.toPay);
         abgelaufeneZeit=0;
@@ -134,6 +126,16 @@ long abgelaufeneZeit;
             public void onClick(View v) {
                 Intent i = new Intent(RentCar.this,DamageActivity.class);
                 i.putExtra("car", car);
+                startActivity(i);
+
+            }
+        });
+        btnNv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(RentCar.this, NavigationActivityCar.class);
+                i.putExtra("long", car.getCarLocation().getLongitude());
+                i.putExtra("lat", car.getCarLocation().getLatitude());
                 startActivity(i);
 
             }

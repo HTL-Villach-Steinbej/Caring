@@ -91,6 +91,7 @@ public class Car implements Parcelable {
 Location l=new Location("");
         l.setLongitude(13.848);
         l.setLatitude(46.6353);
+
         return (int)carLocation.distanceTo(l);
     }
 
