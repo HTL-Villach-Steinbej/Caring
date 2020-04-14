@@ -88,7 +88,7 @@ public class Car implements Parcelable {
 
     public int getDistance() {
         UserLocationFinder finder=new UserLocationFinder();
-Location l=new Location("");
+        Location l=new Location("");
         l.setLongitude(13.848);
         l.setLatitude(46.6353);
 
