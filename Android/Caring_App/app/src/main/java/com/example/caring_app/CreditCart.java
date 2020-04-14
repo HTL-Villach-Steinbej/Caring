@@ -3,6 +3,7 @@ package com.example.caring_app;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -86,6 +87,8 @@ public class CreditCart extends AppCompatActivity {
 
                     try {
                         Firestoredb.collection("users").document(User.getUid()).update("paymethod","creditcart");
+                        Intent s = new Intent(CreditCart.this,MainActivity.class);
+                        startActivity(s);
                     }catch (Exception ex)
                     {
                         ex.printStackTrace();
