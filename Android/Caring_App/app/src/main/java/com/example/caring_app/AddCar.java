@@ -79,7 +79,7 @@ public class AddCar extends AppCompatActivity {
                 carlocation.setLongitude(longitude);
                 //WS neues Car in die DB speichern fortlaufende Id?? SQL sequence?
                 newCar=new Car(10,edBezeichnung.getText().toString(),edMarke.getText().toString(),Integer.valueOf(edLaufleistung.getText().toString()),carlocation);
-                this.f = new Fahrzeug(10,newCar.getBezeichnung(),newCar.getMarke(),newCar.getLaufleistung(),new Point(carlocation.getLatitude(),carlocation.getLongitude()));
+                this.f = new Fahrzeug(10,newCar.getBezeichnung(),newCar.getMarke(),newCar.getLaufleistung(),new Point(carlocation.getLongitude(),carlocation.getLatitude()));
             }
         }
     }

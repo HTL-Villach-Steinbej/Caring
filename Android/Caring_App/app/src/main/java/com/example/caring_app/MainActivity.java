@@ -208,8 +208,8 @@ BackgroundLocationService gpsService;
             TestList = db.getAllCars();
             for (Fahrzeug fahrzeug:TestList) {
                 Location locationnew = new Location("");
-                locationnew.setLatitude(fahrzeug.getLocation().getX());
-                locationnew.setLongitude(fahrzeug.getLocation().getY());
+                locationnew.setLongitude(fahrzeug.getLocation().getX());
+                locationnew.setLatitude(fahrzeug.getLocation().getY());
                items.add(new Car(fahrzeug.getId(),fahrzeug.getBezeichnung(),fahrzeug.getMarke(),fahrzeug.getLaufleistung(),locationnew));
             }
             Toast.makeText(getApplicationContext(),items.toString(),Toast.LENGTH_LONG).show();
