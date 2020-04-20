@@ -1,0 +1,5 @@
+Webapp/your-project-name/.vscode/
+Webapp/your-project-name/.vscode/*
+Webapp/your-project-name/node-modules/
+Webapp/your-project-name/node-modules/*
+node_modules
