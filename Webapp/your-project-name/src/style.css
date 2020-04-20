@@ -1,0 +1,136 @@
+.track-heading {
+  padding-top: 10px;
+  float: left;
+  color: #008cba;
+  margin-left: 10px;
+  font-size: 24px;
+  text-decoration: none;
+}
+.track-heading-highlighted {
+  padding-top: 10px;
+  float: left;
+  color: #008cba;
+  margin-left: 10px;
+  font-weight: bold;
+  font-size: 24px;
+  text-decoration: none;
+}
+.logoutMessage {
+  float: right;
+}
+.button {
+  background-color: #4caf50; /* Green */
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+.logout-button {
+  float: right;
+  margin: 10px;
+  border-radius: 5px;
+  background-color: white;
+  color: #008cba;
+  border: 2px solid #008cba;
+}
+.logout-button:hover {
+  background-color: #008cba;
+  color: white;
+}
+.dahboard-button {
+  border-radius: 5px;
+  background-color: white;
+  color: #008cba;
+  border: 2px solid #008cba;
+  height: 35px;
+  float: right;
+}
+.dahboard-button:hover {
+  background-color: #008cba;
+  color: white;
+}
+.track-mainframe {
+  margin-left: 10px;
+  border-radius: 5px;
+}
+.link {
+  color: #008cba;
+  cursor: pointer;
+}
+.dashboard {
+  padding-top: 15px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.dashboard-heading {
+    float: left;
+  color: #008cba;
+}
+.sub-dashboard-heading {
+  color: #3a4447;
+  margin-top: 45px;
+}
+.dashboard-list {
+  list-style: none;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+th {
+  background-color: #008cba;
+  color: white;
+}
+.form-label {
+  display: inline;
+  color: #008cba;
+  font-weight: bold;
+}
+.form-text {
+  display: inline;
+}
+.dashboard-heading-right{
+    float: right;
+    margin-top: 20px;
+}
+.dashboard-heding-text{
+    display: inline;
+}
+.navbar{
+    height: 70px;
+}
+.form-dashboard{
+  float: left;
+  font-size: 20px;
+}
+.form-dashboard-right{
+  float: right;
+  font-size: 20px;
+  margin-right: 600px;
+}
+.dashboard-general{
+  height: 150px;
+}
+.paymethod-label{
+  font-size: 20px;
+  font-weight: bold;
+  color: #008cba;
+}
