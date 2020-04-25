@@ -1,0 +1,795 @@
+{
+	"info": {
+		"_postman_id": "a0f086ce-f753-41ee-8204-f4117f49ffd3",
+		"name": "Caring",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Cars",
+			"item": [
+				{
+					"name": "http://localhost:8080/Caring_WebService/Caring/cars",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Caring_WebService/Caring/cars",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Caring_WebService",
+								"Caring",
+								"cars"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/Caring_WebService/Caring/car/1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Caring_WebService/Caring/car/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Caring_WebService",
+								"Caring",
+								"car",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/Caring_WebService/Caring/car/1",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Caring_WebService/Caring/car/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Caring_WebService",
+								"Caring",
+								"car",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/Caring_WebService/Caring/car",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n        \"id\": 1,\n        \"bezeichnung\": \"A8 SDI SDI SDI\",\n        \"marke\": \"AUDI\",\n        \"laufleistung\": 8832,\n        \"location\": {\n            \"x\": 12.0,\n            \"y\": 14.0\n        }\n    }"
+						},
+						"url": {
+							"raw": "http://localhost:8080/Caring_WebService/Caring/car",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Caring_WebService",
+								"Caring",
+								"car"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/Caring_WebService/Caring/car",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n        \"bezeichnung\": \"A8 SDI\",\n        \"marke\": \"AUDI\",\n        \"laufleistung\": 8832,\n        \"location\": {\n            \"x\": 12.0,\n            \"y\": 14.0\n        }\n    }"
+						},
+						"url": {
+							"raw": "http://localhost:8080/Caring_WebService/Caring/car",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Caring_WebService",
+								"Caring",
+								"car"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Damages",
+			"item": [
+				{
+					"name": "http://localhost:8080/Caring_WebService/Caring/damages",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Caring_WebService/Caring/damages",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Caring_WebService",
+								"Caring",
+								"damages"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/Caring_WebService/Caring/damage/1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Caring_WebService/Caring/damage/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Caring_WebService",
+								"Caring",
+								"damage",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/Caring_WebService/Caring/damage/1",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Caring_WebService/Caring/damage/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Caring_WebService",
+								"Caring",
+								"damage",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/Caring_WebService/Caring/damage/",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"bezeichnung\": \"Bordsteineeeeee\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/Caring_WebService/Caring/damage/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Caring_WebService",
+								"Caring",
+								"damage",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/Caring_WebService/Caring/damage",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"id\":5,\"bezeichnung\":\"Bordstein\"}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/Caring_WebService/Caring/damage",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Caring_WebService",
+								"Caring",
+								"damage"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Zones",
+			"item": [
+				{
+					"name": "http://localhost:8080/Caring_WebService/Caring/zones",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Caring_WebService/Caring/zones",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Caring_WebService",
+								"Caring",
+								"zones"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/Caring_WebService/Caring/zone/1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Caring_WebService/Caring/zone/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Caring_WebService",
+								"Caring",
+								"zone",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/Caring_WebService/Caring/zone/1",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Caring_WebService/Caring/zone/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Caring_WebService",
+								"Caring",
+								"zone",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/Caring_WebService/Caring/zone",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n        \"id\": 5,\n        \"bezeichnung\": \"Lieserhofen\"\n    }"
+						},
+						"url": {
+							"raw": "http://localhost:8080/Caring_WebService/Caring/zone",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Caring_WebService",
+								"Caring",
+								"zone"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/Caring_WebService/Caring/zones",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n        \"id\": 8,\n        \"bezeichnung\": \"test\",\n        \"kostensatz\": 1\n }"
+						},
+						"url": {
+							"raw": "http://localhost:8080/Caring_WebService/Caring/zone",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Caring_WebService",
+								"Caring",
+								"zone"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Rents",
+			"item": [
+				{
+					"name": "http://localhost:8080/Caring_WebService/Caring/rents",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Caring_WebService/Caring/rents",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Caring_WebService",
+								"Caring",
+								"rents"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/Caring_WebService/Caring/rent/1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Caring_WebService/Caring/rent/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Caring_WebService",
+								"Caring",
+								"rent",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/Caring_WebService/Caring/rent/1",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Caring_WebService/Caring/rent/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Caring_WebService",
+								"Caring",
+								"rent",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/Caring_WebService/Caring/rent",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"von\": \"Dec 17, 2015\",\n    \"bis\": \"Dec 18, 2015\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/Caring_WebService/Caring/rent",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Caring_WebService",
+								"Caring",
+								"rent"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/Caring_WebService/Caring/rent",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"fid\": 4,\n    \"uid\": \"DkTycfHAhYfYAgzOkUXiopMqcfn2\",\n    \"zid\": 2,\n    \"von\": \"2018-04-25T14:05:15.953Z\",\n    \"bis\": \"2018-04-25T14:05:15.953Z\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/Caring_WebService/Caring/rent",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Caring_WebService",
+								"Caring",
+								"rent"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/Caring_WebService/Caring/rent/2/dammages",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Caring_WebService/Caring/rent/2/dammages",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Caring_WebService",
+								"Caring",
+								"rent",
+								"2",
+								"dammages"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/Caring_WebService/Caring/rent/dammage",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"id\":8,\"lid\":4,\"kosten\":10000,\"bezeichnung\":\"Fussgeher\"}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/Caring_WebService/Caring/rent/dammage",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Caring_WebService",
+								"Caring",
+								"rent",
+								"dammage"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/Caring_WebService/Caring/rent/2/damage/2",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Caring_WebService/Caring/rent/2/damage/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Caring_WebService",
+								"Caring",
+								"rent",
+								"2",
+								"damage",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "http://localhost:8080/Caring_WebService/Caring/users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Caring_WebService/Caring/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Caring_WebService",
+								"Caring",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/Caring_WebService/Caring/user/DkTycfHAhYfYAgzOkUXiopMqcfn1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Caring_WebService/Caring/user/DkTycfHAhYfYAgzOkUXiopMqcfn1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Caring_WebService",
+								"Caring",
+								"user",
+								"DkTycfHAhYfYAgzOkUXiopMqcfn1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/Caring_WebService/Caring/user/DkTycfHAhYfYAgzOkUXiopMqcfn1",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Caring_WebService/Caring/user/DkTycfHAhYfYAgzOkUXiopMqcfn1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Caring_WebService",
+								"Caring",
+								"user",
+								"DkTycfHAhYfYAgzOkUXiopMqcfn1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/Caring_WebService/Caring/user/DkTycfHAhYfYAgzOkUXiopMqcfn1",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "KEINE AHNUNG Ob i das brauch hihi"
+						},
+						"url": {
+							"raw": "http://localhost:8080/Caring_WebService/Caring/user/DkTycfHAhYfYAgzOkUXiopMqcfn1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Caring_WebService",
+								"Caring",
+								"user",
+								"DkTycfHAhYfYAgzOkUXiopMqcfn1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/Caring_WebService/Caring/user/",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n        \"id\": \"DkTycfHAhYfYAgzOkUXiopMqcfn2\"\n    }"
+						},
+						"url": {
+							"raw": "http://localhost:8080/Caring_WebService/Caring/user/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Caring_WebService",
+								"Caring",
+								"user",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "http://localhost:8080/Caring_WebService/Caring/user/dammage",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"uid\":\"DkTycfHAhYfYAgzOkUXiopMqcfn2\",\"fid\": 1 , \"bezeichnung\":\"dhihdifd\",\"beschreibung\":\"Fussgeher\" , \"datum\": \"12.4.2020, 14:03:24\"}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/Caring_WebService/Caring/user/dammage",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Caring_WebService",
+						"Caring",
+						"user",
+						"dammage"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
