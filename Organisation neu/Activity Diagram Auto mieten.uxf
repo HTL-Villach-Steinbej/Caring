@@ -4,8 +4,8 @@
   <element>
     <id>UMLSpecialState</id>
     <coordinates>
-      <x>846</x>
-      <y>27</y>
+      <x>972</x>
+      <y>36</y>
       <w>18</w>
       <h>18</h>
     </coordinates>
@@ -15,8 +15,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>846</x>
-      <y>27</y>
+      <x>972</x>
+      <y>36</y>
       <w>27</w>
       <h>90</h>
     </coordinates>
@@ -26,8 +26,8 @@
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>810</x>
-      <y>99</y>
+      <x>936</x>
+      <y>108</y>
       <w>90</w>
       <h>36</h>
     </coordinates>
@@ -37,8 +37,8 @@
   <element>
     <id>UMLSpecialState</id>
     <coordinates>
-      <x>837</x>
-      <y>189</y>
+      <x>963</x>
+      <y>198</y>
       <w>36</w>
       <h>36</h>
     </coordinates>
@@ -50,8 +50,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>846</x>
-      <y>126</y>
+      <x>972</x>
+      <y>135</y>
       <w>27</w>
       <h>81</h>
     </coordinates>
@@ -61,8 +61,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>576</x>
-      <y>189</y>
+      <x>702</x>
+      <y>198</y>
       <w>279</w>
       <h>36</h>
     </coordinates>
@@ -73,20 +73,20 @@ Zahlungsmethode nicht verbunden</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>846</x>
-      <y>216</y>
+      <x>972</x>
+      <y>225</y>
       <w>189</w>
-      <h>99</h>
+      <h>117</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 Zahlungsmethode verbunden</panel_attributes>
-    <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;110.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>414</x>
-      <y>189</y>
+      <x>540</x>
+      <y>198</y>
       <w>171</w>
       <h>36</h>
     </coordinates>
@@ -96,8 +96,8 @@ Zahlungsmethode verbunden</panel_attributes>
   <element>
     <id>UMLSpecialState</id>
     <coordinates>
-      <x>837</x>
-      <y>297</y>
+      <x>963</x>
+      <y>423</y>
       <w>36</w>
       <h>36</h>
     </coordinates>
@@ -107,8 +107,8 @@ Zahlungsmethode verbunden</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>504</x>
-      <y>297</y>
+      <x>630</x>
+      <y>423</y>
       <w>351</w>
       <h>36</h>
     </coordinates>
@@ -119,8 +119,8 @@ Auto hat einen Schaden</panel_attributes>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>414</x>
-      <y>297</y>
+      <x>540</x>
+      <y>423</y>
       <w>99</w>
       <h>36</h>
     </coordinates>
@@ -130,8 +130,8 @@ Auto hat einen Schaden</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>846</x>
-      <y>324</y>
+      <x>972</x>
+      <y>450</y>
       <w>162</w>
       <h>117</h>
     </coordinates>
@@ -142,8 +142,8 @@ Auto hat keinen Schaden</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>504</x>
-      <y>63</y>
+      <x>630</x>
+      <y>72</y>
       <w>369</w>
       <h>144</h>
     </coordinates>
@@ -153,8 +153,8 @@ Auto hat keinen Schaden</panel_attributes>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>792</x>
-      <y>423</y>
+      <x>918</x>
+      <y>549</y>
       <w>126</w>
       <h>36</h>
     </coordinates>
@@ -164,8 +164,8 @@ Auto hat keinen Schaden</panel_attributes>
   <element>
     <id>UMLSyncBarHorizontal</id>
     <coordinates>
-      <x>738</x>
-      <y>513</y>
+      <x>864</x>
+      <y>639</y>
       <w>234</w>
       <h>18</h>
     </coordinates>
@@ -176,8 +176,8 @@ Auto hat keinen Schaden</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>846</x>
-      <y>450</y>
+      <x>972</x>
+      <y>576</y>
       <w>27</w>
       <h>90</h>
     </coordinates>
@@ -188,8 +188,8 @@ Auto hat keinen Schaden</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>927</x>
-      <y>513</y>
+      <x>1053</x>
+      <y>639</y>
       <w>27</w>
       <h>90</h>
     </coordinates>
@@ -200,8 +200,8 @@ Auto hat keinen Schaden</panel_attributes>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>882</x>
-      <y>585</y>
+      <x>1008</x>
+      <y>711</y>
       <w>108</w>
       <h>36</h>
     </coordinates>
@@ -211,8 +211,8 @@ Auto hat keinen Schaden</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>783</x>
-      <y>513</y>
+      <x>909</x>
+      <y>639</y>
       <w>27</w>
       <h>90</h>
     </coordinates>
@@ -222,8 +222,8 @@ Auto hat keinen Schaden</panel_attributes>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>711</x>
-      <y>585</y>
+      <x>837</x>
+      <y>711</y>
       <w>162</w>
       <h>36</h>
     </coordinates>
@@ -233,8 +233,8 @@ Auto hat keinen Schaden</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>927</x>
-      <y>612</y>
+      <x>1053</x>
+      <y>738</y>
       <w>27</w>
       <h>90</h>
     </coordinates>
@@ -244,8 +244,8 @@ Auto hat keinen Schaden</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>783</x>
-      <y>612</y>
+      <x>909</x>
+      <y>738</y>
       <w>27</w>
       <h>90</h>
     </coordinates>
@@ -255,8 +255,8 @@ Auto hat keinen Schaden</panel_attributes>
   <element>
     <id>UMLSyncBarHorizontal</id>
     <coordinates>
-      <x>738</x>
-      <y>675</y>
+      <x>864</x>
+      <y>801</y>
       <w>243</w>
       <h>18</h>
     </coordinates>
@@ -267,8 +267,8 @@ Auto hat keinen Schaden</panel_attributes>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>792</x>
-      <y>729</y>
+      <x>918</x>
+      <y>855</y>
       <w>135</w>
       <h>36</h>
     </coordinates>
@@ -278,8 +278,8 @@ Auto hat keinen Schaden</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>855</x>
-      <y>675</y>
+      <x>981</x>
+      <y>801</y>
       <w>27</w>
       <h>72</h>
     </coordinates>
@@ -289,8 +289,8 @@ Auto hat keinen Schaden</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>855</x>
-      <y>756</y>
+      <x>981</x>
+      <y>882</y>
       <w>27</w>
       <h>72</h>
     </coordinates>
@@ -300,8 +300,8 @@ Auto hat keinen Schaden</panel_attributes>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>774</x>
-      <y>810</y>
+      <x>900</x>
+      <y>936</y>
       <w>180</w>
       <h>36</h>
     </coordinates>
@@ -311,8 +311,8 @@ Auto hat keinen Schaden</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>855</x>
-      <y>837</y>
+      <x>981</x>
+      <y>963</y>
       <w>27</w>
       <h>63</h>
     </coordinates>
@@ -322,8 +322,8 @@ Auto hat keinen Schaden</panel_attributes>
   <element>
     <id>UMLSpecialState</id>
     <coordinates>
-      <x>855</x>
-      <y>882</y>
+      <x>981</x>
+      <y>1008</y>
       <w>18</w>
       <h>18</h>
     </coordinates>
@@ -333,12 +333,34 @@ Auto hat keinen Schaden</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>459</x>
-      <y>324</y>
+      <x>585</x>
+      <y>450</y>
       <w>414</w>
       <h>585</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>440.0;630.0;10.0;630.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>900</x>
+      <y>324</y>
+      <w>162</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>User begutachtet Fahrzeug</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>972</x>
+      <y>351</y>
+      <w>27</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
   </element>
 </diagram>
